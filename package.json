@@ -1,0 +1,31 @@
+{
+  "name": "live-resolver",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "mocha"
+  },
+  "author": "Stefan Buck",
+  "license": "MIT",
+  "engines": {
+    "node": "0.12.2"
+  },
+  "dependencies": {
+    "github-url-from-git": "^1.4.0",
+    "got": "^3.2.0",
+    "hapi": "^9.0.2",
+    "joi": "^6.6.1",
+    "package-json": "^1.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/github-linker/live-resolver"
+  },
+  "devDependencies": {
+    "mocha": "^2.2.5",
+    "rewire": "^2.3.4",
+    "sinon": "^1.16.1"
+  }
+}
