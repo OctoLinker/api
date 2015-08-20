@@ -4,8 +4,9 @@ if (process.env.NEW_RELIC_LICENSE_KEY) {
 
 var Hapi = require('hapi');
 var Joi = require('joi');
-var resolver = require('./src/resolver');
 var pkg = require('./package.json');
+var resolver = require('./src/resolver');
+var insight = require('./src/utils/insight.js').init();
 
 var server = new Hapi.Server();
 server.connection({
@@ -33,6 +34,10 @@ server.route({
       resolver(type, pkg, function(err, url) {
 
         if (err && err.code === 404) {
+          insight.sendEvent('package_not_found', {
+            registry: type,
+            package: pkg
+          });
           return reply({error: 'Package not found'}).code(404);
         }
 
@@ -41,9 +46,18 @@ server.route({
         }
 
         if (!url) {
+          insight.sendEvent('repository_url_not_found', {
+            registry: type,
+            package: pkg
+          });
           return reply({error: 'Repository url not found'}).code(500);
         }
 
+        insight.sendEvent('resolved', {
+          registry: type,
+          package: pkg,
+          url: url
+        });
         return reply({url: url});
       });
     }
@@ -56,6 +70,10 @@ server.route({
       var repoUrl = pkg.repository.url;
       var short = repoUrl.replace('https://github.com/', '');
       var versionInfo = '<a href="' + repoUrl + '">' + short + '@' + pkg.version + '</a>';
+
+      insight.sendEvent('shows_index', {
+        version: pkg.version
+      });
 
       reply(versionInfo);
     }
