@@ -17,6 +17,7 @@
     "got": "^3.2.0",
     "hapi": "^9.0.2",
     "joi": "^6.6.1",
+    "newrelic": "^1.22.0",
     "package-json": "^1.2.0"
   },
   "repository": {

@@ -1,3 +1,7 @@
+if (process.env.NEW_RELIC_LICENSE_KEY) {
+  require('newrelic');
+}
+
 var Hapi = require('hapi');
 var Joi = require('joi');
 var resolver = require('./src/resolver');
