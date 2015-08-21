@@ -32,49 +32,49 @@ var parseURL = function(url) {
   return githubUrl(url);
 };
 
-var getRepoURL = function(node) {
-  if (typeof node === 'string') {
-    return parseURL(node);
-  } else if (node.url) {
-    return parseURL(node.url);
-  } else if (node.path) {
-    return parseURL(node.path);
-  } else if (node.web) {
-    return parseURL(node.web);
-  } else if (node.git) {
-    return parseURL(node.git);
+var getRepoURL = function(json) {
+  if (typeof json === 'string') {
+    return parseURL(json);
+  } else if (json.url) {
+    return parseURL(json.url);
+  } else if (json.path) {
+    return parseURL(json.path);
+  } else if (json.web) {
+    return parseURL(json.web);
+  } else if (json.git) {
+    return parseURL(json.git);
   }
 };
 
-var lookup = function(node) {
-  if (Array.isArray(node)) {
-    return getRepoURL(node[0]);
+var lookup = function(json) {
+  if (Array.isArray(json)) {
+    return getRepoURL(json[0]);
   } else {
-    return getRepoURL(node);
+    return getRepoURL(json);
   }
 };
 
-module.exports = function(node) {
+module.exports = function(json) {
   var result = null;
 
-  if (typeof node === 'string') {
-    return getRepoURL(node);
+  if (typeof json === 'string') {
+    return getRepoURL(json);
   }
 
-  if (node.url) {
-    result = lookup(node.url);
+  if (json.url) {
+    result = lookup(json.url);
   }
 
-  if (!result && node.repository) {
-    result = lookup(node.repository);
+  if (!result && json.repository) {
+    result = lookup(json.repository);
   }
 
-  if (!result && node.repositories) {
-    result = lookup(node.repositories);
+  if (!result && json.repositories) {
+    result = lookup(json.repositories);
   }
 
-  if (!result && node.homepage) {
-    result = parseURL(node.homepage);
+  if (!result && json.homepage) {
+    result = parseURL(json.homepage);
   }
 
   return result;
