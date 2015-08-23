@@ -4,6 +4,7 @@ if (process.env.NEW_RELIC_LICENSE_KEY) {
 
 var Hapi = require('hapi');
 var Joi = require('joi');
+var cache = require('memory-cache');
 var pkg = require('./package.json');
 var resolver = require('./src/resolver');
 var insight = require('./src/utils/insight.js').init();
@@ -30,6 +31,24 @@ server.route({
     handler: function (request, reply) {
       var type = request.params.registry;
       var pkg = request.params.package;
+      var cacheKey = type + '@' + pkg;
+
+      function resolvedHandler (url) {
+        insight.sendEvent('resolved', {
+          registry: type,
+          package: pkg,
+          url: url
+        });
+        return reply({url: url});
+      }
+
+      var cachedUrl = cache.get(cacheKey);
+      if (cachedUrl) {
+        console.log('Get cache entry %s', cachedUrl);
+        return resolvedHandler(cachedUrl);
+      }
+
+      console.log('Hit %s registry for %s', type, pkg);
 
       resolver(type, pkg, function(err, url) {
 
@@ -53,12 +72,10 @@ server.route({
           return reply({error: 'Repository url not found'}).code(500);
         }
 
-        insight.sendEvent('resolved', {
-          registry: type,
-          package: pkg,
-          url: url
-        });
-        return reply({url: url});
+        var twoWeeks = 1209600000;
+        cache.put(cacheKey, url, twoWeeks);
+
+        resolvedHandler(url);
       });
     }
 });
