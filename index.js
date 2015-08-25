@@ -44,18 +44,16 @@ server.route({
 
       var cachedUrl = cache.get(cacheKey);
       if (cachedUrl) {
-        console.log('Get cache entry %s', cachedUrl);
         return resolvedHandler(cachedUrl);
       }
-
-      console.log('Hit %s registry for %s', type, pkg);
 
       resolver(type, pkg, function(err, url) {
 
         if (err && err.code === 404) {
           insight.sendEvent('package_not_found', {
             registry: type,
-            package: pkg
+            package: pkg,
+            referer: request.headers.referer
           });
           return reply({error: 'Package not found'}).code(404);
         }
