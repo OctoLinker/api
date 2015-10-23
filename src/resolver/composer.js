@@ -7,17 +7,17 @@ var registryUrl = 'https://packagist.org/packages/%s.json';
 
 module.exports = function (pkg, cb) {
 
-	got(util.format(registryUrl, pkg), {json: true}, function (err, json) {
+  got(util.format(registryUrl, pkg), {json: true}, function (err, json) {
     var url = '';
 
     if (err) {
-			return cb(err);
-		}
+      return cb(err);
+    }
 
     if (json && json.package && json.package.repository) {
       url = githubUrl(json.package.repository);
     }
 
-		cb(null, url);
-	});
+    cb(null, url);
+  });
 };
