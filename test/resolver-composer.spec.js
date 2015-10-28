@@ -57,19 +57,16 @@ describe('composer resolver', function() {
     assert.equal(callbackStub.args[0][1], 'https://linkerhub.com/pale-ale-beer');
   });
 
-  it('returns empty string when package was not resolvable', function() {
+  it('returns packagist.org url when package was not resolvable', function() {
     var callbackStub = this.sandbox.stub();
-    var response = {
-      package: {
-        name: 'pale-ale-beer',
-        repository: 'https://linkerhub.com/pale-ale-beer'
-      }
+    var err = {
+      code: 404
     };
     composerResolver('pale-ale-beer', callbackStub);
-    this.githubUrlStub.returns('');
-    this.gotStub.callArgWith(2, null, response);
+    this.gotStub.callArgWith(2, err);
 
-    assert.equal(callbackStub.args[0][1], '');
+    composerResolver('pale-ale-beer', callbackStub);
+    assert.equal(callbackStub.args[0][1], 'https://packagist.org/packages/pale-ale-beer');
   });
 
   it('returns empty string when response was invalid', function() {

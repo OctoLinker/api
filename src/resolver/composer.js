@@ -9,8 +9,12 @@ module.exports = function (pkg, cb) {
 
   got(util.format(registryUrl, pkg), {json: true}, function (err, json) {
     var url = '';
-
     if (err) {
+      if (err.code === 404) {
+        url = 'https://packagist.org/packages/' + pkg;
+        return cb(null, url);
+      }
+
       return cb(err);
     }
 
