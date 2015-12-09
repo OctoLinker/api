@@ -40,5 +40,5 @@ Run server:
 Copyright (c) 2015 Stefan Buck. Licensed under the MIT license.
 
 
-[travis-url]: https://travis-ci.org/github-linker/live-resolver
-[travis-image]: https://travis-ci.org/github-linker/live-resolver.svg?branch=master
+[travis-url]: https://travis-ci.org/octo-linker/live-resolver
+[travis-image]: https://travis-ci.org/octo-linker/live-resolver.svg?branch=master
