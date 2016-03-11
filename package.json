@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "mocha"
+    "test": "mocha",
+    "watch-test": "mocha -w"
   },
   "author": "Stefan Buck",
   "license": "MIT",
