@@ -1,0 +1,34 @@
+{
+  "bower": {
+    "registry": "http://bower.herokuapp.com/packages/%s",
+    "fallback": "http://bower.io/search/?q=%s",
+    "xpaths": [
+      "/url"
+    ]
+  },
+  "composer": {
+    "registry": "https://packagist.org/packages/%s.json",
+    "fallback": "https://packagist.org/packages/%s",
+    "xpaths": [
+      "/package/repository"
+    ]
+  },
+  "npm": {
+    "registry": "https://registry.npmjs.org/%s",
+    "fallback": "https://npmjs.org/package/%s",
+    "xpaths": [
+      "/url",
+      "/repository",
+      "/repository/url",
+      "/repository/path",
+      "/repository/web",
+      "/repository/git",
+      "/repositories",
+      "/repositories/url",
+      "/repositories/path",
+      "/repositories/web",
+      "/repositories/git",
+      "/homepage"
+    ]
+  }
+}

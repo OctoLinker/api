@@ -8,6 +8,7 @@ var cache = require('memory-cache');
 var pkg = require('./package.json');
 var resolver = require('./src/resolver');
 var insight = require('./src/utils/insight.js').init();
+const config = require('./config.json');
 
 var server = new Hapi.Server();
 server.connection({
@@ -23,7 +24,7 @@ server.route({
     config: {
         validate: {
             params: {
-                registry: Joi.required().valid('npm', 'bower', 'composer'),
+                registry: Joi.required().valid(Object.keys(config)),
                 package: Joi.required()
             }
         }
@@ -47,7 +48,7 @@ server.route({
         return resolvedHandler(cachedUrl);
       }
 
-      resolver(type, pkg, function(err, url) {
+      resolver(config, type, pkg, function(err, url) {
 
         if (err && err.code === 404) {
           insight.sendEvent('package_not_found', {

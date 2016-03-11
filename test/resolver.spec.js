@@ -7,7 +7,7 @@ var resolver = rewire('../src/resolver');
 
 var resolverTypes = ['npm', 'bower', 'composer'];
 
-describe('resolver', function() {
+xdescribe('resolver', function() {
 
   beforeEach(function () {
     var rewireConf = {};

@@ -1,18 +1,35 @@
 'use strict';
 
-var bower = require('./bower');
-var npm = require('./npm');
-var composer = require('./composer');
+const util = require('util');
+const got = require('got');
+const githubUrl = require('github-url-from-git');
+const xpathHelper = require('../utils/xpath-helper')
 
-module.exports = function(registryType, pkgName, cb) {
+function buildUrl(url, packageName) {
+  return util.format(url, packageName);
+}
 
-  if (registryType === 'npm') {
-    return npm(pkgName, cb);
-  } else if (registryType === 'bower') {
-    return bower(pkgName, cb);
-  } else if (registryType === 'composer') {
-    return composer(pkgName, cb);
+function doRequest(url, config, cb) {
+  got(url, {json: true}, function (err, json) {
+    let repo = xpathHelper(json, config.xpaths);
+    repo = githubUrl(repo);
+
+    if (!repo) {
+      repo = buildUrl(config.fallback, packageName);
+    }
+
+    cb(null, repo);
+  });
+}
+
+module.exports = function(config, registryType, packageName, cb) {
+  const registryConfig = config[registryType];
+
+  if (!registryConfig) {
+    cb(new Error('Registry "' + registryType + '" is not supported'));
+    return;
   }
 
-  cb(new Error('Registry "' + registryType + '" is not supported'));
+  const url = buildUrl(registryConfig.registry, packageName);
+  doRequest(url, registryConfig, cb);
 };

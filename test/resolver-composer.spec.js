@@ -1,11 +1,11 @@
 'use strict';
 
-var assert = require('assert');
-var sinon = require('sinon');
-var rewire = require('rewire');
-var composerResolver = rewire('../src/resolver/composer');
+// var assert = require('assert');
+// var sinon = require('sinon');
+// var rewire = require('rewire');
+// var composerResolver = rewire('../src/resolver/composer');
 
-describe('composer resolver', function() {
+xdescribe('composer resolver', function() {
 
   beforeEach(function () {
     this.sandbox = sinon.sandbox.create();

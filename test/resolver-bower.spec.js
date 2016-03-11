@@ -1,11 +1,11 @@
 'use strict';
 
-var assert = require('assert');
-var sinon = require('sinon');
-var rewire = require('rewire');
-var bowerResolver = rewire('../src/resolver/bower');
+// var assert = require('assert');
+// var sinon = require('sinon');
+// var rewire = require('rewire');
+// var bowerResolver = rewire('../src/resolver/bower');
 
-describe('bower resolver', function() {
+xdescribe('bower resolver', function() {
 
   beforeEach(function () {
     this.sandbox = sinon.sandbox.create();
