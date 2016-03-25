@@ -2,7 +2,7 @@
 
 const util = require('util');
 const got = require('got');
-const githubUrl = require('github-url-from-git');
+const repositoryUrl = require('../utils/repository-url');
 const xpathHelper = require('../utils/xpath-helper')
 
 function buildUrl(url, packageName) {
@@ -12,7 +12,7 @@ function buildUrl(url, packageName) {
 function doRequest(url, config, cb) {
   got(url, {json: true}, function (err, json) {
     let repo = xpathHelper(json, config.xpaths);
-    repo = githubUrl(repo);
+    repo = repositoryUrl(repo);
 
     if (!repo) {
       repo = buildUrl(config.fallback, packageName);
