@@ -9,8 +9,14 @@ function buildUrl(url, packageName) {
   return util.format(url, packageName);
 }
 
-function doRequest(url, config, cb) {
-  got(url, {json: true}, function (err, json) {
+function doRequest(packageName, config, cb) {
+  const url = buildUrl(config.registry, packageName);
+
+  got.get(url, {json: true}, function (err, json) {
+    if (err) {
+      return cb(err);
+    }
+
     let repo = xpathHelper(json, config.xpaths);
     repo = repositoryUrl(repo);
 
@@ -30,6 +36,5 @@ module.exports = function(config, registryType, packageName, cb) {
     return;
   }
 
-  const url = buildUrl(registryConfig.registry, packageName);
-  doRequest(url, registryConfig, cb);
+  doRequest(packageName, registryConfig, cb);
 };

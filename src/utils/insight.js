@@ -6,8 +6,6 @@ var keen;
 function sendEvent(eventName, data) {
   if (keen) {
     keen.addEvent(eventName, data);
-  } else {
-    console.log(eventName, data);
   }
 }
 
