@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node server.js",
     "test": "mocha",
     "watch-test": "mocha -w"
   },
@@ -14,6 +14,7 @@
     "node": "0.12.2"
   },
   "dependencies": {
+    "boom": "^3.1.2",
     "github-url-from-git": "^1.4.0",
     "got": "^3.2.0",
     "hapi": "^13.1.0",

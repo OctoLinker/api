@@ -1,27 +1,29 @@
 'use strict';
 
-var keenIO = require('keen.io');
-var keen;
+const keenIO = require('keen.io');
+let instance;
 
 function sendEvent(eventName, data) {
-  if (keen) {
-    keen.addEvent(eventName, data);
+  if (instance) {
+    instance.addEvent(eventName, data);
   }
 }
 
 function init() {
-  if (process.env.KEEN_PROJECT_ID) {
-    keen = keenIO.configure({
-        projectId: process.env.KEEN_PROJECT_ID,
-        writeKey: process.env.KEEN_WRITE_KEY
-    });
+  if (!process.env.KEEN_PROJECT_ID) {
+    return;
   }
 
-  return {
-    sendEvent: sendEvent
-  };
+  instance = keenIO.configure({
+      projectId: process.env.KEEN_PROJECT_ID,
+      writeKey: process.env.KEEN_WRITE_KEY
+  });
 }
 
-module.exports = {
-  init: init
-};
+module.exports = function (eventName, data) {
+  if (!instance) {
+    init();
+  }
+
+  sendEvent(eventName, data);
+}
