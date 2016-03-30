@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- v4
+- v4.3.0
 deploy:
   provider: heroku
   app: githublinker
