@@ -2,11 +2,21 @@
 
 A small service that points you to the github repository for the requested package.
 
+The supported registries are:
+  - [npmjs.com](https://npmjs.com)
+  - [bower.io](http:/bower.io)
+  - [getcomposer.org](https://getcomposer.org)
+  - [rubygems.org](https://rubygems.org)
+  
 ## Find a package
 
 https://githublinker.herokuapp.com/q/{registry}/{package}
 
-The supported registries are: `npm` `bower` and `composer`
+Registry must be one of:
+  - `npm`
+  - `bower`
+  - `composer`
+  - `rubygems`
 
 Example:
 
