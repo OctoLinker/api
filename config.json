@@ -13,6 +13,15 @@
       "/package/repository"
     ]
   },
+  "rubygems": {
+    "registry": "https://rubygems.org/api/v1/gems/%s.json",
+    "fallback": "https://rubygems.org/search?query=%s",
+    "xpaths": [
+      "/source_code_uri",
+      "/homepage_uri",
+      "/project_uri"
+    ]
+  },
   "npm": {
     "registry": "https://registry.npmjs.org/%s",
     "fallback": "https://npmjs.org/package/%s",
