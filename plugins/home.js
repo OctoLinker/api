@@ -11,9 +11,9 @@ exports.register = (server, options, next) => {
             var short = repoUrl.replace('https://github.com/', '');
             var versionInfo = '<a href="' + repoUrl + '">' + short + '@' + pkg.version + '</a>';
 
-            insight('shows_index', {
+            insight.trackEvent('shows_index', {
               version: pkg.version
-            });
+            }, request);
 
             reply(versionInfo);
           }

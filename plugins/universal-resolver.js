@@ -27,22 +27,6 @@ function repositoryUrlNotFoundResponse() {
   })
 }
 
-function trackError(err, eventData) {
-  if (!err.isBoom) {
-    eventData.errorMessage = err.message;
-    eventData.errorStack = err.stack;
-  }
-
-  insight(
-    (err.data || {}).eventKey || 'unkown_error',
-    eventData
-  );
-}
-
-function trackResolved(eventData) {
-  insight('resolved', eventData);
-}
-
 function doRequest(packageName, type, cb) {
   const config = registryConfig[type];
 
@@ -97,12 +81,13 @@ exports.register = (server, options, next) => {
 
             doRequest(pkg, type, function(err, url) {
               if (err) {
-                trackError(err, eventData);
+                const eventKey = (err.data || {}).eventKey;
+                insight.trackError(eventKey, err, eventData, request);
                 return reply(err);
               }
 
               eventData.url = url;
-              trackResolved(eventData);
+              insight.trackEvent('resolved', eventData, request);
 
               reply({
                 url
