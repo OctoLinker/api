@@ -7,7 +7,7 @@ const cache = require('memory-cache');
 const hapi = require('hapi');
 const resolverPlugin = require('../plugins/universal-resolver.js');
 
-describe.only('resolver', () => {
+describe('resolver', () => {
   let server;
 
   before(done => {
