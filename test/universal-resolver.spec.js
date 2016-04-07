@@ -9,6 +9,10 @@ const resolverPlugin = require('../plugins/universal-resolver.js');
 
 describe('resolver', () => {
   let server;
+  const options = {
+    method: 'GET',
+    url: '/q/bower/foo'
+  };
 
   before(done => {
       server = new hapi.Server();
@@ -36,69 +40,86 @@ describe('resolver', () => {
     this.sandbox.restore();
   });
 
-  it("returns an error if registry fetch fails", (done) => {
-    const err = new Error('Some error');
-    this.gotStub.yields(err);
+  describe('fetch', () => {
+    it('returns an error if registry fetch fails', (done) => {
+      const err = new Error('Some error');
+      this.gotStub.yields(err);
 
-    const options = {
-      method: 'GET',
-      url: '/q/bower/foo'
-    };
+      server.inject(options, (response) => {
+        assert.equal(response.statusCode, 500);
+        assert.equal(response.result.error, 'Internal Server Error');
+        done();
+      });
+    });
 
-    server.inject(options, (response) => {
-      assert.equal(response.statusCode, 500);
-      assert.equal(response.result.error, 'Internal Server Error');
-      done();
+    it('fetch package information from registry', (done) => {
+      this.gotStub.yields(null);
+
+      server.inject(options, (response) => {
+        assert.equal(this.gotStub.callCount, 1);
+        assert.equal(this.gotStub.args[0][0], 'http://bower.herokuapp.com/packages/foo');
+        assert.equal(this.gotStub.args[0][1].json, undefined);
+        done();
+      });
     });
   });
 
-  it('fetch package information from registry', (done) => {
-    this.gotStub.yields(null);
+  describe('response', () => {
+    describe('with 404', () => {
+      it('when package can not be found', (done) => {
+        const err = new Error('Some error');
+        err.code = 404;
+        this.gotStub.yields(err);
 
-    const options = {
-      method: 'GET',
-      url: '/q/bower/foo'
-    };
-
-    server.inject(options, (response) => {
-      assert.equal(this.gotStub.callCount, 1);
-      assert.equal(this.gotStub.args[0][0], 'http://bower.herokuapp.com/packages/foo');
-      assert.equal(this.gotStub.args[0][1].json, undefined);
-      done();
+        server.inject(options, (response) => {
+          assert.equal(response.statusCode, 404);
+          assert.equal(response.result.message, 'Package not found');
+          done();
+        });
+      });
     });
-  });
 
-  it("returns 404 response if package can not be found", (done) => {
-    const err = new Error('Some error');
-    err.code = 404;
-    this.gotStub.yields(err);
+    describe('with 500', () => {
+      it('when no repository url is found', (done) => {
+        this.gotStub.yields(null, JSON.stringify({
+          url: ''
+        }));
 
-    const options = {
-      method: 'GET',
-      url: '/q/bower/foo'
-    };
-
-    server.inject(options, (response) => {
-      assert.equal(response.statusCode, 404);
-      assert.equal(response.result.message, 'Package not found');
-      done();
+        server.inject(options, (response) => {
+          assert.equal(response.statusCode, 500);
+          done();
+        });
+      });
     });
-  });
 
-  it("returns project url", (done) => {
-    this.gotStub.yields(null, JSON.stringify({
-      url: 'rundmc/foo'
-    }));
+    describe('with 200', () => {
+      describe('when url is a github.com', () => {
+        it('returns project url', (done) => {
+          this.gotStub.yields(null, JSON.stringify({
+            url: 'rundmc/foo'
+          }));
 
-    const options = {
-      method: 'GET',
-      url: '/q/bower/foo'
-    };
+          server.inject(options, (response) => {
+            assert.equal(response.statusCode, 200);
+            assert.equal(response.result.url, 'https://github.com/rundmc/foo');
+            done();
+          });
+        });
+      });
 
-    server.inject(options, (response) => {
-      assert.equal(response.statusCode, 200);
-      assert.equal(response.result.url, 'https://github.com/rundmc/foo');
-      done();
+      describe('when url is something else', () => {
+        it('returns custom url', (done) => {
+          this.gotStub.yields(null, JSON.stringify({
+            url: 'http://rundmc.com/foo'
+          }));
+
+          server.inject(options, (response) => {
+            assert.equal(response.statusCode, 200);
+            assert.equal(response.result.url, 'http://rundmc.com/foo');
+            done();
+          });
+        });
+      });
     });
   });
 });

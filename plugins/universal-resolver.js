@@ -3,6 +3,7 @@
 const util = require('util');
 const got = require('got');
 const Joi = require('joi');
+const isUrl = require('is-url');
 const Boom = require('boom');
 const repositoryUrl = require('../src/utils/repository-url');
 const xpathHelper = require('../src/utils/xpath-helper')
@@ -49,7 +50,12 @@ function doRequest(packageName, type, cb) {
       return cb(parseFailedResponse());
     }
 
-    const url = repositoryUrl(xpathHelper(json, config.xpaths));
+    const bestMatchUrl = xpathHelper(json, config.xpaths);
+    let url = repositoryUrl(bestMatchUrl);
+
+    if (!url && isUrl(bestMatchUrl)) {
+      url = bestMatchUrl;
+    }
 
     if (!url) {
       return cb(repositoryUrlNotFoundResponse());
