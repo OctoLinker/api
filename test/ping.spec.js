@@ -4,7 +4,7 @@ const assert = require('assert');
 const sinon = require('sinon');
 const got = require('got');
 const hapi = require('hapi');
-const plugin = require('../plugins/ping.js');
+const plugin = require('../src/plugins/ping.js');
 
 describe('ping', () => {
   let server;

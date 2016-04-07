@@ -2,7 +2,7 @@
 
 const got = require('got');
 const Joi = require('joi');
-const insight = require('../src/utils/insight.js');
+const insight = require('../utils/insight.js');
 
 exports.register = (server, options, next) => {
     server.route([{

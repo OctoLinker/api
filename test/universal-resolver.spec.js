@@ -5,7 +5,7 @@ const sinon = require('sinon');
 const got = require('got');
 const cache = require('memory-cache');
 const hapi = require('hapi');
-const resolverPlugin = require('../plugins/universal-resolver.js');
+const resolverPlugin = require('../src/plugins/universal-resolver.js');
 
 describe('resolver', () => {
   let server;

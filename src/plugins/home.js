@@ -1,5 +1,5 @@
-const pkg = require('../package.json');
-const insight = require('../src/utils/insight.js');
+const pkg = require('../../package.json');
+const insight = require('../utils/insight.js');
 
 exports.register = (server, options, next) => {
     server.route([{

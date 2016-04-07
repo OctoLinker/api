@@ -3,9 +3,9 @@ if (process.env.NEW_RELIC_LICENSE_KEY) {
 }
 
 const hapi = require('hapi');
-const resolverPlugin = require('./plugins/universal-resolver.js');
-const pingPlugin = require('./plugins/ping.js');
-const homePlugin = require('./plugins/home.js');
+const resolverPlugin = require('./src/plugins/universal-resolver.js');
+const pingPlugin = require('./src/plugins/ping.js');
+const homePlugin = require('./src/plugins/home.js');
 
 const server = new hapi.Server();
 server.connection({

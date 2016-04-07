@@ -5,10 +5,10 @@ const got = require('got');
 const Joi = require('joi');
 const isUrl = require('is-url');
 const Boom = require('boom');
-const repositoryUrl = require('../src/utils/repository-url');
-const xpathHelper = require('../src/utils/xpath-helper')
-const insight = require('../src/utils/insight.js');
-const registryConfig = require('../config.json');
+const repositoryUrl = require('../utils/repository-url');
+const xpathHelper = require('../utils/xpath-helper')
+const insight = require('../utils/insight.js');
+const registryConfig = require('../../config.json');
 
 function notFoundResponse() {
   return Boom.notFound('Package not found', {
