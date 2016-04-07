@@ -1,6 +1,6 @@
 # Live resolver [![Build Status][travis-image]][travis-url]
 
-A small service that points you to the github repository for the requested package.
+Returns the github repository url for the requested package.
 
 The supported registries are:
   - [npmjs.com](https://npmjs.com)
