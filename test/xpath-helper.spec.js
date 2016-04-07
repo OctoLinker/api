@@ -19,25 +19,35 @@ describe('xpath-helper', () => {
   });
 
   describe('jpath', () => {
-    let result;
-    const json = {foo: 'bar'};
+    const json = {
+      foo: '',
+      bar: 'blub'
+    };
     const xpaths = [
       '/foo',
       '/bar',
     ];
 
-    beforeEach(() => {
-      result = xpathHelper(json, xpaths);
-    });
-
     it('calls jpath.resolve for each xpath entry', () => {
+      xpathHelper({}, xpaths);
+
       assert.equal(jpathResolveStub.callCount, xpaths.length);
       assert.equal(jpathResolveStub.args[0][1], xpaths[0]);
       assert.equal(jpathResolveStub.args[1][1], xpaths[1]);
     });
 
     it('calls jpath.resolve with json passed in', () => {
-      assert.equal(jpathResolveStub.args[0][0], json);
+      xpathHelper(json, xpaths);
+
+      assert.deepEqual(jpathResolveStub.args[0][0], json);
+    });
+
+    it('ignores empty values', () => {
+      jpathResolveStub.onCall(0).returns(['']);
+      jpathResolveStub.onCall(1).returns(['blub']);
+
+      const result = xpathHelper(json, xpaths);
+      assert.equal(result, 'blub');
     });
   });
 });
