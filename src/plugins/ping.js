@@ -17,7 +17,7 @@ exports.register = (server, options, next) => {
           handler: (request, reply) => {
             const url = request.query.url;
 
-            got.head(url, function (err) {
+            got.get(url, function (err) {
               if (err) {
                 insight.trackError('ping_error', err, {
                   url,
@@ -30,7 +30,9 @@ exports.register = (server, options, next) => {
                 url,
               }, request);
 
-              reply().code(200);
+              reply({
+                url
+              }).code(200);
             });
           }
         }
