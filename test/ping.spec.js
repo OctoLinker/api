@@ -26,7 +26,7 @@ describe('ping', () => {
 
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create();
-    this.gotStub = this.sandbox.stub(got, 'head');
+    this.gotStub = this.sandbox.stub(got, 'get');
   });
 
   afterEach(() => {
