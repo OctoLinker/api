@@ -8,10 +8,6 @@ function init() {
     return;
   }
 
-  if (!instance) {
-    init();
-  }
-
   instance = keenIO.configure({
       projectId: process.env.KEEN_PROJECT_ID,
       writeKey: process.env.KEEN_WRITE_KEY
@@ -27,6 +23,8 @@ function trackEvent(eventKey, eventData, request) {
 
   if (instance) {
     instance.addEvent(eventKey, data);
+  } else {
+    console.log(eventKey, data);
   }
 }
 
@@ -44,6 +42,8 @@ function trackError(eventKey, err, eventData, request) {
     request
   );
 }
+
+init();
 
 module.exports = {
   trackEvent,
