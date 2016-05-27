@@ -82,7 +82,8 @@ exports.register = (server, options, next) => {
             const eventData = {
               registry: type,
               package: pkg,
-              referer: request.headers.referer
+              referer: request.headers.referer,
+              redirect: request.query.redirect,
             }
 
             doRequest(pkg, type, function(err, url) {
@@ -95,9 +96,13 @@ exports.register = (server, options, next) => {
               eventData.url = url;
               insight.trackEvent('resolved', eventData, request);
 
-              reply({
-                url
-              });
+              if (eventData.redirect) {
+                reply().redirect(url);
+              } else {
+                reply({
+                  url
+                });
+              }
             });
           }
         }
