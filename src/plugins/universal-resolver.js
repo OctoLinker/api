@@ -57,6 +57,10 @@ function doRequest(packageName, type, cb) {
       url = bestMatchUrl;
     }
 
+    if (!url && config.fallback) {
+      url = util.format(config.fallback, packageName);
+    }
+
     if (!url) {
       return cb(repositoryUrlNotFoundResponse());
     }
