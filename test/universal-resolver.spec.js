@@ -79,20 +79,18 @@ describe('resolver', () => {
       });
     });
 
-    describe('with 500', () => {
+    describe('with 200', () => {
       it('when no repository url is found', (done) => {
         this.gotStub.yields(null, JSON.stringify({
           url: ''
         }));
 
         server.inject(options, (response) => {
-          assert.equal(response.statusCode, 500);
+          assert.equal(response.statusCode, 200);
+          assert.equal(response.result.url, 'http://bower.io/search/?q=foo');
           done();
         });
       });
-    });
-
-    describe('with 200', () => {
       describe('when url is a github.com', () => {
         it('returns project url', (done) => {
           this.gotStub.yields(null, JSON.stringify({
