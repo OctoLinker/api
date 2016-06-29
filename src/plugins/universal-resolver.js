@@ -31,7 +31,7 @@ function repositoryUrlNotFoundResponse() {
 function doRequest(packageName, type, cb) {
   const config = registryConfig[type];
 
-  const url = util.format(config.registry, packageName);
+  const url = util.format(config.registry, packageName.replace(/\//g, '%2f'));
 
   got.get(url, function (err, data) {
     if (err) {

@@ -62,6 +62,22 @@ describe('resolver', () => {
         done();
       });
     });
+
+    it('escapes slashes in package names', (done) => {
+      const options = {
+        method: 'GET',
+        url: '/q/npm/@angular/core'
+      };
+
+      this.gotStub.yields(null);
+
+      server.inject(options, (response) => {
+        assert.equal(this.gotStub.callCount, 1);
+        assert.equal(this.gotStub.args[0][0], 'https://registry.npmjs.org/@angular%2fcore');
+        assert.equal(this.gotStub.args[0][1].json, undefined);
+        done();
+      });
+    });
   });
 
   describe('response', () => {
