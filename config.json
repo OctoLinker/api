@@ -39,5 +39,13 @@
       "/repositories/git",
       "/homepage"
     ]
+  },
+  "pypi": {
+    "registry": "https://pypi.python.org/pypi/%s/json",
+    "fallback": "https://pypi.python.org/pypi/%s",
+    "xpaths": [
+      "/info/home_page",
+      "/info/package_url"
+    ]
   }
 }
