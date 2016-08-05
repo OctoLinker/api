@@ -33,19 +33,11 @@ function doRequest(packageName, type, cb) {
 
   const url = util.format(config.registry, packageName.replace(/\//g, '%2f'));
 
-  got.get(url, function (err, data) {
-    if (err) {
-      if (err.code === 404) {
-        return cb(notFoundResponse());
-      }
-
-      return cb(Boom.wrap(err));
-    }
-
+  got.get(url).then(function (response) {
     let json;
 
     try {
-      json = JSON.parse(data);
+      json = JSON.parse(response.body);
     } catch (e) {
       return cb(parseFailedResponse());
     }
@@ -66,6 +58,12 @@ function doRequest(packageName, type, cb) {
     }
 
     cb(null, url);
+  }, function (err) {
+    if (err.code === 404) {
+      return cb(notFoundResponse());
+    }
+
+    return cb(Boom.wrap(err));
   });
 }
 
