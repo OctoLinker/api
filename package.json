@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "lodash": "^4.6.1",
-    "mocha": "^2.2.5",
+    "mocha": "^3.0.1",
     "rewire": "^2.3.4",
     "sinon": "^1.16.1"
   }
