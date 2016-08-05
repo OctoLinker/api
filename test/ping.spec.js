@@ -2,6 +2,7 @@
 
 const assert = require('assert');
 const sinon = require('sinon');
+require('sinon-as-promised')
 const got = require('got');
 const hapi = require('hapi');
 const plugin = require('../src/plugins/ping.js');
@@ -34,7 +35,7 @@ describe('ping', () => {
   });
 
   it('performs an HTTP HEAD request', (done) => {
-    this.gotStub.yields(null);
+    this.gotStub.resolves();
 
     const options = {
       url: '/ping?url=http://awesomefooland.com'
@@ -50,7 +51,7 @@ describe('ping', () => {
   it("returns 404 response if package can not be found", (done) => {
     const err = new Error('Some error');
     err.code = 404;
-    this.gotStub.yields(err);
+    this.gotStub.rejects(err);
 
     const options = {
       method: 'GET',
@@ -64,7 +65,7 @@ describe('ping', () => {
   });
 
   it("returns project url", (done) => {
-    this.gotStub.yields(null);
+    this.gotStub.resolves();
 
     const options = {
       method: 'GET',
