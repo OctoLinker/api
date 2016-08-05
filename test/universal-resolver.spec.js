@@ -2,6 +2,7 @@
 
 const assert = require('assert');
 const sinon = require('sinon');
+require('sinon-as-promised')
 const got = require('got');
 const cache = require('memory-cache');
 const hapi = require('hapi');
@@ -43,7 +44,7 @@ describe('resolver', () => {
   describe('fetch', () => {
     it('returns an error if registry fetch fails', (done) => {
       const err = new Error('Some error');
-      this.gotStub.yields(err);
+      this.gotStub.rejects(err);
 
       server.inject(options, (response) => {
         assert.equal(response.statusCode, 500);
@@ -53,12 +54,11 @@ describe('resolver', () => {
     });
 
     it('fetch package information from registry', (done) => {
-      this.gotStub.yields(null);
+      this.gotStub.resolves();
 
       server.inject(options, (response) => {
         assert.equal(this.gotStub.callCount, 1);
         assert.equal(this.gotStub.args[0][0], 'http://bower.herokuapp.com/packages/foo');
-        assert.equal(this.gotStub.args[0][1].json, undefined);
         done();
       });
     });
@@ -69,12 +69,11 @@ describe('resolver', () => {
         url: '/q/npm/@angular/core'
       };
 
-      this.gotStub.yields(null);
+      this.gotStub.resolves();
 
       server.inject(options, (response) => {
         assert.equal(this.gotStub.callCount, 1);
         assert.equal(this.gotStub.args[0][0], 'https://registry.npmjs.org/@angular%2fcore');
-        assert.equal(this.gotStub.args[0][1].json, undefined);
         done();
       });
     });
@@ -85,7 +84,7 @@ describe('resolver', () => {
       it('when package can not be found', (done) => {
         const err = new Error('Some error');
         err.code = 404;
-        this.gotStub.yields(err);
+        this.gotStub.rejects(err);
 
         server.inject(options, (response) => {
           assert.equal(response.statusCode, 404);
@@ -97,9 +96,11 @@ describe('resolver', () => {
 
     describe('with 200', () => {
       it('when no repository url is found', (done) => {
-        this.gotStub.yields(null, JSON.stringify({
-          url: ''
-        }));
+        this.gotStub.resolves({
+          body: JSON.stringify({
+            url: ''
+          })
+        });
 
         server.inject(options, (response) => {
           assert.equal(response.statusCode, 200);
@@ -109,9 +110,11 @@ describe('resolver', () => {
       });
       describe('when url is a github.com', () => {
         it('returns project url', (done) => {
-          this.gotStub.yields(null, JSON.stringify({
-            url: 'rundmc/foo'
-          }));
+          this.gotStub.resolves({
+              body: JSON.stringify({
+              url: 'rundmc/foo'
+            })
+          });
 
           server.inject(options, (response) => {
             assert.equal(response.statusCode, 200);
@@ -123,9 +126,11 @@ describe('resolver', () => {
 
       describe('when url is something else', () => {
         it('returns custom url', (done) => {
-          this.gotStub.yields(null, JSON.stringify({
-            url: 'http://rundmc.com/foo'
-          }));
+          this.gotStub.resolves({
+            body: JSON.stringify({
+              url: 'http://rundmc.com/foo'
+            })
+          });
 
           server.inject(options, (response) => {
             assert.equal(response.statusCode, 200);
