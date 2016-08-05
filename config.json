@@ -47,5 +47,13 @@
       "/info/home_page",
       "/info/package_url"
     ]
+  },
+  "crates": {
+    "registry": "https://crates.io/api/v1/crates/%s",
+    "fallback": "https://crates.io/crates/%s",
+    "xpaths": [
+      "/crate/repository",
+      "/crate/homepage"
+    ]
   }
 }
