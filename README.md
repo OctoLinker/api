@@ -8,6 +8,7 @@ The supported registries are:
   - [getcomposer.org](https://getcomposer.org)
   - [rubygems.org](https://rubygems.org)
   - [pypi.python.org](https://pypi.python.org)
+  - [crates.io](https://crates.io)
   
 ## Find a package
 
@@ -19,6 +20,7 @@ Registry must be one of:
   - `composer`
   - `rubygems`
   - `pypi`
+  - `crates`
 
 Example:
 
