@@ -7,6 +7,7 @@ The supported registries are:
   - [bower.io](http:/bower.io)
   - [getcomposer.org](https://getcomposer.org)
   - [rubygems.org](https://rubygems.org)
+  - [pypi.python.org](https://pypi.python.org)
   
 ## Find a package
 
@@ -17,6 +18,7 @@ Registry must be one of:
   - `bower`
   - `composer`
   - `rubygems`
+  - `pypi`
 
 Example:
 
