@@ -29,6 +29,7 @@ describe('functional', () => {
   testUrl('/q/composer/phpunit/phpunit', 'https://github.com/sebastianbergmann/phpunit');
   testUrl('/q/rubygems/nokogiri', 'https://github.com/sparklemotion/nokogiri');
   testUrl('/q/npm/request', 'https://github.com/request/request');
+  testUrl('/q/npm/babel-helper-regex', 'https://github.com/babel/babel/tree/master/packages/babel-helper-regex');
   testUrl('/q/pypi/simplejson', 'https://github.com/simplejson/simplejson');
   testUrl('/q/crates/libc', 'https://github.com/rust-lang/libc');
 });
