@@ -2,7 +2,7 @@
 
 const assert = require('assert');
 const sinon = require('sinon');
-require('sinon-as-promised')
+require('sinon-as-promised');
 const got = require('got');
 const cache = require('memory-cache');
 const hapi = require('hapi');
@@ -56,7 +56,7 @@ describe('resolver', () => {
     it('fetch package information from registry', (done) => {
       this.gotStub.resolves();
 
-      server.inject(options, (response) => {
+      server.inject(options, () => {
         assert.equal(this.gotStub.callCount, 1);
         assert.equal(this.gotStub.args[0][0], 'http://bower.herokuapp.com/packages/foo');
         done();
@@ -71,7 +71,7 @@ describe('resolver', () => {
 
       this.gotStub.resolves();
 
-      server.inject(options, (response) => {
+      server.inject(options, () => {
         assert.equal(this.gotStub.callCount, 1);
         assert.equal(this.gotStub.args[0][0], 'https://registry.npmjs.org/@angular%2fcore');
         done();
