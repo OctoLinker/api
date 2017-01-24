@@ -1,6 +1,7 @@
 'use strict';
 
-var githubUrl = require('github-url-from-git');
+var nodeUrl = require('url');
+var githubUrl = require('github-url-to-object');
 
 module.exports = function(url) {
   if (typeof url !== 'string') {
@@ -24,11 +25,11 @@ module.exports = function(url) {
   url = url.replace('https+git://', 'git+https://');
   url = url.replace('://www.github.com', '://github.com');
 
-  // Resolve detail link
-  var stripDetails = url.match(/https?:\/\/github.com(\/[^\/]+){2,2}/g);
-  if (stripDetails) {
-    url = stripDetails[0];
+  // Ensure there is a protocol (`github-url-to-object` needs it)
+  if (nodeUrl.parse(url).protocol === null) {
+    url = 'https://' + url;
   }
 
-  return githubUrl(url);
+  var githubInfo = githubUrl(url);
+  return githubInfo && githubInfo.https_url || url;
 };
