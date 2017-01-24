@@ -10,9 +10,5 @@
   "disallowMultipleLineBreaks": true,
   "disallowKeywordsOnNewLine": ["else"],
   "disallowTrailingWhitespace": true,
-  "requireLineFeedAtFileEnd": true,
-  "validateJSDoc": {
-    "checkParamNames": true,
-    "requireParamTypes": true
-  }
+  "requireLineFeedAtFileEnd": true
 }
