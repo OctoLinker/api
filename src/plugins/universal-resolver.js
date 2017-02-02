@@ -1,5 +1,3 @@
-
-
 const util = require('util');
 const got = require('got');
 const Joi = require('joi');
@@ -31,14 +29,14 @@ function repositoryUrlNotFoundResponse() {
 function doRequest(packageName, type, cb) {
   const config = registryConfig[type];
 
-  const url = util.format(config.registry, packageName.replace(/\//g, '%2f'));
+  const requestUrl = util.format(config.registry, packageName.replace(/\//g, '%2f'));
 
-  got.get(url).then((response) => {
+  got.get(requestUrl).then((response) => {
     let json;
 
     try {
       json = JSON.parse(response.body);
-    } catch (e) {
+    } catch (err) {
       return cb(parseFailedResponse());
     }
 

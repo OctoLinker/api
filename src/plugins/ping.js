@@ -1,5 +1,3 @@
-
-
 const got = require('got');
 const Joi = require('joi');
 const insight = require('../utils/insight.js');

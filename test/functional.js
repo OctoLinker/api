@@ -1,5 +1,3 @@
-
-
 const assert = require('assert');
 const got = require('got');
 
@@ -7,7 +5,7 @@ describe('functional', () => {
   let server;
 
   before((done) => {
-    server = require('../server');
+    server = require('../server'); // eslint-disable-line global-require
     server.once('start', done);
   });
 

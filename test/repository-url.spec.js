@@ -1,5 +1,3 @@
-
-
 const assert = require('assert');
 const findRepositoryUrl = require('../src/utils/repository-url');
 

@@ -1,5 +1,3 @@
-
-
 const jpath = require('json-path');
 
 function xpathResolver(json, selector) {

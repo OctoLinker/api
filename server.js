@@ -1,5 +1,5 @@
 if (process.env.NEW_RELIC_LICENSE_KEY) {
-  require('newrelic');
+  require('newrelic'); // eslint-disable-line global-require
 }
 
 const hapi = require('hapi');

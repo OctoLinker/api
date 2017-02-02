@@ -1,6 +1,5 @@
-
-
 const keenIO = require('keen.io');
+
 let instance;
 
 function init() {
@@ -36,11 +35,7 @@ function trackError(eventKey, err, eventData, request) {
     data.errorStack = err.stack;
   }
 
-  trackEvent(
-    eventKey || 'unkown_error',
-    data,
-    request,
-  );
+  trackEvent(eventKey || 'unkown_error', data, request);
 }
 
 init();

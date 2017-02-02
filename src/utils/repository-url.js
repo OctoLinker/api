@@ -1,5 +1,3 @@
-
-
 const nodeUrl = require('url');
 const githubUrl = require('github-url-to-object');
 
@@ -31,5 +29,5 @@ module.exports = function (url) {
   }
 
   const githubInfo = githubUrl(url);
-  return githubInfo && githubInfo.https_url || url;
+  return githubInfo ? githubInfo.https_url : url;
 };

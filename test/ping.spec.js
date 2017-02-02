@@ -41,7 +41,7 @@ describe('ping', () => {
       url: '/ping?url=http://awesomefooland.com',
     };
 
-    server.inject(options, (response) => {
+    server.inject(options, () => {
       assert.equal(this.gotStub.callCount, 1);
       assert.equal(this.gotStub.args[0][0], 'http://awesomefooland.com');
       done();
