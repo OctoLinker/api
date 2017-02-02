@@ -15,7 +15,6 @@ describe('repository url', function() {
     'https://www.github.com/john/doe/',
     'http://github.com/john/doe/tree/master',
     'https://github.com/john/doe/tree/master',
-    'https://github.com/john/doe/tree/master/foo',
     'john/doe',
     'john/doe/'
   ];
@@ -29,5 +28,10 @@ describe('repository url', function() {
     it('resolves ' + type, function() {
       assert.equal(findRepositoryUrl(node), 'https://github.com/john/doe');
     });
+  });
+
+  var detailUrl = 'https://github.com/john/doe/tree/master/foo';
+  it('resolves ' + detailUrl, function() {
+    assert.equal(findRepositoryUrl(detailUrl), 'https://github.com/john/doe/tree/master/foo');
   });
 });
