@@ -1,8 +1,8 @@
-'use strict';
+
 
 const assert = require('assert');
 const sinon = require('sinon');
-require('sinon-as-promised')
+require('sinon-as-promised');
 const got = require('got');
 const cache = require('memory-cache');
 const hapi = require('hapi');
@@ -12,22 +12,22 @@ describe('resolver', () => {
   let server;
   const options = {
     method: 'GET',
-    url: '/q/bower/foo'
+    url: '/q/bower/foo',
   };
 
-  before(done => {
-      server = new hapi.Server();
-      server.connection();
+  before((done) => {
+    server = new hapi.Server();
+    server.connection();
 
-      server.register(resolverPlugin, () => {
-          server.start(() => {
-              done();
-          });
+    server.register(resolverPlugin, () => {
+      server.start(() => {
+        done();
       });
+    });
   });
 
-  after(done => {
-      server.stop(() => done());
+  after((done) => {
+    server.stop(() => done());
   });
 
   beforeEach(() => {
@@ -66,7 +66,7 @@ describe('resolver', () => {
     it('escapes slashes in package names', (done) => {
       const options = {
         method: 'GET',
-        url: '/q/npm/@angular/core'
+        url: '/q/npm/@angular/core',
       };
 
       this.gotStub.resolves();
@@ -98,8 +98,8 @@ describe('resolver', () => {
       it('when no repository url is found', (done) => {
         this.gotStub.resolves({
           body: JSON.stringify({
-            url: ''
-          })
+            url: '',
+          }),
         });
 
         server.inject(options, (response) => {
@@ -111,9 +111,9 @@ describe('resolver', () => {
       describe('when url is a github.com', () => {
         it('returns project url', (done) => {
           this.gotStub.resolves({
-              body: JSON.stringify({
-              url: 'rundmc/foo'
-            })
+            body: JSON.stringify({
+              url: 'rundmc/foo',
+            }),
           });
 
           server.inject(options, (response) => {
@@ -128,8 +128,8 @@ describe('resolver', () => {
         it('returns custom url', (done) => {
           this.gotStub.resolves({
             body: JSON.stringify({
-              url: 'http://rundmc.com/foo'
-            })
+              url: 'http://rundmc.com/foo',
+            }),
           });
 
           server.inject(options, (response) => {

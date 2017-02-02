@@ -1,4 +1,4 @@
-'use strict';
+
 
 const assert = require('assert');
 const got = require('got');
@@ -6,13 +6,13 @@ const got = require('got');
 describe('functional', () => {
   let server;
 
-  before(done => {
-      server = require('../server');
-      server.once('start', done);
+  before((done) => {
+    server = require('../server');
+    server.once('start', done);
   });
 
-  after(done => {
-      server.stop(done);
+  after((done) => {
+    server.stop(done);
   });
 
   function testUrl(path, expectedUrl) {

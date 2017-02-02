@@ -1,11 +1,10 @@
-'use strict';
 
-var assert = require('assert');
-var findRepositoryUrl = require('../src/utils/repository-url');
 
-describe('repository url', function() {
+const assert = require('assert');
+const findRepositoryUrl = require('../src/utils/repository-url');
 
-  var urls = [
+describe('repository url', () => {
+  const urls = [
     'github.com/john/doe/',
     'http://github.com/john/doe/',
     'https://github.com/john/doe',
@@ -16,22 +15,22 @@ describe('repository url', function() {
     'http://github.com/john/doe/tree/master',
     'https://github.com/john/doe/tree/master',
     'john/doe',
-    'john/doe/'
+    'john/doe/',
   ];
 
-  urls.forEach(function(node) {
-    var type = node;
+  urls.forEach((node) => {
+    let type = node;
     if (typeof node !== 'string') {
       type = JSON.stringify(node);
     }
 
-    it('resolves ' + type, function() {
+    it(`resolves ${type}`, () => {
       assert.equal(findRepositoryUrl(node), 'https://github.com/john/doe');
     });
   });
 
-  var detailUrl = 'https://github.com/john/doe/tree/master/foo';
-  it('resolves ' + detailUrl, function() {
+  const detailUrl = 'https://github.com/john/doe/tree/master/foo';
+  it(`resolves ${detailUrl}`, () => {
     assert.equal(findRepositoryUrl(detailUrl), 'https://github.com/john/doe/tree/master/foo');
   });
 });

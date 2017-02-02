@@ -1,6 +1,6 @@
-'use strict';
 
-const jpath = require('json-path')
+
+const jpath = require('json-path');
 
 function xpathResolver(json, selector) {
   try {
@@ -10,8 +10,8 @@ function xpathResolver(json, selector) {
   }
 }
 
-module.exports = function(json, xpaths) {
-  for (let selector of xpaths) {
+module.exports = function (json, xpaths) {
+  for (const selector of xpaths) {
     const result = xpathResolver(json, selector);
     if (result.length && typeof result[0] === 'string' && result[0]) {
       return result[0];
