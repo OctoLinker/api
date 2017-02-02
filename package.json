@@ -5,6 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
+    "jscs": "jscs $(git ls-files | grep js$)",
+    "jshint": "jshint $(git ls-files | grep js$)",
+    "lint": "npm run jscs && npm run jshint",
+    "pretest": "npm run lint",
     "test": "mocha",
     "watch-test": "mocha -w"
   },
@@ -30,6 +34,8 @@
     "url": "https://github.com/octo-linker/live-resolver"
   },
   "devDependencies": {
+    "jscs": "^3.0.7",
+    "jshint": "^2.9.4",
     "lodash": "^4.6.1",
     "mocha": "^3.0.1",
     "sinon": "^1.16.1",

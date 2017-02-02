@@ -1,6 +1,6 @@
 'use strict';
 
-const jpath = require('json-path')
+const jpath = require('json-path');
 
 function xpathResolver(json, selector) {
   try {

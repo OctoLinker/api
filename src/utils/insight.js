@@ -48,4 +48,4 @@ init();
 module.exports = {
   trackEvent,
   trackError,
-}
+};

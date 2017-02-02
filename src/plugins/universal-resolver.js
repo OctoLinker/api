@@ -6,7 +6,7 @@ const Joi = require('joi');
 const isUrl = require('is-url');
 const Boom = require('boom');
 const repositoryUrl = require('../utils/repository-url');
-const xpathHelper = require('../utils/xpath-helper')
+const xpathHelper = require('../utils/xpath-helper');
 const insight = require('../utils/insight.js');
 const registryConfig = require('../../config.json');
 
@@ -25,7 +25,7 @@ function parseFailedResponse() {
 function repositoryUrlNotFoundResponse() {
   return Boom.create(500, 'Repository url not found', {
     eventKey: 'repository_url_not_found'
-  })
+  });
 }
 
 function doRequest(packageName, type, cb) {
@@ -85,7 +85,7 @@ exports.register = (server, options, next) => {
               registry: type,
               package: pkg,
               referer: request.headers.referer
-            }
+            };
 
             doRequest(pkg, type, function(err, url) {
               if (err) {
