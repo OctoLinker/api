@@ -1,9 +1,7 @@
-'use strict';
+const nodeUrl = require('url');
+const githubUrl = require('github-url-to-object');
 
-var nodeUrl = require('url');
-var githubUrl = require('github-url-to-object');
-
-module.exports = function(url) {
+module.exports = function (url) {
   if (typeof url !== 'string') {
     return null;
   }
@@ -18,7 +16,7 @@ module.exports = function(url) {
 
   // Resolve shorthand url to a qualified URL
   if (url.split('/').length === 2) {
-    url = 'http://github.com/' + url;
+    url = `http://github.com/${url}`;
   }
 
   // Replace and fix invalid urls
@@ -27,9 +25,9 @@ module.exports = function(url) {
 
   // Ensure there is a protocol (`github-url-to-object` needs it)
   if (nodeUrl.parse(url).protocol === null) {
-    url = 'https://' + url;
+    url = `https://${url}`;
   }
 
-  var githubInfo = githubUrl(url);
-  return githubInfo && githubInfo.https_url || url;
+  const githubInfo = githubUrl(url);
+  return githubInfo ? githubInfo.https_url : url;
 };

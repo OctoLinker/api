@@ -1,6 +1,5 @@
-'use strict';
-
 const keenIO = require('keen.io');
+
 let instance;
 
 function init() {
@@ -9,8 +8,8 @@ function init() {
   }
 
   instance = keenIO.configure({
-      projectId: process.env.KEEN_PROJECT_ID,
-      writeKey: process.env.KEEN_WRITE_KEY
+    projectId: process.env.KEEN_PROJECT_ID,
+    writeKey: process.env.KEEN_WRITE_KEY,
   });
 }
 
@@ -36,11 +35,7 @@ function trackError(eventKey, err, eventData, request) {
     data.errorStack = err.stack;
   }
 
-  trackEvent(
-    eventKey || 'unkown_error',
-    data,
-    request
-  );
+  trackEvent(eventKey || 'unkown_error', data, request);
 }
 
 init();
@@ -48,4 +43,4 @@ init();
 module.exports = {
   trackEvent,
   trackError,
-}
+};

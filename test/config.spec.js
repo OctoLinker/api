@@ -1,19 +1,17 @@
-'use strict';
-
 const assert = require('assert');
-const _ = require('lodash');
 const config = require('../config.json');
 
 describe('config.json', () => {
   const props = ['registry', 'xpaths', 'fallback'];
 
-  _.each(config, (item, key) => {
+  for (const key of Object.keys(config)) {
     describe(`${key}`, () => {
-      _.each(props, (prop) => {
+      for (const propKey of Object.keys(props)) {
+        const prop = props[propKey];
         it(`has "${prop}" property`, () => {
-          assert(item[prop], `No property ${prop} found for ${key} `);
+          assert(config[key][prop], `No property ${prop} found for ${key} `);
         });
-      });
+      }
     });
-  });
+  }
 });

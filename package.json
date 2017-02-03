@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
+    "lint": "eslint .",
+    "pretest": "npm run lint",
     "test": "mocha",
     "watch-test": "mocha -w"
   },
@@ -30,6 +32,10 @@
     "url": "https://github.com/octo-linker/live-resolver"
   },
   "devDependencies": {
+    "eslint": "3.14.1",
+    "eslint-config-airbnb-base": "11.0.1",
+    "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-mocha": "4.8.0",
     "lodash": "4.17.4",
     "mocha": "3.2.0",
     "sinon": "1.17.7",

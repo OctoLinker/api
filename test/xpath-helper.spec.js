@@ -1,8 +1,6 @@
-'use strict';
-
 const assert = require('assert');
 const sinon = require('sinon');
-const jpath = require('json-path')
+const jpath = require('json-path');
 const xpathHelper = require('../src/utils/xpath-helper.js');
 
 describe('xpath-helper', () => {
@@ -21,7 +19,7 @@ describe('xpath-helper', () => {
   describe('jpath', () => {
     const json = {
       foo: '',
-      bar: 'blub'
+      bar: 'blub',
     };
     const xpaths = [
       '/foo',
