@@ -14,6 +14,10 @@ describe('resolver', () => {
     method: 'GET',
     url: '/q/bower/foo'
   };
+  const redirectOptions = {
+    method: 'GET',
+    url: '/q/bower/foo?redirect=1',
+  };
 
   before(done => {
       server = new hapi.Server();
@@ -135,6 +139,36 @@ describe('resolver', () => {
           server.inject(options, (response) => {
             assert.equal(response.statusCode, 200);
             assert.equal(response.result.url, 'http://rundmc.com/foo');
+            done();
+          });
+        });
+      });
+    });
+
+    describe('with 302', () => {
+      describe('when url is a github.com', () => {
+        it('redirects to project url', (done) => {
+          this.gotStub.yields(null, JSON.stringify({
+            url: 'rundmc/foo'
+          }));
+
+          server.inject(redirectOptions, (response) => {
+            assert.equal(response.statusCode, 302);
+            assert.equal(response.headers.location, 'https://github.com/rundmc/foo');
+            done();
+          });
+        });
+      });
+
+      describe('when url is something else', () => {
+        it('redirects to custom url', (done) => {
+          this.gotStub.yields(null, JSON.stringify({
+            url: 'http://rundmc.com/foo'
+          }));
+
+          server.inject(redirectOptions, (response) => {
+            assert.equal(response.statusCode, 302);
+            assert.equal(response.headers.location, 'http://rundmc.com/foo');
             done();
           });
         });
