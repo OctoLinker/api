@@ -55,7 +55,12 @@ function doRequest(packageName, type, cb) {
       return cb(repositoryUrlNotFoundResponse());
     }
 
-    cb(null, url);
+    got.get(url).then(() => {
+      cb(null, url);
+    }).catch(() => {
+      url = util.format(config.fallback, packageName);
+      cb(null, url);
+    });
   }, (err) => {
     if (err.code === 404) {
       return cb(notFoundResponse());
