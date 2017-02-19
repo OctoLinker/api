@@ -24,7 +24,7 @@
   },
   "npm": {
     "registry": "https://registry.npmjs.org/%s",
-    "fallback": "https://npmjs.org/package/%s",
+    "fallback": "https://www.npmjs.com/package/%s",
     "xpaths": [
       "/url",
       "/repository",
