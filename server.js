@@ -3,6 +3,7 @@ if (process.env.NEW_RELIC_LICENSE_KEY) {
 }
 
 const hapi = require('hapi');
+const goResolverPlugin = require('./src/plugins/go-resolver.js');
 const resolverPlugin = require('./src/plugins/universal-resolver.js');
 const pingPlugin = require('./src/plugins/ping.js');
 const homePlugin = require('./src/plugins/home.js');
@@ -14,6 +15,7 @@ server.connection({
 
 server.register([
   resolverPlugin,
+  goResolverPlugin,
   pingPlugin,
   homePlugin,
 ], (err) => {
