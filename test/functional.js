@@ -14,12 +14,10 @@ describe('functional', () => {
   });
 
   function testUrl(path, expectedUrl) {
-    it(`resolves ${path} to ${expectedUrl}`, (done) => {
-      got(server.info.uri + path).then((response) => {
-        const url = JSON.parse(response.body).url;
-        assert.deepStrictEqual(url, expectedUrl);
-        done();
-      });
+    it(`resolves ${path} to ${expectedUrl}`, async () => {
+      const response = await got(server.info.uri + path);
+      const url = JSON.parse(response.body).url;
+      assert.deepStrictEqual(url, expectedUrl);
     });
   }
 
