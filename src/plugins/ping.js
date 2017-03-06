@@ -12,10 +12,11 @@ exports.register = (server, options, next) => {
           url: Joi.required(),
         },
       },
-      handler: (request, reply) => {
+      handler: async (request, reply) => {
         const url = request.query.url;
 
-        got.get(url).then(() => {
+        try {
+          await got.get(url);
           insight.trackEvent('ping_resolved', {
             url,
           }, request);
@@ -23,13 +24,13 @@ exports.register = (server, options, next) => {
           reply({
             url,
           }).code(200);
-        }, (err) => {
+        } catch (err) {
           insight.trackError('ping_error', err, {
             url,
           }, request);
 
-          return reply().code(404);
-        });
+          reply().code(404);
+        }
       },
     },
   }]);
