@@ -9,12 +9,7 @@ function xpathResolver(json, selector) {
 }
 
 module.exports = function (json, xpaths) {
-  const results = [];
-  for (const selector of xpaths) {
-    const result = xpathResolver(json, selector);
-    if (result.length && typeof result[0] === 'string' && result[0]) {
-      results.push(result[0]);
-    }
-  }
-  return results;
+  return xpaths.map(selector => xpathResolver(json, selector))
+    .filter(result => result.length && typeof result[0] === 'string' && result[0])
+    .map(result => result[0]);
 };
