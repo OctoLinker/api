@@ -24,18 +24,18 @@ function repositoryUrlNotFoundResponse() {
   });
 }
 
-module.exports = function doRequest(packageName, type, cb) {
+module.exports = function doRequest(packageName, type) {
   const config = registryConfig[type];
 
   const requestUrl = util.format(config.registry, packageName.replace(/\//g, '%2f'));
 
-  got.get(requestUrl).then((response) => {
+  return got.get(requestUrl).then((response) => {
     let json;
 
     try {
       json = JSON.parse(response.body);
     } catch (err) {
-      return cb(parseFailedResponse());
+      throw parseFailedResponse();
     }
 
     const bestMatchUrl = xpathHelper(json, config.xpaths);
@@ -50,20 +50,18 @@ module.exports = function doRequest(packageName, type, cb) {
     }
 
     if (!url) {
-      return cb(repositoryUrlNotFoundResponse());
+      throw repositoryUrlNotFoundResponse();
     }
 
-    got.get(url).then(() => {
-      cb(null, url);
-    }).catch(() => {
+    return got.get(url).then(() => url).catch(() => {
       url = util.format(config.fallback, packageName);
-      cb(null, url);
+      return url;
     });
   }, (err) => {
     if (err.code === 404) {
-      return cb(notFoundResponse());
+      throw notFoundResponse();
     }
 
-    return cb(Boom.wrap(err));
+    throw Boom.wrap(err);
   });
 };

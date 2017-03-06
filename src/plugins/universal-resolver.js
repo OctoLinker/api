@@ -23,19 +23,17 @@ exports.register = (server, options, next) => {
           referer: request.headers.referer,
         };
 
-        doRequest(pkg, type, (err, url) => {
-          if (err) {
-            const eventKey = (err.data || {}).eventKey;
-            insight.trackError(eventKey, err, eventData, request);
-            return reply(err);
-          }
-
+        doRequest(pkg, type).then((url) => {
           eventData.url = url;
           insight.trackEvent('resolved', eventData, request);
 
           reply({
             url,
           });
+        }, (err) => {
+          const eventKey = (err.data || {}).eventKey;
+          insight.trackError(eventKey, err, eventData, request);
+          reply(err);
         });
       },
     },
