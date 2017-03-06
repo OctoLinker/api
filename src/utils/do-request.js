@@ -39,28 +39,32 @@ module.exports = async function doRequest(packageName, type) {
       throw parseFailedResponse();
     }
 
-    const bestMatchUrl = xpathHelper(json, config.xpaths);
-    let url = repositoryUrl(bestMatchUrl);
+    const urls = xpathHelper(json, config.xpaths);
+    for (const bestMatchUrl of urls) {
+      try {
+        let url = repositoryUrl(bestMatchUrl);
 
-    if (!url && isUrl(bestMatchUrl)) {
-      url = bestMatchUrl;
+        if (!url && isUrl(bestMatchUrl)) {
+          url = bestMatchUrl;
+        }
+
+        if (!url) {
+          throw repositoryUrlNotFoundResponse();
+        }
+
+        // Normally, you wouldn't use `await` inside of a loop.
+        // However, we explicity want to do this sequentially.
+        // See http://eslint.org/docs/rules/no-await-in-loop
+        await got.get(url); // eslint-disable-line no-await-in-loop
+        return url;
+      } catch (err) {
+        // There's nothing to do here, so just keep going.
+        // eslint-disable-line no-empty
+      }
     }
 
-    if (!url && config.fallback) {
-      url = util.format(config.fallback, packageName);
-    }
-
-    if (!url) {
-      throw repositoryUrlNotFoundResponse();
-    }
-
-    try {
-      await got.get(url);
-      return url;
-    } catch (err) {
-      url = util.format(config.fallback, packageName);
-      return url;
-    }
+    // If we get here, no urls could be loaded.
+    return util.format(config.fallback, packageName);
   } catch (err) {
     if (err.code === 404) {
       throw notFoundResponse();
