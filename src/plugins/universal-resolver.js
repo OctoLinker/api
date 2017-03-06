@@ -14,7 +14,7 @@ exports.register = (server, options, next) => {
           package: Joi.required(),
         },
       },
-      handler: (request, reply) => {
+      handler: async (request, reply) => {
         const pkg = request.params.package;
         const type = request.params.registry;
         const eventData = {
@@ -23,20 +23,19 @@ exports.register = (server, options, next) => {
           referer: request.headers.referer,
         };
 
-        doRequest(pkg, type, (err, url) => {
-          if (err) {
-            const eventKey = (err.data || {}).eventKey;
-            insight.trackError(eventKey, err, eventData, request);
-            return reply(err);
-          }
-
+        try {
+          const url = await doRequest(pkg, type);
           eventData.url = url;
           insight.trackEvent('resolved', eventData, request);
 
           reply({
             url,
           });
-        });
+        } catch (err) {
+          const eventKey = (err.data || {}).eventKey;
+          insight.trackError(eventKey, err, eventData, request);
+          reply(err);
+        }
       },
     },
   }]);
