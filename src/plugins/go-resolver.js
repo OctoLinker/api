@@ -4,22 +4,22 @@ const readMeta = require('lets-get-meta');
 const got = require('got');
 const insight = require('../utils/insight');
 
-const getGoMeta = async url => got.get(url)
-  .then((response) => {
-    const meta = readMeta(response.body);
+const getGoMeta = async (url) => {
+  const response = await got.get(url);
+  const meta = readMeta(response.body);
 
-    if (!meta['go-source']) {
-      throw new Error('go-source meta is missing');
-    }
+  if (!meta['go-source']) {
+    throw new Error('go-source meta is missing');
+  }
 
-    const values = meta['go-source'].replace(/\s+/, ' ').split(' ');
+  const values = meta['go-source'].replace(/\s+/, ' ').split(' ');
 
-    return {
-      projectRoot: values[0],
-      projectUrl: values[1],
-      dirTemplate: values[2].replace('{/dir}', ''),
-    };
-  });
+  return {
+    projectRoot: values[0],
+    projectUrl: values[1],
+    dirTemplate: values[2].replace('{/dir}', ''),
+  };
+};
 
 const resolveUrl = async (url) => {
   let goMetaConfig;
