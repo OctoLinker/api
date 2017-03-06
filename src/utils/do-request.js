@@ -24,12 +24,13 @@ function repositoryUrlNotFoundResponse() {
   });
 }
 
-module.exports = function doRequest(packageName, type) {
+module.exports = async function doRequest(packageName, type) {
   const config = registryConfig[type];
 
   const requestUrl = util.format(config.registry, packageName.replace(/\//g, '%2f'));
 
-  return got.get(requestUrl).then((response) => {
+  try {
+    const response = await got.get(requestUrl);
     let json;
 
     try {
@@ -53,15 +54,18 @@ module.exports = function doRequest(packageName, type) {
       throw repositoryUrlNotFoundResponse();
     }
 
-    return got.get(url).then(() => url).catch(() => {
+    try {
+      await got.get(url);
+      return url;
+    } catch (err) {
       url = util.format(config.fallback, packageName);
       return url;
-    });
-  }, (err) => {
+    }
+  } catch (err) {
     if (err.code === 404) {
       throw notFoundResponse();
     }
 
     throw Boom.wrap(err);
-  });
+  }
 };
