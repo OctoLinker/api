@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "lint": "eslint .",
-    "pretest": "npm run lint",
+    "pretest": "yarn lint",
     "test": "mocha",
     "watch-test": "mocha -w"
   },
