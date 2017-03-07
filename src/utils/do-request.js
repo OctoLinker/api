@@ -2,6 +2,7 @@ const util = require('util');
 const got = require('got');
 const isUrl = require('is-url');
 const Boom = require('boom');
+const findReachableUrls = require('find-reachable-urls');
 const repositoryUrl = require('./repository-url');
 const xpathHelper = require('./xpath-helper');
 const registryConfig = require('../../config.json');
@@ -15,12 +16,6 @@ function notFoundResponse() {
 function parseFailedResponse() {
   return Boom.create(500, 'Parsing response failed', {
     eventKey: 'json_parse_failed',
-  });
-}
-
-function repositoryUrlNotFoundResponse() {
-  return Boom.create(500, 'Repository url not found', {
-    eventKey: 'repository_url_not_found',
   });
 }
 
@@ -40,7 +35,7 @@ module.exports = async function doRequest(packageName, type) {
     }
 
     const urls = xpathHelper(json, config.xpaths);
-    for (const bestMatchUrl of urls) {
+    const validUrls = urls.map((bestMatchUrl) => {
       try {
         let url = repositoryUrl(bestMatchUrl);
 
@@ -48,23 +43,21 @@ module.exports = async function doRequest(packageName, type) {
           url = bestMatchUrl;
         }
 
-        if (!url) {
-          throw repositoryUrlNotFoundResponse();
-        }
-
-        // Normally, you wouldn't use `await` inside of a loop.
-        // However, we explicity want to do this sequentially.
-        // See http://eslint.org/docs/rules/no-await-in-loop
-        await got.get(url); // eslint-disable-line no-await-in-loop
         return url;
       } catch (err) {
-        // There's nothing to do here, so just keep going.
-        // eslint-disable-line no-empty
+        return false;
       }
+    });
+
+    const fallbackUrl = util.format(config.fallback, packageName);
+    const tryUrls = validUrls.concat(fallbackUrl);
+    const reachableUrls = await findReachableUrls(tryUrls);
+
+    if (reachableUrls.length === 0) {
+      throw notFoundResponse();
     }
 
-    // If we get here, no urls could be loaded.
-    return util.format(config.fallback, packageName);
+    return reachableUrls[0];
   } catch (err) {
     if (err.code === 404) {
       throw notFoundResponse();
