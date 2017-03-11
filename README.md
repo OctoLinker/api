@@ -38,15 +38,15 @@ Response:
 
 Install dependencies:
 
-`npm install`
+`yarn install`
 
 Run server:
 
-`npm start`
+`yarn start`
 
 ## Testing
 
-`npm test`
+`yarn test`
 
 
 ## License
