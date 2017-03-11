@@ -1,15 +1,16 @@
 const assert = require('assert');
 const got = require('got');
+const parallel = require('mocha.parallel');
 
-describe('functional', () => {
+parallel('functional', () => {
   let server;
 
-  before((done) => {
+  before((done) => { // eslint-disable-line mocha/no-top-level-hooks
     server = require('../server'); // eslint-disable-line global-require
     server.once('start', done);
   });
 
-  after((done) => {
+  after((done) => { // eslint-disable-line mocha/no-top-level-hooks
     server.stop(done);
   });
 
