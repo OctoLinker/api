@@ -5,6 +5,9 @@
     "node": true,
     "mocha": true
   },
+  "settings": {
+    "mocha/additionalSuiteNames": ["parallel"]
+  },
   "rules": {
     "func-names": 0,
     "id-length": [1, {"exceptions": ["$"]}],
