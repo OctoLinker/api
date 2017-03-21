@@ -5,12 +5,12 @@ const parallel = require('mocha.parallel');
 parallel('functional', () => {
   let server;
 
-  before((done) => { // eslint-disable-line mocha/no-top-level-hooks
+  before((done) => {
     server = require('../server'); // eslint-disable-line global-require
     server.once('start', done);
   });
 
-  after((done) => { // eslint-disable-line mocha/no-top-level-hooks
+  after((done) => {
     server.stop(done);
   });
 
