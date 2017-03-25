@@ -1,7 +1,8 @@
 const assert = require('assert');
 const got = require('got');
+const parallel = require('mocha.parallel');
 
-describe('functional', () => {
+parallel('functional', () => {
   let server;
 
   before((done) => {
