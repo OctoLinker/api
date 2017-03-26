@@ -106,37 +106,6 @@ describe('resolver', () => {
           done();
         });
       });
-      describe('when url is a github.com', () => {
-        it('returns project url', (done) => {
-          this.gotStub.resolves({
-            body: JSON.stringify({
-              url: 'rundmc/foo',
-            }),
-          });
-
-          server.inject(options, (response) => {
-            assert.equal(response.statusCode, 200);
-            assert.equal(response.result.url, 'https://github.com/rundmc/foo');
-            done();
-          });
-        });
-      });
-
-      describe('when url is something else', () => {
-        it('returns custom url', (done) => {
-          this.gotStub.resolves({
-            body: JSON.stringify({
-              url: 'http://rundmc.com/foo',
-            }),
-          });
-
-          server.inject(options, (response) => {
-            assert.equal(response.statusCode, 200);
-            assert.equal(response.result.url, 'http://rundmc.com/foo');
-            done();
-          });
-        });
-      });
     });
   });
 });
