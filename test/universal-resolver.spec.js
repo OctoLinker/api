@@ -5,7 +5,6 @@ const got = require('got');
 const cache = require('memory-cache');
 const hapi = require('hapi');
 const resolverPlugin = require('../src/plugins/universal-resolver.js');
-const nock = require('nock');
 
 describe('resolver', () => {
   let server;
@@ -109,13 +108,11 @@ describe('resolver', () => {
       });
       describe('when url is a github.com', () => {
         it('returns project url', (done) => {
-          this.sandbox.restore();
-          nock('http://bower.herokuapp.com')
-            .get('/packages/foo')
-            .reply(200, {
+          this.gotStub.resolves({
+            body: JSON.stringify({
               url: 'rundmc/foo',
-            });
-          nock('https://github.com').get('/rundmc/foo').reply(200);
+            }),
+          });
 
           server.inject(options, (response) => {
             assert.equal(response.statusCode, 200);
@@ -127,13 +124,11 @@ describe('resolver', () => {
 
       describe('when url is something else', () => {
         it('returns custom url', (done) => {
-          this.sandbox.restore();
-          nock('http://bower.herokuapp.com')
-            .get('/packages/foo')
-            .reply(200, {
+          this.gotStub.resolves({
+            body: JSON.stringify({
               url: 'http://rundmc.com/foo',
-            });
-          nock('http://rundmc.com').get('/foo').reply(200);
+            }),
+          });
 
           server.inject(options, (response) => {
             assert.equal(response.statusCode, 200);
