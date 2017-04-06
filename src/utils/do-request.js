@@ -51,13 +51,13 @@ module.exports = async function doRequest(packageName, type) {
 
     const fallbackUrl = util.format(config.fallback, packageName);
     const tryUrls = validUrls.concat(fallbackUrl);
-    const reachableUrls = await findReachableUrls(tryUrls);
+    const reachableUrl = await findReachableUrls(tryUrls, { firstMatch: true });
 
-    if (reachableUrls.length === 0) {
+    if (!reachableUrl) {
       throw notFoundResponse();
     }
 
-    return reachableUrls[0];
+    return reachableUrl;
   } catch (err) {
     if (err.code === 404) {
       throw notFoundResponse();
