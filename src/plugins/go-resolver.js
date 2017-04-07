@@ -32,16 +32,16 @@ const resolveUrl = async (url) => {
     goMetaConfig = await getGoMeta(`http://${url}?go-get=1`);
   }
 
-  const urls = await findReachableUrls([
+  const reachableUrl = await findReachableUrls([
     url.replace(goMetaConfig.projectRoot, goMetaConfig.dirTemplate),
     goMetaConfig.projectUrl,
-  ]);
+  ], { firstMatch: true });
 
-  if (!urls[0]) {
+  if (!reachableUrl) {
     throw new Error('No url is reachable');
   }
 
-  return urls[0];
+  return reachableUrl;
 };
 
 exports.register = (server, options, next) => {
