@@ -3,8 +3,25 @@ const findReachableUrls = require('find-reachable-urls');
 const got = require('got');
 const insight = require('../utils/insight');
 
+let lastModified = 'Mon, 19 Jun 2017 15:27:49 GMT';
+let archive;
+
 const resolveUrl = async (pkg) => {
-  const archive = (await got('https://melpa.org/archive.json', { json: true })).body;
+  try {
+    const response = await got('https://melpa.org/archive.json', {
+      json: true,
+      headers: {
+        'if-modified-since': lastModified,
+      },
+    });
+
+    lastModified = response.headers['last-modified'];
+    archive = response.body;
+  } catch (err) {
+    if (err.statusCode !== 304) {
+      throw err;
+    }
+  }
 
   const reachableUrl = await findReachableUrls([
     archive[pkg].props.url,
