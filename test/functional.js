@@ -33,4 +33,5 @@ parallel('functional', () => {
   testUrl('/q/pypi/simplejson', 'https://github.com/simplejson/simplejson');
   testUrl('/q/crates/libc', 'https://github.com/rust-lang/libc');
   testUrl('/q/go/k8s.io/kubernetes/pkg/api', 'https://github.com/kubernetes/kubernetes/tree/master/pkg/api');
+  testUrl('/q/melpa/zzz-to-char', 'https://github.com/mrkkrp/zzz-to-char');
 });
