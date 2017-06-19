@@ -3,16 +3,16 @@ const findReachableUrls = require('find-reachable-urls');
 const got = require('got');
 const insight = require('../utils/insight');
 
-let lastModified = 'Mon, 19 Jun 2017 15:27:49 GMT';
+let lastModified;
 let archive;
 
 const resolveUrl = async (pkg) => {
   try {
     const response = await got('https://melpa.org/archive.json', {
       json: true,
-      headers: {
+      headers: lastModified ? {
         'if-modified-since': lastModified,
-      },
+      } : undefined,
     });
 
     lastModified = response.headers['last-modified'];
