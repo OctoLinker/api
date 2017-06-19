@@ -9,6 +9,7 @@ The supported registries are:
   - [rubygems.org](https://rubygems.org)
   - [pypi.python.org](https://pypi.python.org)
   - [crates.io](https://crates.io)
+  - [melpa.org](https://melpa.org)
   
 ## Find a package
 
@@ -21,6 +22,7 @@ Registry must be one of:
   - `rubygems`
   - `pypi`
   - `crates`
+  - `melpa`
 
 Example:
 
