@@ -10,7 +10,8 @@ The supported registries are:
   - [pypi.python.org](https://pypi.python.org)
   - [crates.io](https://crates.io)
   - [melpa.org](https://melpa.org)
-  
+  - [maven.org](https://maven.org)
+
 ## Find a package
 
 https://githublinker.herokuapp.com/q/{registry}/{package}
@@ -23,6 +24,7 @@ Registry must be one of:
   - `pypi`
   - `crates`
   - `melpa`
+  - `maven`
 
 Example:
 

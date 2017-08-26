@@ -34,4 +34,7 @@ parallel('functional', () => {
   testUrl('/q/crates/libc', 'https://github.com/rust-lang/libc');
   testUrl('/q/go/k8s.io/kubernetes/pkg/api', 'https://github.com/kubernetes/kubernetes/tree/master/pkg/api');
   testUrl('/q/melpa/zzz-to-char', 'https://github.com/mrkkrp/zzz-to-char');
+  testUrl('/q/maven/org.springframework.boot.SpringApplication', 'http://projects.spring.io/spring-boot/');
+  testUrl('/q/maven/com.google.common.util.concurrent.ThreadFactoryBuilder', 'https://github.com/google/guava/');
+  testUrl('/q/maven/org.springframework.security.config.annotation.web.configuration.EnableWebSecurity', 'https://github.com/spring-projects/spring-security');
 });
