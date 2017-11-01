@@ -56,7 +56,7 @@ describe('resolver', () => {
 
       server.inject(options, () => {
         assert.equal(this.gotStub.callCount, 1);
-        assert.equal(this.gotStub.args[0][0], 'http://bower.herokuapp.com/packages/foo');
+        assert.equal(this.gotStub.args[0][0], 'https://registry.bower.io/packages/foo');
         done();
       });
     });
@@ -102,7 +102,7 @@ describe('resolver', () => {
 
         server.inject(options, (response) => {
           assert.equal(response.statusCode, 200);
-          assert.equal(response.result.url, 'http://bower.io/search/?q=foo');
+          assert.equal(response.result.url, 'https://bower.io/search/?q=foo');
           done();
         });
       });

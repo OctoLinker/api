@@ -1,7 +1,7 @@
 {
   "bower": {
-    "registry": "http://bower.herokuapp.com/packages/%s",
-    "fallback": "http://bower.io/search/?q=%s",
+    "registry": "https://registry.bower.io/packages/%s",
+    "fallback": "https://bower.io/search/?q=%s",
     "xpaths": [
       "/url"
     ]
