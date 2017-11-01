@@ -13,7 +13,7 @@
   "author": "Stefan Buck",
   "license": "MIT",
   "engines": {
-    "node": "8.1.4"
+    "node": "8.9.x"
   },
   "dependencies": {
     "boom": "^6.0.0",
