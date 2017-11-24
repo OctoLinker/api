@@ -24,6 +24,10 @@ const config = [
     filename: 'hamcrest.json',
     url: 'http://hamcrest.org/JavaHamcrest/javadoc/2.0.0.0/allclasses-frame.html',
   },
+  {
+    filename: 'jackson-core.json',
+    url: 'http://fasterxml.github.io/jackson-core/javadoc/2.9/allclasses-frame.html',
+  },
 ];
 
 async function loadPage(url) {
