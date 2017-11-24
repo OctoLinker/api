@@ -20,6 +20,10 @@ const config = [
     filename: 'slf4j.json',
     url: 'https://www.slf4j.org/api/allclasses-frame.html',
   },
+  {
+    filename: 'hamcrest.json',
+    url: 'http://hamcrest.org/JavaHamcrest/javadoc/2.0.0.0/allclasses-frame.html',
+  },
 ];
 
 async function loadPage(url) {
