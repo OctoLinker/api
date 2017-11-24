@@ -1,0 +1,11 @@
+{
+ "org.springframework.cloud.dataflow.yarn.client.ClientApplication": "https://docs.spring.io/spring-cloud-dataflow-server-yarn/docs/1.2.2.RELEASE/api/org/springframework/cloud/dataflow/yarn/client/ClientApplication.html",
+ "org.springframework.cloud.dataflow.yarn.h2.H2ConfigurationProperties": "https://docs.spring.io/spring-cloud-dataflow-server-yarn/docs/1.2.2.RELEASE/api/org/springframework/cloud/dataflow/yarn/h2/H2ConfigurationProperties.html",
+ "org.springframework.cloud.dataflow.yarn.h2.H2ServerApplication": "https://docs.spring.io/spring-cloud-dataflow-server-yarn/docs/1.2.2.RELEASE/api/org/springframework/cloud/dataflow/yarn/h2/H2ServerApplication.html",
+ "org.springframework.cloud.dataflow.yarn.h2.H2ServerConfiguration": "https://docs.spring.io/spring-cloud-dataflow-server-yarn/docs/1.2.2.RELEASE/api/org/springframework/cloud/dataflow/yarn/h2/H2ServerConfiguration.html",
+ "org.springframework.cloud.dataflow.server.yarn.YarnDataFlowServer": "https://docs.spring.io/spring-cloud-dataflow-server-yarn/docs/1.2.2.RELEASE/api/org/springframework/cloud/dataflow/server/yarn/YarnDataFlowServer.html",
+ "org.springframework.cloud.dataflow.autoconfigure.yarn.YarnDataFlowServerAutoConfiguration": "https://docs.spring.io/spring-cloud-dataflow-server-yarn/docs/1.2.2.RELEASE/api/org/springframework/cloud/dataflow/autoconfigure/yarn/YarnDataFlowServerAutoConfiguration.html",
+ "org.springframework.cloud.dataflow.yarn.client.YarnPushApplication": "https://docs.spring.io/spring-cloud-dataflow-server-yarn/docs/1.2.2.RELEASE/api/org/springframework/cloud/dataflow/yarn/client/YarnPushApplication.html",
+ "org.springframework.cloud.dataflow.yarn.client.YarnPushCommand": "https://docs.spring.io/spring-cloud-dataflow-server-yarn/docs/1.2.2.RELEASE/api/org/springframework/cloud/dataflow/yarn/client/YarnPushCommand.html",
+ "org.springframework.cloud.dataflow.yarn.client.YarnPushCommand.PushOptionHandler": "https://docs.spring.io/spring-cloud-dataflow-server-yarn/docs/1.2.2.RELEASE/api/org/springframework/cloud/dataflow/yarn/client/YarnPushCommand.PushOptionHandler.html"
+}

@@ -1,0 +1,13 @@
+{
+ "org.springframework.session.data.mongo.AbstractMongoSessionConverter": "https://docs.spring.io/spring-session-data-mongodb/docs/2.0.0.BUILD-SNAPSHOT/api/org/springframework/session/data/mongo/AbstractMongoSessionConverter.html",
+ "org.springframework.session.data.mongo.config.annotation.web.http.EnableMongoHttpSession": "https://docs.spring.io/spring-session-data-mongodb/docs/2.0.0.BUILD-SNAPSHOT/api/org/springframework/session/data/mongo/config/annotation/web/http/EnableMongoHttpSession.html",
+ "org.springframework.session.data.mongo.config.annotation.web.reactive.EnableMongoWebSession": "https://docs.spring.io/spring-session-data-mongodb/docs/2.0.0.BUILD-SNAPSHOT/api/org/springframework/session/data/mongo/config/annotation/web/reactive/EnableMongoWebSession.html",
+ "org.springframework.session.data.mongo.JacksonMongoSessionConverter": "https://docs.spring.io/spring-session-data-mongodb/docs/2.0.0.BUILD-SNAPSHOT/api/org/springframework/session/data/mongo/JacksonMongoSessionConverter.html",
+ "org.springframework.session.data.mongo.JdkMongoSessionConverter": "https://docs.spring.io/spring-session-data-mongodb/docs/2.0.0.BUILD-SNAPSHOT/api/org/springframework/session/data/mongo/JdkMongoSessionConverter.html",
+ "org.springframework.session.data.mongo.config.annotation.web.http.MongoHttpSessionConfiguration": "https://docs.spring.io/spring-session-data-mongodb/docs/2.0.0.BUILD-SNAPSHOT/api/org/springframework/session/data/mongo/config/annotation/web/http/MongoHttpSessionConfiguration.html",
+ "org.springframework.session.data.mongo.MongoOperationsSessionRepository": "https://docs.spring.io/spring-session-data-mongodb/docs/2.0.0.BUILD-SNAPSHOT/api/org/springframework/session/data/mongo/MongoOperationsSessionRepository.html",
+ "org.springframework.session.data.mongo.MongoSession": "https://docs.spring.io/spring-session-data-mongodb/docs/2.0.0.BUILD-SNAPSHOT/api/org/springframework/session/data/mongo/MongoSession.html",
+ "org.springframework.session.data.mongo.MongoSessionUtils": "https://docs.spring.io/spring-session-data-mongodb/docs/2.0.0.BUILD-SNAPSHOT/api/org/springframework/session/data/mongo/MongoSessionUtils.html",
+ "org.springframework.session.data.mongo.ReactiveMongoOperationsSessionRepository": "https://docs.spring.io/spring-session-data-mongodb/docs/2.0.0.BUILD-SNAPSHOT/api/org/springframework/session/data/mongo/ReactiveMongoOperationsSessionRepository.html",
+ "org.springframework.session.data.mongo.config.annotation.web.reactive.ReactiveMongoWebSessionConfiguration": "https://docs.spring.io/spring-session-data-mongodb/docs/2.0.0.BUILD-SNAPSHOT/api/org/springframework/session/data/mongo/config/annotation/web/reactive/ReactiveMongoWebSessionConfiguration.html"
+}

@@ -1,0 +1,23 @@
+{
+ "demo.app.Application": "https://docs.spring.io/spring-security-kerberos/docs/1.0.1.RELEASE/api/demo/app/Application.html",
+ "demo.DummyUserDetailsService": "https://docs.spring.io/spring-security-kerberos/docs/1.0.1.RELEASE/api/demo/DummyUserDetailsService.html",
+ "org.springframework.security.kerberos.authentication.sun.GlobalSunJaasKerberosConfig": "https://docs.spring.io/spring-security-kerberos/docs/1.0.1.RELEASE/api/org/springframework/security/kerberos/authentication/sun/GlobalSunJaasKerberosConfig.html",
+ "org.springframework.security.kerberos.authentication.KerberosAuthenticationProvider": "https://docs.spring.io/spring-security-kerberos/docs/1.0.1.RELEASE/api/org/springframework/security/kerberos/authentication/KerberosAuthenticationProvider.html",
+ "org.springframework.security.kerberos.authentication.KerberosClient": "https://docs.spring.io/spring-security-kerberos/docs/1.0.1.RELEASE/api/org/springframework/security/kerberos/authentication/KerberosClient.html",
+ "org.springframework.security.kerberos.client.ldap.KerberosLdapContextSource": "https://docs.spring.io/spring-security-kerberos/docs/1.0.1.RELEASE/api/org/springframework/security/kerberos/client/ldap/KerberosLdapContextSource.html",
+ "org.springframework.security.kerberos.client.KerberosRestTemplate": "https://docs.spring.io/spring-security-kerberos/docs/1.0.1.RELEASE/api/org/springframework/security/kerberos/client/KerberosRestTemplate.html",
+ "org.springframework.security.kerberos.test.KerberosSecurityTestcase": "https://docs.spring.io/spring-security-kerberos/docs/1.0.1.RELEASE/api/org/springframework/security/kerberos/test/KerberosSecurityTestcase.html",
+ "org.springframework.security.kerberos.authentication.KerberosServiceAuthenticationProvider": "https://docs.spring.io/spring-security-kerberos/docs/1.0.1.RELEASE/api/org/springframework/security/kerberos/authentication/KerberosServiceAuthenticationProvider.html",
+ "org.springframework.security.kerberos.authentication.KerberosServiceRequestToken": "https://docs.spring.io/spring-security-kerberos/docs/1.0.1.RELEASE/api/org/springframework/security/kerberos/authentication/KerberosServiceRequestToken.html",
+ "org.springframework.security.kerberos.authentication.KerberosTicketValidation": "https://docs.spring.io/spring-security-kerberos/docs/1.0.1.RELEASE/api/org/springframework/security/kerberos/authentication/KerberosTicketValidation.html",
+ "org.springframework.security.kerberos.authentication.KerberosTicketValidator": "https://docs.spring.io/spring-security-kerberos/docs/1.0.1.RELEASE/api/org/springframework/security/kerberos/authentication/KerberosTicketValidator.html",
+ "org.springframework.security.kerberos.test.MiniKdc": "https://docs.spring.io/spring-security-kerberos/docs/1.0.1.RELEASE/api/org/springframework/security/kerberos/test/MiniKdc.html",
+ "demo.app.MvcConfig": "https://docs.spring.io/spring-security-kerberos/docs/1.0.1.RELEASE/api/demo/app/MvcConfig.html",
+ "org.springframework.security.kerberos.web.authentication.ResponseHeaderSettingKerberosAuthenticationSuccessHandler": "https://docs.spring.io/spring-security-kerberos/docs/1.0.1.RELEASE/api/org/springframework/security/kerberos/web/authentication/ResponseHeaderSettingKerberosAuthenticationSuccessHandler.html",
+ "org.springframework.security.kerberos.web.authentication.SpnegoAuthenticationProcessingFilter": "https://docs.spring.io/spring-security-kerberos/docs/1.0.1.RELEASE/api/org/springframework/security/kerberos/web/authentication/SpnegoAuthenticationProcessingFilter.html",
+ "org.springframework.security.kerberos.web.authentication.SpnegoEntryPoint": "https://docs.spring.io/spring-security-kerberos/docs/1.0.1.RELEASE/api/org/springframework/security/kerberos/web/authentication/SpnegoEntryPoint.html",
+ "org.springframework.security.kerberos.authentication.sun.SunJaasKerberosClient": "https://docs.spring.io/spring-security-kerberos/docs/1.0.1.RELEASE/api/org/springframework/security/kerberos/authentication/sun/SunJaasKerberosClient.html",
+ "org.springframework.security.kerberos.authentication.sun.SunJaasKerberosTicketValidator": "https://docs.spring.io/spring-security-kerberos/docs/1.0.1.RELEASE/api/org/springframework/security/kerberos/authentication/sun/SunJaasKerberosTicketValidator.html",
+ "org.springframework.security.kerberos.client.config.SunJaasKrb5LoginConfig": "https://docs.spring.io/spring-security-kerberos/docs/1.0.1.RELEASE/api/org/springframework/security/kerberos/client/config/SunJaasKrb5LoginConfig.html",
+ "demo.app.WebSecurityConfig": "https://docs.spring.io/spring-security-kerberos/docs/1.0.1.RELEASE/api/demo/app/WebSecurityConfig.html"
+}
