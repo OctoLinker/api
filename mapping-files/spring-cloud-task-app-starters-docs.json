@@ -1,0 +1,16 @@
+{
+ "org.springframework.cloud.task.app.spark.client.SparkClientTaskConfiguration": "https://docs.spring.io/spring-cloud-task-app-starters/docs/1.0.1.RELEASE/api/org/springframework/cloud/task/app/spark/client/SparkClientTaskConfiguration.html",
+ "org.springframework.cloud.task.app.spark.client.SparkClientTaskProperties": "https://docs.spring.io/spring-cloud-task-app-starters/docs/1.0.1.RELEASE/api/org/springframework/cloud/task/app/spark/client/SparkClientTaskProperties.html",
+ "org.springframework.cloud.task.app.spark.cluster.SparkClusterTaskConfiguration": "https://docs.spring.io/spring-cloud-task-app-starters/docs/1.0.1.RELEASE/api/org/springframework/cloud/task/app/spark/cluster/SparkClusterTaskConfiguration.html",
+ "org.springframework.cloud.task.app.spark.cluster.SparkClusterTaskProperties": "https://docs.spring.io/spring-cloud-task-app-starters/docs/1.0.1.RELEASE/api/org/springframework/cloud/task/app/spark/cluster/SparkClusterTaskProperties.html",
+ "org.springframework.cloud.task.app.spark.yarn.SparkYarnTaskConfiguration": "https://docs.spring.io/spring-cloud-task-app-starters/docs/1.0.1.RELEASE/api/org/springframework/cloud/task/app/spark/yarn/SparkYarnTaskConfiguration.html",
+ "org.springframework.cloud.task.app.spark.yarn.SparkYarnTaskProperties": "https://docs.spring.io/spring-cloud-task-app-starters/docs/1.0.1.RELEASE/api/org/springframework/cloud/task/app/spark/yarn/SparkYarnTaskProperties.html",
+ "org.springframework.cloud.task.sqoop.common.SqoopCommonRunnerUtils": "https://docs.spring.io/spring-cloud-task-app-starters/docs/1.0.1.RELEASE/api/org/springframework/cloud/task/sqoop/common/SqoopCommonRunnerUtils.html",
+ "org.springframework.cloud.task.sqoop.common.SqoopCommonTaskProperties": "https://docs.spring.io/spring-cloud-task-app-starters/docs/1.0.1.RELEASE/api/org/springframework/cloud/task/sqoop/common/SqoopCommonTaskProperties.html",
+ "org.springframework.cloud.task.app.sqoop.job.SqoopJobTaskConfiguration": "https://docs.spring.io/spring-cloud-task-app-starters/docs/1.0.1.RELEASE/api/org/springframework/cloud/task/app/sqoop/job/SqoopJobTaskConfiguration.html",
+ "org.springframework.cloud.task.app.sqoop.job.SqoopJobTaskProperties": "https://docs.spring.io/spring-cloud-task-app-starters/docs/1.0.1.RELEASE/api/org/springframework/cloud/task/app/sqoop/job/SqoopJobTaskProperties.html",
+ "org.springframework.cloud.task.app.sqoop.tool.SqoopToolTaskConfiguration": "https://docs.spring.io/spring-cloud-task-app-starters/docs/1.0.1.RELEASE/api/org/springframework/cloud/task/app/sqoop/tool/SqoopToolTaskConfiguration.html",
+ "org.springframework.cloud.task.app.sqoop.tool.SqoopToolTaskProperties": "https://docs.spring.io/spring-cloud-task-app-starters/docs/1.0.1.RELEASE/api/org/springframework/cloud/task/app/sqoop/tool/SqoopToolTaskProperties.html",
+ "org.springframework.cloud.task.app.timestamp.TimestampTaskConfiguration": "https://docs.spring.io/spring-cloud-task-app-starters/docs/1.0.1.RELEASE/api/org/springframework/cloud/task/app/timestamp/TimestampTaskConfiguration.html",
+ "org.springframework.cloud.task.app.timestamp.TimestampTaskProperties": "https://docs.spring.io/spring-cloud-task-app-starters/docs/1.0.1.RELEASE/api/org/springframework/cloud/task/app/timestamp/TimestampTaskProperties.html"
+}

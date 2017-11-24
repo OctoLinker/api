@@ -1,0 +1,4 @@
+{
+ "org.springframework.cloud.dataflow.server.mesos.MesosDataFlowServer": "https://docs.spring.io/spring-cloud-dataflow-server-mesos/docs/1.0.0.RELEASE/api/org/springframework/cloud/dataflow/server/mesos/MesosDataFlowServer.html",
+ "org.springframework.cloud.dataflow.server.mesos.MesosDataFlowServerAutoConfiguration": "https://docs.spring.io/spring-cloud-dataflow-server-mesos/docs/1.0.0.RELEASE/api/org/springframework/cloud/dataflow/server/mesos/MesosDataFlowServerAutoConfiguration.html"
+}
