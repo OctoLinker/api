@@ -12,6 +12,10 @@ const config = [
     filename: 'junit.json',
     url: 'http://junit.org/junit5/docs/current/api/allclasses-frame.html',
   },
+  {
+    filename: 'mockito.json',
+    url: 'http://static.javadoc.io/org.mockito/mockito-core/2.12.0/allclasses-frame.html',
+  },
 ];
 
 async function loadPage(url) {
