@@ -6,6 +6,7 @@ const hapi = require('hapi');
 const goResolverPlugin = require('./src/plugins/go-resolver.js');
 const melpaResolverPlugin = require('./src/plugins/melpa-resolver.js');
 const resolverPlugin = require('./src/plugins/universal-resolver.js');
+const javaPlugin = require('./src/plugins/java-resolver.js');
 const pingPlugin = require('./src/plugins/ping.js');
 const homePlugin = require('./src/plugins/home.js');
 
@@ -16,6 +17,7 @@ server.connection({
 
 server.register([
   resolverPlugin,
+  javaPlugin,
   goResolverPlugin,
   melpaResolverPlugin,
   pingPlugin,
