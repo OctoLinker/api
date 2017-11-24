@@ -16,6 +16,10 @@ const config = [
     filename: 'mockito.json',
     url: 'http://static.javadoc.io/org.mockito/mockito-core/2.12.0/allclasses-frame.html',
   },
+  {
+    filename: 'slf4j.json',
+    url: 'https://www.slf4j.org/api/allclasses-frame.html',
+  },
 ];
 
 async function loadPage(url) {
