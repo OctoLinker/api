@@ -23,6 +23,7 @@ Registry must be one of:
   - `pypi`
   - `crates`
   - `melpa`
+  - `java`
 
 Example:
 
