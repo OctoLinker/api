@@ -7,7 +7,12 @@ const jsdom = require('jsdom');
 
 const { JSDOM } = jsdom;
 
-const config = [];
+const config = [
+  {
+    filename: 'junit.json',
+    url: 'http://junit.org/junit5/docs/current/api/allclasses-frame.html',
+  },
+];
 
 async function loadPage(url) {
   try {
