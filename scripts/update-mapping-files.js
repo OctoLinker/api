@@ -102,7 +102,7 @@ exports.getMappingFiles = async () => {
 
   const result = {};
 
-  for (const { filename, url } of fullconfig) {
+  await Promise.all(fullconfig.map(async ({ filename, url }) => {
     const content = await getClassesUrl(url); // eslint-disable-line no-await-in-loop
     const count = Object.keys(content).length;
 
@@ -110,7 +110,7 @@ exports.getMappingFiles = async () => {
       console.log(`Add ${count} libaries to ${filename}`);
       result[filename] = content;
     }
-  }
+  }));
 
   return result;
 };
