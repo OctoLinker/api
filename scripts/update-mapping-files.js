@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-const fs = require('fs-extra');
-const path = require('path');
 const got = require('got');
 const jsdom = require('jsdom');
 
@@ -98,14 +96,11 @@ async function getClassesUrl(url) {
   return results;
 }
 
-(async () => {
+exports.getMappingFiles = async () => {
   const fullconfig = config
     .concat(await getSpringDocumentationUrls());
 
-  const dir = path.join(__dirname, '../mapping-files');
-
-  fs.removeSync(dir);
-  fs.mkdirsSync(dir);
+  const result = {};
 
   for (const { filename, url } of fullconfig) {
     const content = await getClassesUrl(url); // eslint-disable-line no-await-in-loop
@@ -113,7 +108,9 @@ async function getClassesUrl(url) {
 
     if (count > 0) {
       console.log(`Add ${count} libaries to ${filename}`);
-      fs.writeJsonSync(path.join(dir, filename), content, { spaces: ' ' });
+      result[filename] = content;
     }
   }
-})();
+
+  return result;
+};

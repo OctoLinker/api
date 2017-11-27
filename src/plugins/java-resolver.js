@@ -1,12 +1,13 @@
 const Joi = require('joi');
 const Boom = require('boom');
-const requireDir = require('require-dir');
 const insight = require('../utils/insight.js');
 
-const mappingFiles = requireDir('../../mapping-files');
-const flatMappingList = Object.assign(...Object.values(mappingFiles));
+const { getMappingFiles } = require('../../scripts/update-mapping-files.js');
 
-exports.register = (server, options, next) => {
+exports.register = async (server, options, next) => {
+  const mappingFiles = await getMappingFiles();
+  const flatMappingList = Object.assign(...Object.values(mappingFiles));
+
   server.route([{
     path: '/q/java/{package*}',
     method: 'GET',
