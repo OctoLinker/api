@@ -28,6 +28,14 @@ const config = [
     filename: 'jackson-core.json',
     url: 'http://fasterxml.github.io/jackson-core/javadoc/2.9/allclasses-frame.html',
   },
+  {
+    filename: 'jackson-databind.json',
+    url: 'http://fasterxml.github.io/jackson-databind/javadoc/2.9/allclasses-frame.html',
+  },
+  {
+    filename: 'jackson-annotations.json',
+    url: 'http://fasterxml.github.io/jackson-annotations/javadoc/2.9/allclasses-frame.html',
+  },
 ];
 
 async function loadPage(url) {
