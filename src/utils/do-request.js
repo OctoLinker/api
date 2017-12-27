@@ -35,6 +35,15 @@ module.exports = async function doRequest(packageName, type) {
     }
 
     const urls = xpathHelper(json, config.xpaths);
+
+    if (type === 'npm') {
+      try {
+        urls.push(...json.maintainers.map(({ name }) => `${name}/${packageName}`));
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
     const validUrls = urls.map((bestMatchUrl) => {
       try {
         let url = repositoryUrl(bestMatchUrl);
