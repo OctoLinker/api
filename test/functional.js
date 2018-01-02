@@ -7,12 +7,10 @@ parallel('functional', () => {
 
   before((done) => {
     server = require('../server'); // eslint-disable-line global-require
-    server.once('start', done);
+    server.events.once('start', done);
   });
 
-  after((done) => {
-    server.stop(done);
-  });
+  after(() => server.stop());
 
   function testUrl(path, expectedUrl) {
     it(`resolves ${path} to ${expectedUrl}`, async () => {

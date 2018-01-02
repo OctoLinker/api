@@ -10,20 +10,14 @@ const plugin = require('../src/plugins/ping.js');
 describe('ping', () => {
   let server;
 
-  before((done) => {
+  before(async () => {
     server = new hapi.Server();
-    server.connection();
 
-    server.register(plugin, () => {
-      server.start(() => {
-        done();
-      });
-    });
+    await server.register(plugin);
+    return server.start();
   });
 
-  after((done) => {
-    server.stop(() => done());
-  });
+  after(() => server.stop());
 
   beforeEach(() => {
     this.sandbox = sinon.sandbox.create();
@@ -34,21 +28,19 @@ describe('ping', () => {
     this.sandbox.restore();
   });
 
-  it('performs an HTTP HEAD request', (done) => {
+  it('performs an HTTP HEAD request', async () => {
     this.gotStub.resolves();
 
     const options = {
       url: '/ping?url=http://awesomefooland.com',
     };
 
-    server.inject(options, () => {
-      assert.equal(this.gotStub.callCount, 1);
-      assert.equal(this.gotStub.args[0][0], 'http://awesomefooland.com');
-      done();
-    });
+    await server.inject(options);
+    assert.equal(this.gotStub.callCount, 1);
+    assert.equal(this.gotStub.args[0][0], 'http://awesomefooland.com');
   });
 
-  it('returns 404 response if package can not be found', (done) => {
+  it('returns 404 response if package can not be found', async () => {
     const err = new Error('Some error');
     err.code = 404;
     this.gotStub.rejects(err);
@@ -58,13 +50,11 @@ describe('ping', () => {
       url: '/ping?url=http://awesomefooland.com',
     };
 
-    server.inject(options, (response) => {
-      assert.equal(response.statusCode, 404);
-      done();
-    });
+    const response = await server.inject(options);
+    assert.equal(response.statusCode, 404);
   });
 
-  it('returns project url', (done) => {
+  it('returns project url', async () => {
     this.gotStub.resolves();
 
     const options = {
@@ -72,9 +62,7 @@ describe('ping', () => {
       url: '/ping?url=http://awesomefooland.com',
     };
 
-    server.inject(options, (response) => {
-      assert.equal(response.statusCode, 200);
-      done();
-    });
+    const response = await server.inject(options);
+    assert.equal(response.statusCode, 200);
   });
 });

@@ -1,8 +1,10 @@
 const got = require('got');
+const Boom = require('boom');
+
 const Joi = require('joi');
 const insight = require('../utils/insight.js');
 
-exports.register = (server, options, next) => {
+const register = (server) => {
   server.route([{
     path: '/ping',
     method: 'GET',
@@ -12,7 +14,7 @@ exports.register = (server, options, next) => {
           url: Joi.required(),
         },
       },
-      handler: async (request, reply) => {
+      handler: async (request) => {
         const url = request.query.url;
 
         try {
@@ -21,26 +23,23 @@ exports.register = (server, options, next) => {
             url,
           }, request);
 
-          reply({
+          return {
             url,
-          }).code(200);
-        } catch (err) {
-          insight.trackError('ping_error', err, {
-            url,
-          }, request);
+          };
+        } catch (error) {
+          const err = Boom.notFound('URL not found');
 
-          reply().code(404);
+          insight.trackError('ping_error', err, { url }, request);
+
+          return err;
         }
       },
     },
   }]);
-
-  next();
 };
 
-exports.register.attributes = {
-  pkg: {
-    name: 'Ping',
-    version: '1.0.0',
-  },
+exports.plugin = {
+  name: 'Ping',
+  version: '1.0.0',
+  register,
 };
