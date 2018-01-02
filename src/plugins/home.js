@@ -1,24 +1,30 @@
+const Inert = require('inert');
 const pkg = require('../../package.json');
-const insight = require('../utils/insight.js');
+const insight = require('../utils/insight');
 
-const register = (server) => {
-  server.route([{
-    path: '/',
+const register = async (server) => {
+  await server.register(Inert);
+
+  server.ext('onPreResponse', (request, response) => {
+    if (request.path === '/') {
+      insight.trackEvent('shows_index', {
+        version: pkg.version,
+      }, request);
+    }
+
+    return response.continue;
+  });
+
+  server.route({
     method: 'GET',
-    config: {
-      handler: (request) => {
-        const repoUrl = pkg.repository.url;
-        const short = repoUrl.replace('https://github.com/', '');
-        const versionInfo = `<a href="${repoUrl}">${short}@${pkg.version}</a>`;
-
-        insight.trackEvent('shows_index', {
-          version: pkg.version,
-        }, request);
-
-        return versionInfo;
+    path: '/{param*}',
+    handler: {
+      directory: {
+        path: './public',
+        index: true,
       },
     },
-  }]);
+  });
 };
 
 exports.plugin = {
