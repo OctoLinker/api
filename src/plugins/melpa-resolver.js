@@ -35,7 +35,7 @@ const resolveUrl = async (pkg) => {
   return reachableUrl;
 };
 
-exports.register = (server, options, next) => {
+const register = (server) => {
   server.route([{
     path: '/q/melpa/{package*}',
     method: 'GET',
@@ -45,7 +45,7 @@ exports.register = (server, options, next) => {
           package: Joi.required(),
         },
       },
-      handler: async (request, reply) => {
+      handler: async (request) => {
         const pkg = request.params.package;
 
         const eventData = {
@@ -56,27 +56,25 @@ exports.register = (server, options, next) => {
 
         try {
           const url = await resolveUrl(pkg);
-          reply({
-            url,
-          });
 
           eventData.url = url;
           insight.trackEvent('resolved', eventData, request);
+
+          return {
+            url,
+          };
         } catch (err) {
           const eventKey = (err.data || {}).eventKey;
           insight.trackError(eventKey, err, eventData, request);
-          reply(err);
+          return err;
         }
       },
     },
   }]);
-
-  next();
 };
 
-exports.register.attributes = {
-  pkg: {
-    name: 'MELPA Resolver',
-    version: '1.0.0',
-  },
+exports.plugin = {
+  name: 'MELPA Resolver',
+  version: '1.0.0',
+  register,
 };

@@ -68,10 +68,10 @@ module.exports = async function doRequest(packageName, type) {
 
     return reachableUrl;
   } catch (err) {
-    if (err.code === 404) {
+    if (err.statusCode === 404) {
       throw notFoundResponse();
     }
 
-    throw Boom.wrap(err);
+    throw Boom.boomify(err);
   }
 };

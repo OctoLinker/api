@@ -10,26 +10,28 @@ const javaPlugin = require('./src/plugins/java-resolver.js');
 const pingPlugin = require('./src/plugins/ping.js');
 const homePlugin = require('./src/plugins/home.js');
 
-const server = new hapi.Server();
-server.connection({
+const server = new hapi.Server({
   port: process.env.PORT || 3000,
 });
 
-server.register([
-  resolverPlugin,
-  javaPlugin,
-  goResolverPlugin,
-  melpaResolverPlugin,
-  pingPlugin,
-  homePlugin,
-], (err) => {
-  if (err) {
-    return console.error('Failed to register server:', err);
-  }
+const init = async () => {
+  await server.register([
+    resolverPlugin,
+    javaPlugin,
+    goResolverPlugin,
+    melpaResolverPlugin,
+    pingPlugin,
+    homePlugin,
+  ]);
 
-  server.start(() => {
-    console.log('Server running at:', server.info.uri);
-  });
+  await server.start();
+
+  console.log(`Server running at: ${server.info.uri}`);
+};
+
+init().catch((err) => {
+  console.log(err);
+  process.exit(1);
 });
 
 module.exports = server;

@@ -3,7 +3,7 @@ const insight = require('../utils/insight.js');
 const registryConfig = require('../../config.json');
 const doRequest = require('../utils/do-request.js');
 
-exports.register = (server, options, next) => {
+const register = (server) => {
   server.route([{
     path: '/q/{registry}/{package*}',
     method: 'GET',
@@ -14,7 +14,7 @@ exports.register = (server, options, next) => {
           package: Joi.required(),
         },
       },
-      handler: async (request, reply) => {
+      handler: async (request) => {
         const pkg = request.params.package;
         const type = request.params.registry;
         const eventData = {
@@ -28,24 +28,22 @@ exports.register = (server, options, next) => {
           eventData.url = url;
           insight.trackEvent('resolved', eventData, request);
 
-          reply({
+          return {
             url,
-          });
+          };
         } catch (err) {
           const eventKey = (err.data || {}).eventKey;
           insight.trackError(eventKey, err, eventData, request);
-          reply(err);
+
+          return err;
         }
       },
     },
   }]);
-
-  next();
 };
 
-exports.register.attributes = {
-  pkg: {
-    name: 'Universal Resolver',
-    version: '1.0.0',
-  },
+exports.plugin = {
+  name: 'Universal Resolver',
+  version: '1.0.0',
+  register,
 };
