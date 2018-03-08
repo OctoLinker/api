@@ -1,4 +1,4 @@
-const keenIO = require('keen.io');
+const Keen = require('keen-js');
 
 let instance;
 
@@ -7,7 +7,7 @@ function init() {
     return;
   }
 
-  instance = keenIO.configure({
+  instance = new Keen({
     projectId: process.env.KEEN_PROJECT_ID,
     writeKey: process.env.KEEN_WRITE_KEY,
   });
