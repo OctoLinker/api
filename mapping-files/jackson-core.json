@@ -2,6 +2,7 @@
  "com.fasterxml.jackson.core.Base64Variant": "http://fasterxml.github.io/jackson-core/javadoc/2.9/com/fasterxml/jackson/core/Base64Variant.html",
  "com.fasterxml.jackson.core.Base64Variants": "http://fasterxml.github.io/jackson-core/javadoc/2.9/com/fasterxml/jackson/core/Base64Variants.html",
  "com.fasterxml.jackson.core.util.BufferRecycler": "http://fasterxml.github.io/jackson-core/javadoc/2.9/com/fasterxml/jackson/core/util/BufferRecycler.html",
+ "com.fasterxml.jackson.core.util.BufferRecyclers": "http://fasterxml.github.io/jackson-core/javadoc/2.9/com/fasterxml/jackson/core/util/BufferRecyclers.html",
  "com.fasterxml.jackson.core.util.ByteArrayBuilder": "http://fasterxml.github.io/jackson-core/javadoc/2.9/com/fasterxml/jackson/core/util/ByteArrayBuilder.html",
  "com.fasterxml.jackson.core.async.ByteArrayFeeder": "http://fasterxml.github.io/jackson-core/javadoc/2.9/com/fasterxml/jackson/core/async/ByteArrayFeeder.html",
  "com.fasterxml.jackson.core.async.ByteBufferFeeder": "http://fasterxml.github.io/jackson-core/javadoc/2.9/com/fasterxml/jackson/core/async/ByteBufferFeeder.html",

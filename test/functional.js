@@ -32,5 +32,5 @@ parallel('functional', () => {
   testUrl('/q/crates/libc', 'https://github.com/rust-lang/libc');
   testUrl('/q/go/k8s.io/kubernetes/pkg/api', 'https://github.com/kubernetes/kubernetes/tree/master/pkg/api');
   testUrl('/q/melpa/zzz-to-char', 'https://github.com/mrkkrp/zzz-to-char');
-  testUrl('/q/java/org.springframework.boot.actuate.audit.listener.AbstractAuditListener', 'https://docs.spring.io/spring-boot/docs/1.5.8.RELEASE/api/org/springframework/boot/actuate/audit/listener/AbstractAuditListener.html');
+  testUrl('/q/java/org.apache.log4j.Appender', 'https://www.slf4j.org/api/org/apache/log4j/Appender.html');
 });
