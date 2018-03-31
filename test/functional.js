@@ -33,4 +33,27 @@ parallel('functional', () => {
   testUrl('/q/go/k8s.io/kubernetes/pkg/api', 'https://github.com/kubernetes/kubernetes/tree/master/pkg/api');
   testUrl('/q/melpa/zzz-to-char', 'https://github.com/mrkkrp/zzz-to-char');
   testUrl('/q/java/org.apache.log4j.Appender', 'https://www.slf4j.org/api/org/apache/log4j/Appender.html');
+  testUrl('/ping?url=https://nodejs.org/api/path.html', 'https://nodejs.org/api/path.html');
+
+  it('resolves /bulk request', async () => {
+    const response = await got.post(`${server.info.uri}/bulk`, {
+      body: JSON.stringify([
+        { type: 'registry', registry: 'composer', target: 'phpunit/phpunit' },
+        { type: 'registry', registry: 'npm', target: 'ihopethisdoesnotexist' },
+        { type: 'ping', target: 'https://nodejs.org/api/path.html' },
+        { type: 'registry', registry: 'npm', target: 'request' },
+        { type: 'ping', target: 'http://not.found.org' },
+        { type: 'registry', registry: 'bower', target: 'jquery' },
+      ]),
+    });
+
+
+    const body = JSON.parse(response.body);
+    assert.equal(body[0], 'https://github.com/sebastianbergmann/phpunit');
+    assert.equal(body[1], null);
+    assert.equal(body[2], 'https://nodejs.org/api/path.html');
+    assert.equal(body[3], 'https://github.com/request/request');
+    assert.equal(body[4], null);
+    assert.equal(body[5], 'https://github.com/jquery/jquery-dist');
+  });
 });
