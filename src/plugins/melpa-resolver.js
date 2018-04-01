@@ -7,22 +7,16 @@ let lastModified;
 let archive;
 
 const resolveUrl = async (pkg) => {
-  try {
-    const response = await got('https://melpa.org/archive.json', {
-      json: true,
-      headers: lastModified ? {
-        'if-modified-since': lastModified,
-      } : undefined,
-    });
+  const response = await got('https://melpa.org/archive.json', {
+    json: true,
+    headers: lastModified ? {
+      'if-modified-since': lastModified,
+    } : undefined,
+  });
 
-    if (response.statusCode === 200) {
-      lastModified = response.headers['last-modified'];
-      archive = response.body;
-    }
-  } catch (err) {
-    if (err.statusCode !== 304) {
-      throw err;
-    }
+  if (response.statusCode === 200) {
+    lastModified = response.headers['last-modified'];
+    archive = response.body;
   }
 
   const reachableUrl = await findReachableUrls([
