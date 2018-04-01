@@ -15,8 +15,10 @@ const resolveUrl = async (pkg) => {
       } : undefined,
     });
 
-    lastModified = response.headers['last-modified'];
-    archive = response.body;
+    if (response.statusCode === 200) {
+      lastModified = response.headers['last-modified'];
+      archive = response.body;
+    }
   } catch (err) {
     if (err.statusCode !== 304) {
       throw err;
