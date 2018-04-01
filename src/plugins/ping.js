@@ -1,7 +1,6 @@
-const got = require('got');
 const Boom = require('boom');
-
 const Joi = require('joi');
+const got = require('../utils/memRequest.js');
 const insight = require('../utils/insight.js');
 
 const register = (server) => {
@@ -18,7 +17,7 @@ const register = (server) => {
         const url = request.query.url;
 
         try {
-          await got.get(url);
+          await got.head(url);
           insight.trackEvent('ping_resolved', {
             url,
           }, request);

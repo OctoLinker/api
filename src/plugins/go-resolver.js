@@ -1,6 +1,7 @@
 const Joi = require('joi');
 const findReachableUrls = require('find-reachable-urls');
 const readMeta = require('lets-get-meta');
+const pMemoize = require('mem');
 const got = require('got');
 const insight = require('../utils/insight');
 
@@ -21,7 +22,7 @@ const getGoMeta = async (url) => {
   };
 };
 
-const resolveUrl = async (url) => {
+const resolveUrl = pMemoize(async (url) => {
   let goMetaConfig;
 
   try {
@@ -42,7 +43,7 @@ const resolveUrl = async (url) => {
   }
 
   return reachableUrl;
-};
+}, { maxAge: 86400000 });
 
 const register = (server) => {
   server.route([{

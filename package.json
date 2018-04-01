@@ -28,6 +28,7 @@
     "keen-tracking": "^1.4.0",
     "lets-get-meta": "^2.1.1",
     "lodash.countby": "^4.6.0",
+    "mem": "^3.0.0",
     "newrelic": "^2.2.2",
     "promise-limit": "^2.6.0",
     "require-directory": "^2.1.1"

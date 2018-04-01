@@ -1,7 +1,8 @@
 const Joi = require('joi');
+const pMemoize = require('mem');
 const insight = require('../utils/insight.js');
 const registryConfig = require('../../config.json');
-const doRequest = require('../utils/do-request.js');
+const doRequest = pMemoize(require('../utils/do-request.js'), { maxAge: 86400000 });
 
 const register = (server) => {
   server.route([{
