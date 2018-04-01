@@ -1,20 +1,14 @@
-const assert = require('assert');
-const sinon = require('sinon');
 const jpath = require('json-path');
 const xpathHelper = require('../src/utils/xpath-helper.js');
 
+jest.mock('json-path');
+
 describe('xpath-helper', () => {
-  let sandbox;
-  let jpathResolveStub;
-
   beforeEach(() => {
-    sandbox = sinon.sandbox.create();
-    jpathResolveStub = sandbox.stub(jpath, 'resolve').returns([]);
+    jpath.resolve.mockReturnValue([]);
   });
 
-  afterEach(() => {
-    sandbox.restore();
-  });
+  afterEach(() => jpath.resolve.mockClear());
 
   describe('jpath', () => {
     const json = {
@@ -29,23 +23,23 @@ describe('xpath-helper', () => {
     it('calls jpath.resolve for each xpath entry', () => {
       xpathHelper({}, xpaths);
 
-      assert.equal(jpathResolveStub.callCount, xpaths.length);
-      assert.equal(jpathResolveStub.args[0][1], xpaths[0]);
-      assert.equal(jpathResolveStub.args[1][1], xpaths[1]);
+      expect(jpath.resolve.mock.calls.length).toBe(xpaths.length);
+      expect(jpath.resolve.mock.calls[0][1]).toBe(xpaths[0]);
+      expect(jpath.resolve.mock.calls[1][1]).toBe(xpaths[1]);
     });
 
     it('calls jpath.resolve with json passed in', () => {
       xpathHelper(json, xpaths);
 
-      assert.deepEqual(jpathResolveStub.args[0][0], json);
+      expect(jpath.resolve.mock.calls[0][0]).toBe(json);
     });
 
     it('ignores empty values', () => {
-      jpathResolveStub.onCall(0).returns(['']);
-      jpathResolveStub.onCall(1).returns(['blub']);
+      jpath.resolve.mockReturnValueOnce(['']);
+      jpath.resolve.mockReturnValueOnce(['blub']);
 
       const result = xpathHelper(json, xpaths);
-      assert.equal(result, 'blub');
+      expect(result).toEqual(['blub']);
     });
   });
 });

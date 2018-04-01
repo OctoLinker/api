@@ -7,7 +7,7 @@
     "start": "node server.js",
     "lint": "eslint .",
     "pretest": "yarn lint",
-    "test": "mocha",
+    "test": "jest",
     "watch-test": "mocha -w"
   },
   "author": "Stefan Buck",
@@ -38,16 +38,13 @@
     "url": "https://github.com/octo-linker/live-resolver"
   },
   "devDependencies": {
-    "eslint": "^3.17.1",
+    "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^11.1.1",
     "eslint-plugin-import": "2.2.0",
-    "eslint-plugin-mocha": "^4.9.0",
+    "eslint-plugin-jest": "^21.15.0",
     "fs-extra": "^4.0.2",
+    "jest": "^22.4.3",
     "jsdom": "^11.4.0",
-    "lodash": "4.17.4",
-    "mocha": "3.2.0",
-    "mocha.parallel": "^0.15.0",
-    "sinon": "1.17.7",
-    "sinon-as-promised": "4.0.2"
+    "lodash": "4.17.4"
   }
 }

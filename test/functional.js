@@ -1,22 +1,20 @@
-const assert = require('assert');
 const got = require('got');
-const parallel = require('mocha.parallel');
 
-parallel('functional', () => {
+describe('functional', () => {
   let server;
 
-  before((done) => {
+  beforeAll((done) => {
     server = require('../server'); // eslint-disable-line global-require
     server.events.once('start', done);
   });
 
-  after(() => server.stop());
+  afterAll(() => server.stop());
 
   function testUrl(path, expectedUrl) {
     it(`resolves ${path} to ${expectedUrl}`, async () => {
       const response = await got(server.info.uri + path);
       const url = JSON.parse(response.body).url;
-      assert.deepStrictEqual(url, expectedUrl);
+      expect(url).toBe(expectedUrl);
     });
   }
 
@@ -49,11 +47,11 @@ parallel('functional', () => {
 
 
     const body = JSON.parse(response.body);
-    assert.equal(body[0], 'https://github.com/sebastianbergmann/phpunit');
-    assert.equal(body[1], null);
-    assert.equal(body[2], 'https://nodejs.org/api/path.html');
-    assert.equal(body[3], 'https://github.com/request/request');
-    assert.equal(body[4], null);
-    assert.equal(body[5], 'https://github.com/jquery/jquery-dist');
+    expect(body[0]).toBe('https://github.com/sebastianbergmann/phpunit');
+    expect(body[1]).toBe(null);
+    expect(body[2]).toBe('https://nodejs.org/api/path.html');
+    expect(body[3]).toBe('https://github.com/request/request');
+    expect(body[4]).toBe(null);
+    expect(body[5]).toBe('https://github.com/jquery/jquery-dist');
   });
 });
