@@ -2,7 +2,7 @@ const insight = require('../utils/insight.js');
 const promiseLimit = require('promise-limit');
 const countBy = require('lodash.countby');
 
-const MAXIMUM_CONCURREN_TREQUESTS = 20;
+const MAXIMUM_CONCURRENT_REQUESTS = 20;
 
 function track(request) {
   const { payload } = request;
@@ -24,7 +24,7 @@ const register = (server) => {
 
         track(request);
 
-        const limit = promiseLimit(MAXIMUM_CONCURREN_TREQUESTS);
+        const limit = promiseLimit(MAXIMUM_CONCURRENT_REQUESTS);
 
         return Promise.all(payload.map((item) => {
           if (item.type === 'registry') {
