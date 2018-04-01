@@ -9,6 +9,7 @@ const resolverPlugin = require('./src/plugins/universal-resolver.js');
 const javaPlugin = require('./src/plugins/java-resolver.js');
 const pingPlugin = require('./src/plugins/ping.js');
 const homePlugin = require('./src/plugins/home.js');
+const bulkPlugin = require('./src/plugins/bulk.js');
 
 const server = new hapi.Server({
   port: process.env.PORT || 3000,
@@ -22,6 +23,7 @@ const init = async () => {
     melpaResolverPlugin,
     pingPlugin,
     homePlugin,
+    bulkPlugin,
   ]);
 
   await server.start();
