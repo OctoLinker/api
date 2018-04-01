@@ -1,4 +1,4 @@
-const Keen = require('keen-js');
+const Keen = require('keen-tracking');
 
 let instance;
 
@@ -21,7 +21,7 @@ function trackEvent(eventKey, eventData, request) {
   }
 
   if (instance) {
-    instance.addEvent(eventKey, data);
+    instance.recordEvent(eventKey, data);
   } else {
     console.log(eventKey, data);
   }
