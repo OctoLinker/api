@@ -48,10 +48,10 @@ describe('functional', () => {
 
     const body = JSON.parse(response.body);
     expect(body[0]).toBe('https://github.com/sebastianbergmann/phpunit');
-    expect(body[1]).toBe(null);
+    expect(body[1]).toBeNull();
     expect(body[2]).toBe('https://nodejs.org/api/path.html');
     expect(body[3]).toBe('https://github.com/request/request');
-    expect(body[4]).toBe(null);
+    expect(body[4]).toBeNull();
     expect(body[5]).toBe('https://github.com/jquery/jquery-dist');
   });
 });

@@ -36,7 +36,7 @@ describe('resolver', () => {
       got.get.mockResolvedValue();
 
       await server.inject(options);
-      expect(got.get.mock.calls.length).toBe(1);
+      expect(got.get.mock.calls).toHaveLength(1);
       expect(got.get.mock.calls[0][0]).toBe('https://registry.bower.io/packages/foo');
     });
 
@@ -49,7 +49,7 @@ describe('resolver', () => {
       got.get.mockResolvedValue();
 
       await server.inject(optionsScopePackage);
-      expect(got.get.mock.calls.length).toBe(1);
+      expect(got.get.mock.calls).toHaveLength(1);
       expect(got.get.mock.calls[0][0]).toBe('https://registry.npmjs.org/@angular%2fcore');
     });
   });

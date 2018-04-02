@@ -24,7 +24,7 @@ describe('ping', () => {
     };
 
     await server.inject(options);
-    expect(got.get.mock.calls.length).toBe(1);
+    expect(got.get.mock.calls).toHaveLength(1);
     expect(got.get.mock.calls[0][0]).toBe('http://awesomefooland.com');
   });
 

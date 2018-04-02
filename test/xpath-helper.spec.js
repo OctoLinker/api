@@ -23,7 +23,7 @@ describe('xpath-helper', () => {
     it('calls jpath.resolve for each xpath entry', () => {
       xpathHelper({}, xpaths);
 
-      expect(jpath.resolve.mock.calls.length).toBe(xpaths.length);
+      expect(jpath.resolve.mock.calls).toHaveLength(xpaths.length);
       expect(jpath.resolve.mock.calls[0][1]).toBe(xpaths[0]);
       expect(jpath.resolve.mock.calls[1][1]).toBe(xpaths[1]);
     });
