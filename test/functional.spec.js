@@ -3,10 +3,10 @@ const got = require('got');
 describe('functional', () => {
   let server;
 
-  beforeAll((done) => {
+  beforeAll(() => (new Promise((resolve) => {
     server = require('../server'); // eslint-disable-line global-require
-    server.events.once('start', done);
-  });
+    server.events.once('start', resolve);
+  })));
 
   afterAll(() => server.stop());
 
@@ -34,6 +34,7 @@ describe('functional', () => {
   testUrl('/ping?url=https://nodejs.org/api/path.html', 'https://nodejs.org/api/path.html');
 
   it('resolves /bulk request', async () => {
+    console.log('yyy');
     const response = await got.post(`${server.info.uri}/bulk`, {
       body: JSON.stringify([
         { type: 'registry', registry: 'composer', target: 'phpunit/phpunit' },

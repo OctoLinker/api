@@ -31,7 +31,7 @@
     "memory-cache": "^0.2.0",
     "newrelic": "^2.2.2",
     "promise-limit": "^2.6.0",
-    "require-dir": "^0.3.2"
+    "require-directory": "^2.1.1"
   },
   "repository": {
     "type": "git",
