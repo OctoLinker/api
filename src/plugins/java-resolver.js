@@ -1,9 +1,10 @@
 const Joi = require('joi');
+const path = require('path');
 const Boom = require('boom');
-const requireDir = require('require-dir');
+const requireDir = require('require-directory');
 const insight = require('../utils/insight.js');
 
-const mappingFiles = requireDir('../../mapping-files');
+const mappingFiles = requireDir(module, path.join(__dirname, '../../mapping-files'));
 const flatMappingList = Object.assign(...Object.values(mappingFiles));
 
 const register = (server) => {

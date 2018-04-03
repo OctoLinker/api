@@ -1,10 +1,8 @@
-const assert = require('assert');
-const sinon = require('sinon');
-require('sinon-as-promised');
 const got = require('got');
-const cache = require('memory-cache');
 const hapi = require('hapi');
 const plugin = require('../src/plugins/universal-resolver.js');
+
+jest.mock('got');
 
 describe('resolver', () => {
   let server;
@@ -13,42 +11,33 @@ describe('resolver', () => {
     url: '/q/bower/foo',
   };
 
-  before(async () => {
+  beforeAll(async () => {
     server = new hapi.Server();
 
     await server.register(plugin);
     return server.start();
   });
 
-  after(() => server.stop());
+  afterAll(() => server.stop());
 
-  beforeEach(() => {
-    this.sandbox = sinon.sandbox.create();
-    this.gotStub = this.sandbox.stub(got, 'get');
-
-    this.sandbox.stub(cache, 'get');
-  });
-
-  afterEach(() => {
-    this.sandbox.restore();
-  });
+  afterEach(() => got.get.mockClear());
 
   describe('fetch', () => {
     it('returns an error if registry fetch fails', async () => {
       const err = new Error('Some error');
-      this.gotStub.rejects(err);
+      got.get.mockRejectedValue(err);
 
       const response = await server.inject(options);
-      assert.equal(response.statusCode, 500);
-      assert.equal(response.result.error, 'Internal Server Error');
+      expect(response.statusCode).toBe(500);
+      expect(response.result.error).toBe('Internal Server Error');
     });
 
     it('fetch package information from registry', async () => {
-      this.gotStub.resolves();
+      got.get.mockResolvedValue();
 
       await server.inject(options);
-      assert.equal(this.gotStub.callCount, 1);
-      assert.equal(this.gotStub.args[0][0], 'https://registry.bower.io/packages/foo');
+      expect(got.get.mock.calls).toHaveLength(1);
+      expect(got.get.mock.calls[0][0]).toBe('https://registry.bower.io/packages/foo');
     });
 
     it('escapes slashes in package names', async () => {
@@ -57,11 +46,11 @@ describe('resolver', () => {
         url: '/q/npm/@angular/core',
       };
 
-      this.gotStub.resolves();
+      got.get.mockResolvedValue();
 
       await server.inject(optionsScopePackage);
-      assert.equal(this.gotStub.callCount, 1);
-      assert.equal(this.gotStub.args[0][0], 'https://registry.npmjs.org/@angular%2fcore');
+      expect(got.get.mock.calls).toHaveLength(1);
+      expect(got.get.mock.calls[0][0]).toBe('https://registry.npmjs.org/@angular%2fcore');
     });
   });
 
@@ -70,25 +59,25 @@ describe('resolver', () => {
       it('when package can not be found', async () => {
         const err = new Error('Some error');
         err.statusCode = 404;
-        this.gotStub.rejects(err);
+        got.get.mockRejectedValue(err);
 
         const response = await server.inject(options);
-        assert.equal(response.statusCode, 404);
-        assert.equal(response.result.message, 'Package not found');
+        expect(response.statusCode).toBe(404);
+        expect(response.result.message).toBe('Package not found');
       });
     });
 
     describe('with 200', () => {
       it('when no repository url is found', async () => {
-        this.gotStub.resolves({
+        got.get.mockResolvedValue({
           body: JSON.stringify({
             url: '',
           }),
         });
 
         const response = await server.inject(options);
-        assert.equal(response.statusCode, 200);
-        assert.equal(response.result.url, 'https://bower.io/search/?q=foo');
+        expect(response.statusCode).toBe(200);
+        expect(response.result.url).toBe('https://bower.io/search/?q=foo');
       });
     });
   });

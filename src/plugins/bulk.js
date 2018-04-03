@@ -39,13 +39,13 @@ const register = (server) => {
             }));
           }
         }))
-        .then(values => values.map((item) => {
-          if (item && item.result && item.result.url) {
-            return item.result.url;
-          }
+          .then(values => values.map((item) => {
+            if (item && item.result && item.result.url) {
+              return item.result.url;
+            }
 
-          return null;
-        }));
+            return null;
+          }));
       },
     },
   }]);
