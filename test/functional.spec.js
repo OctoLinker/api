@@ -34,7 +34,6 @@ describe('functional', () => {
   testUrl('/ping?url=https://nodejs.org/api/path.html', 'https://nodejs.org/api/path.html');
 
   it('resolves /bulk request', async () => {
-    console.log('yyy');
     const response = await got.post(`${server.info.uri}/bulk`, {
       body: JSON.stringify([
         { type: 'registry', registry: 'composer', target: 'phpunit/phpunit' },
