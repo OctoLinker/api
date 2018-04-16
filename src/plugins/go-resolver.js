@@ -3,6 +3,7 @@ const findReachableUrls = require('find-reachable-urls');
 const readMeta = require('lets-get-meta');
 const pMemoize = require('mem');
 const got = require('got');
+const timeunits = require('timeunits');
 const insight = require('../utils/insight');
 
 const getGoMeta = async (url) => {
@@ -43,7 +44,7 @@ const resolveUrl = pMemoize(async (url) => {
   }
 
   return reachableUrl;
-}, { maxAge: 86400000 });
+}, { maxAge: timeunits.year });
 
 const register = (server) => {
   server.route([{

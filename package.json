@@ -31,7 +31,8 @@
     "mem": "^3.0.0",
     "newrelic": "^2.2.2",
     "promise-limit": "^2.6.0",
-    "require-directory": "^2.1.1"
+    "require-directory": "^2.1.1",
+    "timeunits": "^1.1.0"
   },
   "repository": {
     "type": "git",
