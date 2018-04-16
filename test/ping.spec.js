@@ -16,7 +16,7 @@ describe('ping', () => {
 
   afterAll(() => server.stop());
 
-  it('performs an HTTP HEAD request', async () => {
+  it('performs an HTTP GET request', async () => {
     got.get.mockResolvedValue();
 
     const options = {
@@ -24,14 +24,14 @@ describe('ping', () => {
     };
 
     await server.inject(options);
-    expect(got.head.mock.calls).toHaveLength(1);
-    expect(got.head.mock.calls[0][0]).toBe('http://awesomefooland.com');
+    expect(got.get.mock.calls).toHaveLength(1);
+    expect(got.get.mock.calls[0][0]).toBe('http://awesomefooland.com');
   });
 
   it('returns 404 response if package can not be found', async () => {
     const err = new Error('Some error');
     err.code = 404;
-    got.head.mockRejectedValue(err);
+    got.get.mockRejectedValue(err);
 
     const options = {
       method: 'GET',
@@ -43,7 +43,7 @@ describe('ping', () => {
   });
 
   it('returns project url', async () => {
-    got.head.mockResolvedValue();
+    got.get.mockResolvedValue();
 
     const options = {
       method: 'GET',
