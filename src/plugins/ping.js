@@ -17,7 +17,7 @@ const register = (server) => {
         const url = request.query.url;
 
         try {
-          await got.get(url);
+          await got.head(url);
           insight.trackEvent('ping_resolved', {
             url,
           }, request);
