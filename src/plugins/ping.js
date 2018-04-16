@@ -1,7 +1,6 @@
-const got = require('got');
 const Boom = require('boom');
-
 const Joi = require('joi');
+const got = require('../utils/memRequest.js');
 const insight = require('../utils/insight.js');
 
 const register = (server) => {

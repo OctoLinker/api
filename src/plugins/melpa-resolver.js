@@ -1,12 +1,14 @@
 const Joi = require('joi');
 const findReachableUrls = require('find-reachable-urls');
 const got = require('got');
+const pMemoize = require('mem');
+const timeunits = require('timeunits');
 const insight = require('../utils/insight');
 
 let lastModified;
 let archive;
 
-const resolveUrl = async (pkg) => {
+const resolveUrl = pMemoize(async (pkg) => {
   const response = await got('https://melpa.org/archive.json', {
     json: true,
     headers: lastModified ? {
@@ -29,7 +31,7 @@ const resolveUrl = async (pkg) => {
   }
 
   return reachableUrl;
-};
+}, { maxAge: timeunits.year });
 
 const register = (server) => {
   server.route([{

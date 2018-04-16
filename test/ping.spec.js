@@ -16,7 +16,7 @@ describe('ping', () => {
 
   afterAll(() => server.stop());
 
-  it('performs an HTTP HEAD request', async () => {
+  it('performs an HTTP GET request', async () => {
     got.get.mockResolvedValue();
 
     const options = {
