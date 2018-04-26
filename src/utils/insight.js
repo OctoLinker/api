@@ -13,7 +13,19 @@ function init() {
   });
 }
 
+function doNotTrack(request = {}) {
+  if (!request.headers) {
+    return true;
+  }
+
+  return parseInt(request.headers.dnt, 10) === 1;
+}
+
 function trackEvent(eventKey, eventData, request) {
+  if (doNotTrack(request)) {
+    return;
+  }
+
   const data = Object.assign({}, eventData);
 
   if (request && request.headers && request.headers.referer) {
@@ -28,6 +40,10 @@ function trackEvent(eventKey, eventData, request) {
 }
 
 function trackError(eventKey, err, eventData, request) {
+  if (doNotTrack(request)) {
+    return;
+  }
+
   const data = Object.assign({}, eventData);
 
   if (!err.isBoom) {
