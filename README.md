@@ -51,6 +51,9 @@ Run server:
 
 `yarn test`
 
+## Privacy Policy
+
+Our [Privacy Policy](https://github.com/OctoLinker/OctoLinker/blob/master/privacy-policy.md) describes our practices related to the use, storage and disclosure of information we collect when you're using our service.
 
 ## License
 
