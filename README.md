@@ -55,6 +55,8 @@ Run server:
 
 Our [Privacy Policy](https://github.com/OctoLinker/OctoLinker/blob/master/privacy-policy.md) describes our practices related to the use, storage and disclosure of information we collect when you're using our service.
 
+If you do not want your requests to be logged, you can opt-out of logging by sending `'Do-Not-Track': '1'` or `'DNT': '1'` in the request headers.
+
 ## License
 
 Copyright (c) 2015 Stefan Buck. Licensed under the MIT license.
