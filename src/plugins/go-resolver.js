@@ -14,7 +14,7 @@ const getGoMeta = async (url) => {
     throw new Error('go-source meta is missing');
   }
 
-  const values = meta['go-source'].replace(/\s+/, ' ').split(' ');
+  const values = meta['go-source'].replace(/\s+/g, ' ').split(' ');
 
   return {
     projectRoot: values[0],
