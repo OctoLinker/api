@@ -3,6 +3,7 @@ const hapi = require('hapi');
 const plugin = require('../src/plugins/ping.js');
 
 jest.mock('got');
+jest.mock('../src/utils/cache');
 
 describe('ping', () => {
   let server;

@@ -1,9 +1,7 @@
 const Joi = require('joi');
-const pMemoize = require('mem');
-const timeunits = require('timeunits');
 const insight = require('../utils/insight.js');
 const registryConfig = require('../../config.json');
-const doRequest = pMemoize(require('../utils/do-request.js'), { maxAge: timeunits.year });
+const doRequest = require('../utils/do-request.js');
 
 const register = (server) => {
   server.route([{

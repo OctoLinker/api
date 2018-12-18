@@ -1,9 +1,8 @@
 const Joi = require('joi');
 const findReachableUrls = require('find-reachable-urls');
 const readMeta = require('lets-get-meta');
-const pMemoize = require('mem');
 const got = require('got');
-const timeunits = require('timeunits');
+const cache = require('../utils/cache');
 const insight = require('../utils/insight');
 
 const getGoMeta = async (url) => {
@@ -23,8 +22,14 @@ const getGoMeta = async (url) => {
   };
 };
 
-const resolveUrl = pMemoize(async (url) => {
+const resolveUrl = async (url) => {
   let goMetaConfig;
+
+  const cacheKey = `go_${url}`;
+
+  if (cache.has(cacheKey)) {
+    return cache.get(cacheKey);
+  }
 
   try {
     // Preferred with https
@@ -43,8 +48,10 @@ const resolveUrl = pMemoize(async (url) => {
     throw new Error('No url is reachable');
   }
 
+  cache.set(cacheKey, reachableUrl);
+
   return reachableUrl;
-}, { maxAge: timeunits.year });
+};
 
 const register = (server) => {
   server.route([{
