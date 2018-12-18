@@ -1,6 +1,7 @@
 const Boom = require('boom');
 const Joi = require('joi');
-const got = require('../utils/memRequest.js');
+const got = require('got');
+const cache = require('../utils/cache');
 const insight = require('../utils/insight.js');
 
 const register = (server) => {
@@ -16,11 +17,19 @@ const register = (server) => {
       handler: async (request) => {
         const url = request.query.url;
 
+        const cacheKey = `ping_${url}`;
+
+        if (cache.has(cacheKey)) {
+          return cache.get(cacheKey);
+        }
+
         try {
           await got.head(url);
           insight.trackEvent('ping_resolved', {
             url,
           }, request);
+
+          cache.set(cacheKey, { url });
 
           return {
             url,

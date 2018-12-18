@@ -1,14 +1,19 @@
 const Joi = require('joi');
 const findReachableUrls = require('find-reachable-urls');
 const got = require('got');
-const pMemoize = require('mem');
-const timeunits = require('timeunits');
+const cache = require('../utils/cache');
 const insight = require('../utils/insight');
 
 let lastModified;
 let archive;
 
-const resolveUrl = pMemoize(async (pkg) => {
+const resolveUrl = async (pkg) => {
+  const cacheKey = `melpa_${pkg}`;
+
+  if (cache.has(cacheKey)) {
+    return cache.get(cacheKey);
+  }
+
   const response = await got('https://melpa.org/archive.json', {
     json: true,
     headers: lastModified ? {
@@ -30,8 +35,10 @@ const resolveUrl = pMemoize(async (pkg) => {
     throw new Error('No url is reachable');
   }
 
+  cache.set(cacheKey, reachableUrl);
+
   return reachableUrl;
-}, { maxAge: timeunits.year });
+};
 
 const register = (server) => {
   server.route([{

@@ -6,6 +6,7 @@ const findReachableUrls = require('find-reachable-urls');
 const repositoryUrl = require('./repository-url');
 const xpathHelper = require('./xpath-helper');
 const registryConfig = require('../../config.json');
+const cache = require('./cache');
 
 function notFoundResponse() {
   return Boom.notFound('Package not found', {
@@ -23,6 +24,12 @@ module.exports = async function doRequest(packageName, type) {
   const config = registryConfig[type];
 
   const requestUrl = util.format(config.registry, packageName.replace(/\//g, '%2f'));
+
+  const cacheKey = `${type}_${packageName}`;
+
+  if (cache.has(cacheKey)) {
+    return cache.get(cacheKey);
+  }
 
   try {
     const response = await got.get(requestUrl);
@@ -65,6 +72,8 @@ module.exports = async function doRequest(packageName, type) {
     if (!reachableUrl) {
       throw notFoundResponse();
     }
+
+    cache.set(cacheKey, reachableUrl);
 
     return reachableUrl;
   } catch (err) {
