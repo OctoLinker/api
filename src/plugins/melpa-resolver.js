@@ -55,6 +55,7 @@ const register = (server) => {
 
         const eventData = {
           registry: 'melpa',
+          resourceId: `melpa:::${pkg}`,
           package: pkg,
           referer: request.headers.referer,
         };
