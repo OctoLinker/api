@@ -68,6 +68,7 @@ const register = (server) => {
 
         const eventData = {
           registry: 'go',
+          resourceId: `go:::${pkg}`,
           package: pkg,
           referer: request.headers.referer,
         };

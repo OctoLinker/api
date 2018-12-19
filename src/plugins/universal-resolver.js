@@ -18,6 +18,7 @@ const register = (server) => {
         const pkg = request.params.package;
         const type = request.params.registry;
         const eventData = {
+          resourceId: `${type}:::${pkg}`,
           registry: type,
           package: pkg,
           referer: request.headers.referer,
