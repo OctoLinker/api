@@ -43,14 +43,14 @@ describe('resolver', () => {
     it('escapes slashes in package names', async () => {
       const optionsScopePackage = {
         method: 'GET',
-        url: '/q/npm/@angular/core',
+        url: '/q/npm/@foo/bar',
       };
 
       got.get.mockResolvedValue();
 
       await server.inject(optionsScopePackage);
       expect(got.get.mock.calls).toHaveLength(1);
-      expect(got.get.mock.calls[0][0]).toBe('https://registry.npmjs.org/@angular%2fcore');
+      expect(got.get.mock.calls[0][0]).toBe('https://registry.npmjs.org/@foo%2fbar');
     });
   });
 
