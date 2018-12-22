@@ -2,6 +2,7 @@ const Joi = require('joi');
 const insight = require('../utils/insight.js');
 const registryConfig = require('../../config.json');
 const doRequest = require('../utils/do-request.js');
+const npmStaticCache = require('../../mapping-files/npm.json');
 
 const register = (server) => {
   server.route([{
@@ -23,6 +24,13 @@ const register = (server) => {
           package: pkg,
           referer: request.headers.referer,
         };
+
+        if (npmStaticCache && npmStaticCache[pkg]) {
+          eventData.url = npmStaticCache[pkg];
+          insight.trackEvent('resolved', eventData, request);
+
+          return eventData.url;
+        }
 
         try {
           const url = await doRequest(pkg, type);
