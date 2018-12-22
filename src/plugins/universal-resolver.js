@@ -25,7 +25,7 @@ const register = (server) => {
           referer: request.headers.referer,
         };
 
-        if (npmStaticCache && npmStaticCache[pkg]) {
+        if ((type === 'npm' || type === 'bower') && npmStaticCache && npmStaticCache[pkg]) {
           eventData.url = npmStaticCache[pkg];
           insight.trackEvent('resolved', eventData, request);
 
