@@ -26,6 +26,7 @@ describe('functional', () => {
   testUrl('/q/npm/audio-context-polyfill', 'https://www.npmjs.com/package/audio-context-polyfill');
   testUrl('/q/npm/github-url-from-username-repo', 'https://github.com/robertkowalski/github-url-from-username-repo');
   testUrl('/q/npm/find-project-root', 'https://github.com/kirstein/find-project-root');
+  testUrl('/q/npm/jest-mock', 'https://github.com/facebook/jest/tree/master/packages/jest-mock');
   testUrl('/q/pypi/simplejson', 'https://github.com/simplejson/simplejson');
   testUrl('/q/crates/libc', 'https://github.com/rust-lang/libc');
   testUrl('/q/go/k8s.io/kubernetes/pkg/api', 'https://github.com/kubernetes/kubernetes/tree/master/pkg/api');

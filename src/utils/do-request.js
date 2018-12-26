@@ -45,6 +45,7 @@ module.exports = async function doRequest(packageName, type) {
 
     if (type === 'npm') {
       try {
+        urls.unshift(...urls.map(url => `${url}/tree/master/packages/${packageName}`));
         urls.push(...json.maintainers.map(({ name }) => `${name}/${packageName}`));
       } catch (err) {
         console.log(err);
