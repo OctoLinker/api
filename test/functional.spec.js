@@ -21,6 +21,7 @@ describe('functional', () => {
   testUrl('/q/bower/jquery', 'https://github.com/jquery/jquery-dist');
   testUrl('/q/composer/phpunit/phpunit', 'https://github.com/sebastianbergmann/phpunit');
   testUrl('/q/rubygems/nokogiri', 'https://github.com/sparklemotion/nokogiri');
+  testUrl('/q/npm/eslint', 'https://github.com/eslint/eslint');
   testUrl('/q/npm/request', 'https://github.com/request/request');
   testUrl('/q/npm/babel-helper-regex', 'https://github.com/babel/babel/tree/master/packages/babel-helper-regex');
   testUrl('/q/npm/audio-context-polyfill', 'https://www.npmjs.com/package/audio-context-polyfill');
