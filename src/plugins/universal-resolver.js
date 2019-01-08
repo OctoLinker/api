@@ -29,7 +29,7 @@ const register = (server) => {
           eventData.url = npmStaticCache[pkg];
           insight.trackEvent('resolved', eventData, request);
 
-          return eventData.url;
+          return { url: eventData.url };
         }
 
         try {
