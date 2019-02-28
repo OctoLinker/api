@@ -1,8 +1,3 @@
 language: node_js
 node_js:
-- v10
-deploy:
-  provider: heroku
-  app: githublinker
-  api_key:
-    secure: J7+nRm9IY7Y1cGkvib5g7xaE0Hw0AnoBXy7v1ZUbNmXLNV5K2zRSGpjRCOdz8h+szjk9Iv/GZNrAGo/eTNhkGuQiCfoVLS06k7BLMBZa4x1YiECeLyZ1r8JUzHVRzln8UCMIoksIBxs2oGI4lLdDzvHnQtTXrHN/bxVq/HOAR8G/jyADfxLfvH0b7Z9A1iJZOxNIHVeQFYW0rixu+4bkX/jhViyPfwg3o5xBQC9bO0HSoV7rJeeRe4U2Nv+X/lYA0feImNpjWh1h15Cca03mIMqITyrFDgcmwQovZtMwUSDiaAOn3LJyiHI9U6nODf70dA7D4eFitiqMY1o7M6sdomF2TitrEPr8QwMVJdlnlpIxYExkG+AG5a0P2lFeEMfYP//cMfpSuTevxyiT617iYl995RIeEBkv1CHBGSeomPSKL79/d5Epx2Gk/KavkmjjnjK5CxzZ8cJpH0uVXrPj72/zkzQkssq/mMvW6GceCNc/qEtNodu/k8UgQnXccvUWG03M1xJeYERipOWI7qeONWKTfjN8poMycZVEytHs5YoR6MlWQeyZmS46A6aIvrAw65a+Q8kpOtWF2w9bNk5RoEk+RzIAsRBO2tkE+/w7PUyW6JMkXOCMZnS1eB9Jv+qyfGqjVkAdUqcUyCyFgbDBullhVl3YLSUpni1tGbx/P3o=
+  - v8

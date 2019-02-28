@@ -1,4 +1,4 @@
-const findRepositoryUrl = require('../src/utils/repository-url');
+const findRepositoryUrl = require('./repository-url');
 
 describe('repository url', () => {
   const urls = [
@@ -28,6 +28,8 @@ describe('repository url', () => {
 
   const detailUrl = 'https://github.com/john/doe/tree/master/foo';
   it(`resolves ${detailUrl}`, () => {
-    expect(findRepositoryUrl(detailUrl)).toBe('https://github.com/john/doe/tree/master/foo');
+    expect(findRepositoryUrl(detailUrl)).toBe(
+      'https://github.com/john/doe/tree/master/foo',
+    );
   });
 });

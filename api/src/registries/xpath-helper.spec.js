@@ -1,5 +1,5 @@
 const jpath = require('json-path');
-const xpathHelper = require('../src/utils/xpath-helper.js');
+const xpathHelper = require('./xpath-helper.js');
 
 jest.mock('json-path');
 
@@ -15,10 +15,7 @@ describe('xpath-helper', () => {
       foo: '',
       bar: 'blub',
     };
-    const xpaths = [
-      '/foo',
-      '/bar',
-    ];
+    const xpaths = ['/foo', '/bar'];
 
     it('calls jpath.resolve for each xpath entry', () => {
       xpathHelper({}, xpaths);

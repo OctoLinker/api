@@ -1,4 +1,4 @@
-const config = require('../config.json');
+const config = require('./config.json');
 
 describe('config.json', () => {
   const props = ['registry', 'xpaths', 'fallback'];

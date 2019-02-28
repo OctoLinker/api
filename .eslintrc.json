@@ -5,19 +5,13 @@
     "node": true,
     "jest": true
   },
-  "settings": {
-    "mocha/additionalSuiteNames": ["parallel"]
-  },
   "rules": {
     "func-names": 0,
-    "id-length": [1, {"exceptions": ["$"]}],
-    "new-cap": [2, {"capIsNewExceptions": ["Deferred"]}],
+    "id-length": [1, { "exceptions": ["$"] }],
+    "new-cap": [2, { "capIsNewExceptions": ["Deferred"] }],
     "max-len": 0,
     "no-prototype-builtins": 0,
     "no-console": 0,
-    "import/extensions": 0,
-    "import/prefer-default-export": 0,
-    "import/no-extraneous-dependencies": 0,
     "no-underscore-dangle": 0,
     "no-useless-escape": 0,
     "class-methods-use-this": 0,
@@ -28,7 +22,7 @@
     "jest/no-disabled-tests": 2,
     "jest/no-focused-tests": 2,
     "jest/no-identical-title": 2,
-    "jest/consistent-test-it": ["error", {"fn": "it"}],
+    "jest/consistent-test-it": ["error", { "fn": "it" }],
     "jest/prefer-to-be-undefined": 2,
     "jest/prefer-to-be-null": 2,
     "jest/prefer-to-have-length": 2,

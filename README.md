@@ -3,37 +3,67 @@
 Returns the github repository url for the requested package.
 
 The supported registries are:
-  - [npmjs.com](https://npmjs.com)
-  - [bower.io](http:/bower.io)
-  - [getcomposer.org](https://getcomposer.org)
-  - [rubygems.org](https://rubygems.org)
-  - [pypi.python.org](https://pypi.python.org)
-  - [crates.io](https://crates.io)
-  - [melpa.org](https://melpa.org)
-  
-## Find a package
 
-https://githublinker.herokuapp.com/q/{registry}/{package}
-
-Registry must be one of:
-  - `npm`
-  - `bower`
-  - `composer`
-  - `rubygems`
-  - `pypi`
-  - `crates`
-  - `melpa`
-  - `java`
+- [npmjs.com](https://npmjs.com)
+- [bower.io](http:/bower.io)
+- [getcomposer.org](https://getcomposer.org)
+- [rubygems.org](https://rubygems.org)
+- [pypi.python.org](https://pypi.python.org)
+- [crates.io](https://crates.io)
+- [melpa.org](https://melpa.org)
 
 Example:
 
-https://githublinker.herokuapp.com/q/bower/backbone
+[POST] https://octolinker.now.sh/api
+
+Body:
+
+```json
+[
+  { "type": "npm", "target": "react" },
+  { "type": "composer", "target": "phpunit/phpunit" },
+  { "type": "ping", "target": "https://github.com" },
+  { "type": "npm", "target": "unknown-package" }
+]
+```
+
+Type must be one of:
+
+- `npm`
+- `bower`
+- `composer`
+- `rubygems`
+- `pypi`
+- `crates`
+- `java`
+- `go`
+- `ping`
 
 Response:
 
 ```json
 {
-  "url": "https://github.com/jashkenas/backbone"
+  "result": [
+    {
+      "type": "npm",
+      "target": "react",
+      "result": "https://github.com/facebook/react"
+    },
+    {
+      "type": "composer",
+      "target": "phpunit/phpunit",
+      "result": "https://github.com/sebastianbergmann/phpunit"
+    },
+    {
+      "type": "ping",
+      "target": "https://github.com",
+      "result": "https://github.com"
+    },
+    {
+      "type": "npm",
+      "target": "unknown-package"
+    }
+  ]
 }
 ```
 
@@ -60,7 +90,6 @@ If you do not want your requests to be logged, you can opt-out of logging by sen
 ## License
 
 Copyright (c) 2015 Stefan Buck. Licensed under the MIT license.
-
 
 [travis-url]: https://travis-ci.org/OctoLinker/live-resolver
 [travis-image]: https://travis-ci.org/OctoLinker/live-resolver.svg?branch=master
