@@ -1,51 +1,16 @@
 {
-  "name": "live-resolver",
-  "version": "0.4.3",
-  "description": "",
-  "main": "index.js",
   "scripts": {
-    "start": "node server.js",
     "lint": "eslint .",
-    "pretest": "yarn lint",
-    "test": "jest",
-    "watch-test": "mocha -w"
-  },
-  "author": "Stefan Buck",
-  "license": "MIT",
-  "engines": {
-    "node": "10"
-  },
-  "dependencies": {
-    "boom": "^7.1.1",
-    "find-reachable-urls": "^1.1.1",
-    "github-url-to-object": "^4.0.2",
-    "got": "^7.1.0",
-    "hapi": "^17.2.2",
-    "inert": "^5.0.1",
-    "is-url": "^1.2.2",
-    "joi": "^13.0.2",
-    "json-path": "^0.1.3",
-    "keen-tracking": "^1.4.0",
-    "lets-get-meta": "^2.1.1",
-    "lodash.countby": "^4.6.0",
-    "ms": "^2.1.1",
-    "newrelic": "^4.0.0",
-    "promise-limit": "^2.6.0",
-    "receptacle": "^1.3.2",
-    "require-directory": "^2.1.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/octo-linker/live-resolver"
+    "postinstall": "cd api && npm install",
+    "test": "jest"
   },
   "devDependencies": {
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb-base": "^11.1.1",
-    "eslint-plugin-import": "2.2.0",
-    "eslint-plugin-jest": "^21.15.0",
-    "fs-extra": "^4.0.2",
+    "eslint": "^5.12.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^22.1.2",
+    "got": "^9.5.1",
     "jest": "^23.6.0",
-    "jsdom": "^13.0.0",
-    "lodash": "4.17.11"
+    "prettier": "^1.15.3"
   }
 }

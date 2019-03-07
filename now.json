@@ -1,0 +1,24 @@
+{
+  "name": "octolinker",
+  "version": 2,
+  "builds": [
+    { "src": "api/legacy/handler.js", "use": "@now/node" },
+    { "src": "api/handler.js", "use": "@now/node" },
+    { "src": "index.html", "use": "@now/static" }
+  ],
+  "routes": [
+    { "src": "/api/?", "dest": "api/handler.js" },
+    { "src": "/api/.*", "dest": "api/legacy/handler.js" }
+  ],
+  "regions": ["all"],
+  "alias": ["octolinker.now.sh"],
+  "env": {
+    "MIXPANEL_TOKEN": "@mixpanel_token",
+    "DEFAULT_REDIS_PORT": "10363",
+    "DEFAULT_REDIS_PASSWORD": "@default_redis_password",
+    "DEFAULT_REDIS_HOST": "@default_redis_url",
+    "BRU1_REDIS_PORT": "19483",
+    "BRU1_REDIS_PASSWORD": "@bru1_redis_password",
+    "BRU1_REDIS_HOST": "@bru1_redis_url"
+  }
+}
