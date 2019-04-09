@@ -75,7 +75,9 @@ async function set(key, value) {
   try {
     log('Cache SET redis-cache', key, value);
     const oneDayInSeconds = 86400 * 3;
+    const timingStart = Date.now();
     await redis.set(key, value, 'EX', oneDayInSeconds);
+    log('Cache SET redis-cache timing', Date.now() - timingStart);
   } catch (error) {
     log('Cache SET redis-cache error', error);
   }
@@ -89,7 +91,10 @@ async function get(key) {
 
   try {
     log('Cache GET redis-cache', key);
-    return await redis.get(key);
+    const timingStart = Date.now();
+    const value = await redis.get(key);
+    log('Cache GET redis-cache timing', Date.now() - timingStart);
+    return value;
   } catch (error) {
     log('Cache GET redis-cache error', error);
   }

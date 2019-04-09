@@ -67,7 +67,9 @@ module.exports = async (req, res) => {
 
     const body = await json(req);
 
+    const timingCacheAuthStart = Date.now();
     await cache.auth();
+    const timingCacheAuth = Date.now() - timingCacheAuthStart;
 
     let result;
     let timingTotalEnd;
@@ -85,6 +87,7 @@ module.exports = async (req, res) => {
       log('Request completed', completed);
       log('Instance Name', logPrefix);
       log('Redis Status', cache.getRedisStatus());
+      log('Redis Auth Duration', timingCacheAuth);
       log('Simple Cache Size', cache.simpleCacheSize());
       log('Result Length', (result && result.length) || 0);
       log('Duration', timingTotalEnd - timingTotalStart);
@@ -96,6 +99,7 @@ module.exports = async (req, res) => {
           'Request completed': completed,
           'Instance Name': logPrefix,
           'Redis Status': cache.getRedisStatus(),
+          'Redis Auth Duration': timingCacheAuth,
           'Simple Cache Size': cache.simpleCacheSize(),
           'Result Length': (result && result.length) || 0,
           Duration: timingTotalEnd - timingTotalStart,
