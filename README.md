@@ -1,4 +1,4 @@
-# Live resolver [![Build Status][travis-image]][travis-url]
+# OctoLinker API [![Build Status][travis-image]][travis-url]
 
 Returns the github repository url for the requested package.
 
@@ -89,5 +89,5 @@ Our [Privacy Policy](https://github.com/OctoLinker/OctoLinker/blob/master/privac
 
 Copyright (c) 2015 Stefan Buck. Licensed under the MIT license.
 
-[travis-url]: https://travis-ci.org/OctoLinker/live-resolver
-[travis-image]: https://travis-ci.org/OctoLinker/live-resolver.svg?branch=master
+[travis-url]: https://travis-ci.org/OctoLinker/api
+[travis-image]: https://travis-ci.org/OctoLinker/api.svg?branch=master

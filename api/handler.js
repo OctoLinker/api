@@ -93,7 +93,7 @@ module.exports = async (req, res) => {
       log('Duration', timingTotalEnd - timingTotalStart);
 
       const meta = {
-        event: '2meta',
+        event: 'meta',
         properties: {
           Region: process.env.NOW_REGION || 'unknown',
           'Request completed': completed,
@@ -109,7 +109,7 @@ module.exports = async (req, res) => {
       const bulkData = [
         meta,
         ...result.map(item => ({
-          event: '2packages',
+          event: 'packages',
           properties: {
             Type: item.type,
             Target: item.target,

@@ -1,19 +1,51 @@
 const Redis = require('ioredis');
 const log = require('./log');
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ~~ Thanks to RedisGreen and ZEIT for sponsoring ~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// https://zeit.co/docs/v2/platform/regions-and-providers/
+// bru1 - Brussels, Belgium, Europe
+// gru1 - São Paulo, Brazil
+// hnd1 - Tokyo, Japan
+// iad1 - Washington DC, USA
+// sfo1 - San Francisco, CA, USA
+
+const redisUrls = {
+  bru1: 'sprightly-lavender-4454.redisgreen.net',
+  gru1: 'handsome-turtle-8352.redisgreen.net',
+  hnd1: 'inventive-willow-2140.redisgreen.net',
+  iad1: 'content-pumpkin-3522.redisgreen.net',
+  sfo1: 'graceful-turnip-982.redisgreen.net',
+};
+
+const availableRegions = ['bru1', 'gru1', 'hnd1', 'iad1', 'sfo1'];
+
 let redis;
 const simpleCache = new Map();
 
-function redisConfig() {
-  // https://zeit.co/docs/v2/platform/regions-and-providers/
-  const region = (process.env.NOW_REGION || '').toUpperCase();
+const nowRegion = process.env.NOW_REGION || '';
+let redisRegion = nowRegion;
+
+function getRedisConfig() {
+  if (!availableRegions.includes(nowRegion)) {
+    log(`Region "${nowRegion}" not supported. Fallback to a random region`);
+    // TODO Fallback to closest region
+    redisRegion = availableRegions[Math.floor(Math.random() * availableRegions.length)];
+  }
+
+  const password = process.env[`REDIS_PASSWORD_${redisRegion.toUpperCase()}`];
+  const host = redisUrls[redisRegion];
+
+  log(
+    `Cache connect to redis ${host} (${redisRegion}) from NOW region ${nowRegion}`,
+  );
 
   return {
-    host: process.env[`${region}_REDIS_HOST`] || process.env.DEFAULT_REDIS_HOST,
-    port: process.env[`${region}_REDIS_PORT`] || process.env.DEFAULT_REDIS_PORT,
-    password:
-      process.env[`${region}_REDIS_PASSWORD`]
-      || process.env.DEFAULT_REDIS_PASSWORD,
+    host,
+    password,
+    port: 11042,
   };
 }
 
@@ -22,13 +54,16 @@ function auth() {
 
   return new Promise((resolve) => {
     if (redis && redis.status === 'ready') {
-      log('Cache re-use Redis instance');
+      log(
+        `Cache re-use redis ${
+          redisUrls[redisRegion]
+        } (${redisRegion}) from NOW region ${nowRegion}`,
+      );
+
       return resolve();
     }
 
-    const { host, port, password } = redisConfig();
-    log('Cache Redis host', host);
-    log('Cache Redis port', port);
+    const { host, port, password } = getRedisConfig();
 
     if (redis) {
       log('Cache Redis disconnect');
@@ -74,9 +109,9 @@ async function set(key, value) {
 
   try {
     log('Cache SET redis-cache', key, value);
-    const oneDayInSeconds = 86400 * 3;
+    const oneDayInSeconds = 86400;
     const timingStart = Date.now();
-    await redis.set(key, value, 'EX', oneDayInSeconds);
+    await redis.set(key, value, 'EX', oneDayInSeconds * 3);
     log('Cache SET redis-cache timing', Date.now() - timingStart);
   } catch (error) {
     log('Cache SET redis-cache error', error);

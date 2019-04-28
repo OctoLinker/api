@@ -19,7 +19,7 @@ describe('cache', () => {
 
   function instantiateAuth(eventName, status) {
     const promise = cache.auth();
-    redisInstance = redis.mock.instances[0];
+    [redisInstance] = redis.mock.instances;
     invokeEventHandler(redisInstance.on.mock.calls, eventName);
     redisInstance.status = status;
     return promise;
@@ -33,39 +33,6 @@ describe('cache', () => {
     cache._memoryCache.clear();
 
     jest.clearAllMocks();
-  });
-
-  describe('configuration', () => {
-    beforeEach(() => {
-      process.env.NOW_REGION = 'sfo1';
-      process.env.DEFAULT_REDIS_PORT = 'default-port';
-      process.env.BRU1_REDIS_PORT = 'bru1-port';
-      process.env.DEFAULT_REDIS_HOST = 'default-host';
-      process.env.BRU1_REDIS_HOST = 'bru1-host';
-      process.env.DEFAULT_REDIS_PASSWORD = 'default-pwd';
-      process.env.BRU1_REDIS_PASSWORD = 'bru1-pwd';
-    });
-
-    it('connects to the default redis instance', () => {
-      cache.auth();
-
-      expect(redis).toBeCalledWith({
-        port: 'default-port',
-        host: 'default-host',
-        password: 'default-pwd',
-      });
-    });
-
-    it('connects to a redis instance near new region', () => {
-      process.env.NOW_REGION = 'bru1';
-      cache.auth();
-
-      expect(redis).toBeCalledWith({
-        port: 'bru1-port',
-        host: 'bru1-host',
-        password: 'bru1-pwd',
-      });
-    });
   });
 
   describe('auth', () => {
