@@ -1,5 +1,5 @@
 {
-  "name": "octolinker",
+  "name": "octolinker-api",
   "version": 2,
   "builds": [
     { "src": "api/legacy/handler.js", "use": "@now/node" },
@@ -10,8 +10,8 @@
     { "src": "/api/?", "dest": "api/handler.js" },
     { "src": "/api/.*", "dest": "api/legacy/handler.js" }
   ],
-  "regions": ["all"],
-  "alias": ["octolinker.now.sh"],
+  "regions": ["bru1", "gru1", "hnd1", "iad1", "sfo1"],
+  "alias": ["octolinker-api.now.sh"],
   "env": {
     "MIXPANEL_TOKEN": "@mixpanel_token",
     "DEFAULT_REDIS_PORT": "10363",
