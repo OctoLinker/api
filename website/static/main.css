@@ -1,0 +1,96 @@
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+html {
+line-height: 1.15;
+}
+
+body {
+margin: 0;
+}
+
+h1 {
+font-size: 2em;
+}
+
+h3 {
+    margin-top: 0;
+    font-size: 1rem;
+}
+
+a {
+background-color: transparent;
+}
+
+strong {
+font-weight: bolder;
+}
+
+code {
+font-family: monospace, monospace;
+font-size: 1em;
+}
+
+img {
+border-style: none;
+}
+
+html {
+box-sizing: border-box;
+}
+
+*,
+:after,
+:before {
+box-sizing: border-box;
+}
+
+blockquote {
+    margin:0;
+    padding:0;
+}
+
+html {
+font-family: "Oxygen", Oxygen-Sans, Roboto, sans-serif;
+font-size: 14px;
+line-height: 1.5rem;
+color: #373a3c;
+scroll-behavior: smooth;
+}
+
+@media only screen and (min-width: 768px) {
+html {
+    font-size: 16px;
+}
+}
+
+strong {
+font-weight: 700;
+}
+
+h1 {
+    font-size: 1.6rem;
+    padding-top: 3rem;
+    margin-bottom: 1.6em;
+    font-weight: 500;
+}
+
+@media only screen and (min-width: 768px) {
+h1 {
+    text-align: center;
+    font-size: 2rem;
+}
+}
+
+a {
+text-decoration: none;
+color: #fd4eff;
+}
+
+a:hover {
+text-decoration: underline;
+}
+
+@media only screen and (max-width: 768px) {
+    h3 {
+      padding-top: 2rem;
+    }
+  }

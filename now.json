@@ -2,23 +2,52 @@
   "name": "octolinker",
   "version": 2,
   "builds": [
-    { "src": "api/legacy/handler.js", "use": "@now/node" },
-    { "src": "api/handler.js", "use": "@now/node" },
-    { "src": "index.html", "use": "@now/static" }
+    {
+      "src": "api/legacy/handler.js",
+      "use": "@now/node"
+    },
+    {
+      "src": "api/handler.js",
+      "use": "@now/node"
+    },
+    {
+      "src": "website/package.json",
+      "use": "@now/next"
+    }
   ],
   "routes": [
-    { "src": "/api/?", "dest": "api/handler.js" },
-    { "src": "/api/.*", "dest": "api/legacy/handler.js" }
+    {
+      "src": "/api/?",
+      "dest": "api/handler.js"
+    },
+    {
+      "src": "/api/.*",
+      "dest": "api/legacy/handler.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/website/$1",
+      "headers": {
+        "x-request-path": "$1"
+      }
+    }
   ],
-  "regions": ["all"],
-  "alias": ["octolinker.now.sh"],
+  "regions": [
+    "bru1",
+    "gru1",
+    "hnd1",
+    "iad1",
+    "sfo1"
+  ],
+  "alias": [
+    "octolinker.now.sh"
+  ],
   "env": {
     "MIXPANEL_TOKEN": "@mixpanel_token",
-    "DEFAULT_REDIS_PORT": "10363",
-    "DEFAULT_REDIS_PASSWORD": "@default_redis_password",
-    "DEFAULT_REDIS_HOST": "@default_redis_url",
-    "BRU1_REDIS_PORT": "19483",
-    "BRU1_REDIS_PASSWORD": "@bru1_redis_password",
-    "BRU1_REDIS_HOST": "@bru1_redis_url"
+    "REDIS_PASSWORD_BRU1": "@redis_password_bru1",
+    "REDIS_PASSWORD_GRU1": "@redis_password_gru1",
+    "REDIS_PASSWORD_HND1": "@redis_password_hnd1",
+    "REDIS_PASSWORD_IAD1": "@redis_password_iad1",
+    "REDIS_PASSWORD_SFO1": "@redis_password_sfo1"
   }
 }
