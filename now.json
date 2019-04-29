@@ -7,8 +7,8 @@
     { "src": "index.html", "use": "@now/static" }
   ],
   "routes": [
-    { "src": "/api/?", "dest": "api/handler.js" },
-    { "src": "/api/.*", "dest": "api/legacy/handler.js" }
+    { "src": "/?", "dest": "api/handler.js" },
+    { "src": "/.*", "dest": "api/legacy/handler.js" }
   ],
   "regions": ["bru1", "gru1", "hnd1", "iad1", "sfo1"],
   "alias": ["octolinker-api.now.sh"],
