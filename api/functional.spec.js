@@ -38,6 +38,34 @@ describe('functional', () => {
     });
   }
 
+  it('supports GET', async () => {
+    const response = await got.get({
+      json: true,
+      url:
+        'http://localhost:3000/?npm=jquery,request&go=k8s.io/kubernetes/pkg/api',
+    });
+    expect(response.body).toEqual({
+      result: [
+        {
+          result: 'https://github.com/jquery/jquery',
+          target: 'jquery',
+          type: 'npm',
+        },
+        {
+          result: 'https://github.com/request/request',
+          target: 'request',
+          type: 'npm',
+        },
+        {
+          result:
+            'https://github.com/kubernetes/kubernetes/tree/master/pkg/api',
+          target: 'k8s.io/kubernetes/pkg/api',
+          type: 'go',
+        },
+      ],
+    });
+  });
+
   testBulk('bower', 'jquery', 'https://github.com/jquery/jquery-dist');
   testBulk(
     'composer',
