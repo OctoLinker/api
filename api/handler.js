@@ -2,6 +2,7 @@ const { json } = require('micro');
 const pMap = require('p-map');
 const uniqWith = require('lodash.uniqwith');
 const isEqual = require('lodash.isequal');
+const { parse } = require('url');
 
 const registries = require('./src/registries');
 const go = require('./src/go');
@@ -42,10 +43,11 @@ function cleanPayload(payload) {
   // Remove invalid items which does not follow format {type:'foo', target: 'bar'}
   // Filter out types which are not supported
   return uniqWith(payload, isEqual).filter(
-    item => item
-      && item.target
-      && item.target.length
-      && supportedTypes.includes(item.type),
+    item =>
+      item &&
+      item.target &&
+      item.target.length &&
+      supportedTypes.includes(item.type),
   );
 }
 
@@ -62,10 +64,23 @@ function errorHandler(error, res) {
 tracking.init();
 
 module.exports = async (req, res) => {
-  if (req.method === 'POST') {
+  if (['POST', 'GET'].includes(req.method)) {
     const timingTotalStart = Date.now();
 
-    const body = await json(req);
+    let body;
+    if (req.method === 'POST') {
+      body = await json(req);
+    } else {
+      const { query } = parse(req.url, true);
+      body = [].concat(
+        ...Object.entries(query).map(([type, values]) =>
+          values.split(',').map(target => ({
+            type,
+            target,
+          })),
+        ),
+      );
+    }
 
     const timingCacheAuthStart = Date.now();
     await cache.auth();
@@ -126,6 +141,10 @@ module.exports = async (req, res) => {
     }
 
     res.setHeader('Access-Control-Allow-Origin', '*');
+
+    if (req.method === 'GET') {
+      res.setHeader('Cache-Control', 'public, max-age=300, s-maxage=300');
+    }
 
     return res.end(
       JSON.stringify({
