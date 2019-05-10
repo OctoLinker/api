@@ -14,7 +14,22 @@ The supported registries are:
 
 Example:
 
-[POST] https://octolinker.now.sh/api
+[POST] https://octolinker-api.now.sh/
+
+Body:
+
+```json
+[
+  { "type": "npm", "target": "react" },
+  { "type": "composer", "target": "phpunit/phpunit" },
+  { "type": "ping", "target": "https://github.com" },
+  { "type": "npm", "target": "unknown-package" }
+]
+```
+
+or as 
+
+[GET] https://octolinker-api.now.sh/?npm=react,lodash&composer=phpunit/phpunit
 
 Body:
 
@@ -83,7 +98,7 @@ Run server:
 
 ## Privacy Policy
 
-Our [Privacy Policy](https://github.com/OctoLinker/OctoLinker/blob/master/privacy-policy.md) describes our practices related to the use, storage and disclosure of information we collect when you're using our service.
+Our [Privacy Policy](https://octolinker.now.sh/privacy/) describes our practices related to the use, storage and disclosure of information we collect when you're using our service.
 
 ## License
 
