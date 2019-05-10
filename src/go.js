@@ -1,9 +1,10 @@
 const findReachableUrls = require('find-reachable-urls');
 const readMeta = require('lets-get-meta');
 const got = require('got');
+const { tldExists } = require('tldjs');
+
 const cache = require('./utils/cache');
 const log = require('./utils/log');
-const { tldExists } = require('tldjs');
 
 const getGoMeta = async (url) => {
   const response = await got.get(url);

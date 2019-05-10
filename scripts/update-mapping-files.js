@@ -81,7 +81,7 @@ async function getClassesUrl(results, url) {
 (async () => {
   const fullconfig = config.concat(await getSpringDocumentationUrls());
 
-  const dir = path.join(__dirname, '../api/java/mapping.json');
+  const dir = path.join(__dirname, '../java/mapping.json');
 
   const content = {};
   for (const url of fullconfig) {
