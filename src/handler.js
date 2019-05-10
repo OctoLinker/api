@@ -125,7 +125,7 @@ module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
 
     if (req.method === 'GET') {
-      res.setHeader('Cache-Control', 'public, max-age=300, s-maxage=300');
+      res.setHeader('Cache-Control', 'public, max-age=300, s-maxage=300, stale-while-revalidate');
     }
 
     return res.end(
