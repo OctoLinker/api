@@ -1,20 +1,19 @@
 const http = require('http');
 const got = require('got');
 
-const handler = require('../api/handler.js');
+const handler = require('./src/handler.js');
 
 describe('functional', () => {
   let server;
 
   beforeAll(
-    () =>
-      new Promise((resolve) => {
-        server = http
-          .createServer((req, res) => handler(req, res))
-          .listen(3000);
+    () => new Promise((resolve) => {
+      server = http
+        .createServer((req, res) => handler(req, res))
+        .listen(3000);
 
-        resolve();
-      }),
+      resolve();
+    }),
   );
 
   afterAll(done => server.close(done));

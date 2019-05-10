@@ -1,21 +1,18 @@
+const { parse } = require('url');
 const { json } = require('micro');
 const pMap = require('p-map');
-const uniqWith = require('lodash.uniqwith');
-const isEqual = require('lodash.isequal');
-const { parse } = require('url');
 
-const registries = require('./src/registries');
-const go = require('./src/go');
-const java = require('./src/java');
-const ping = require('./src/ping');
+const go = require('./go');
+const java = require('./java');
+const ping = require('./ping');
+const registries = require('./registries');
 
-const tracking = require('./src/utils/tracking');
-const cache = require('./src//utils/cache');
-const log = require('./src/utils/log');
+const log = require('./utils/log');
+const cache = require('./utils/cache');
+const tracking = require('./utils/tracking');
+const preparePayload = require('./utils/payload');
 
 const logPrefix = log.prefix;
-
-const supportedTypes = ['ping', 'go', 'java', ...registries.supported];
 
 const mapper = async (item) => {
   let result;
@@ -37,19 +34,6 @@ const mapper = async (item) => {
     result,
   };
 };
-
-function cleanPayload(payload) {
-  // Remove duplicates
-  // Remove invalid items which does not follow format {type:'foo', target: 'bar'}
-  // Filter out types which are not supported
-  return uniqWith(payload, isEqual).filter(
-    item =>
-      item &&
-      item.target &&
-      item.target.length &&
-      supportedTypes.includes(item.type),
-  );
-}
 
 async function requestHandler(payload) {
   return pMap(payload, mapper, { concurrency: 5 });
@@ -73,12 +57,10 @@ module.exports = async (req, res) => {
     } else {
       const { query } = parse(req.url, true);
       body = [].concat(
-        ...Object.entries(query).map(([type, values]) =>
-          values.split(',').map(target => ({
-            type,
-            target,
-          })),
-        ),
+        ...Object.entries(query).map(([type, values]) => values.split(',').map(target => ({
+          type,
+          target,
+        }))),
       );
     }
 
@@ -89,7 +71,7 @@ module.exports = async (req, res) => {
     let result;
     let timingTotalEnd;
     let completed = false;
-    const payload = cleanPayload(body);
+    const payload = preparePayload(body);
 
     try {
       result = await requestHandler(payload);

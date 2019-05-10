@@ -2,11 +2,11 @@
   "name": "octolinker-api",
   "version": 2,
   "builds": [
-    { "src": "api/handler.js", "use": "@now/node" },
+    { "src": "src/handler.js", "use": "@now/node" },
     { "src": "index.html", "use": "@now/static" }
   ],
   "routes": [
-    { "src": "/?", "dest": "api/handler.js" }
+    { "src": "/?", "dest": "src/handler.js" }
   ],
   "regions": ["bru1", "gru1", "hnd1", "iad1", "sfo1"],
   "alias": ["octolinker-api.now.sh"],
