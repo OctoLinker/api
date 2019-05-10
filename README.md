@@ -31,17 +31,6 @@ or as
 
 [GET] https://octolinker-api.now.sh/?npm=react,lodash&composer=phpunit/phpunit
 
-Body:
-
-```json
-[
-  { "type": "npm", "target": "react" },
-  { "type": "composer", "target": "phpunit/phpunit" },
-  { "type": "ping", "target": "https://github.com" },
-  { "type": "npm", "target": "unknown-package" }
-]
-```
-
 Type must be one of:
 
 - `npm`
