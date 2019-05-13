@@ -28,7 +28,7 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jest": "^22.1.2",
     "got": "^9.5.1",
-    "jest": "^23.6.0",
+    "jest": "^24.8.0",
     "prettier": "^1.15.3"
   },
   "keywords": [],
