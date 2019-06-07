@@ -108,6 +108,11 @@ describe('functional', () => {
     'https://www.slf4j.org/api/org/apache/log4j/Appender.html',
   );
   testBulk(
+    'java',
+    'java.util.List',
+    'https://docs.oracle.com/javase/9/docs/api/java/util/List.html',
+  );
+  testBulk(
     'ping',
     'https://nodejs.org/api/path.html',
     'https://nodejs.org/api/path.html',

@@ -13,6 +13,7 @@ const log = require('./log');
 // sfo1 - San Francisco, CA, USA
 
 const redisUrls = {
+  dev1: 'sprightly-lavender-4454.redisgreen.net',
   bru1: 'sprightly-lavender-4454.redisgreen.net',
   gru1: 'handsome-turtle-8352.redisgreen.net',
   hnd1: 'inventive-willow-2140.redisgreen.net',
@@ -20,7 +21,7 @@ const redisUrls = {
   sfo1: 'graceful-turnip-982.redisgreen.net',
 };
 
-const availableRegions = ['bru1', 'gru1', 'hnd1', 'iad1', 'sfo1'];
+const availableRegions = ['dev1', 'bru1', 'gru1', 'hnd1', 'iad1', 'sfo1'];
 
 let redis;
 const simpleCache = new Map();
