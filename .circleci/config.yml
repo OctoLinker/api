@@ -1,0 +1,77 @@
+version: 2.1
+
+#########################
+# Aliases
+#########################
+
+aliases:
+  - &attach_workspace
+    attach_workspace:
+      at: .
+  - &persist_to_workspace
+    persist_to_workspace:
+      root: ~/repo
+      paths: ['.']
+
+#########################
+# Executors
+#########################
+
+executors:
+  node:
+    docker:
+      - image: circleci/node:8
+    working_directory: ~/repo
+
+#########################
+# Commands
+#########################
+
+commands:
+  npm_install:
+    steps:
+      - run:
+          name: Installing Dependencies
+          command: npm install
+  npm_lint:
+    steps:
+      - run:
+          name: Linting
+          command: npm run lint
+  npm_test:
+    steps:
+      - run:
+          name: Run Tests
+          command: >
+            npm test
+
+#########################
+# Jobs
+#########################
+
+jobs:
+  build:
+    executor: node
+    steps:
+      - checkout
+      - npm_install
+      - npm_lint
+      - *persist_to_workspace
+  test:
+    executor: node
+    steps:
+      - *attach_workspace
+      - npm_test
+
+#########################
+# Workflows
+#########################
+
+workflows:
+  version: 2
+  build-test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build

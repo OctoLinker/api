@@ -95,12 +95,12 @@ describe('cache', () => {
   });
 
   describe('getRedisStatus', () => {
-    it('returns current redis status', async () => {
+    it('returns ready redis status', async () => {
       instantiateAuth('ready', 'ready');
       expect(cache.getRedisStatus()).toBe('ready');
     });
 
-    it('returns current redis status', async () => {
+    it('returns reconneting redis status', async () => {
       instantiateAuth('ready', 'reconneting');
       expect(cache.getRedisStatus()).toBe('reconneting');
     });
