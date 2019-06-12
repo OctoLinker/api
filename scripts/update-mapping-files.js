@@ -15,6 +15,7 @@ const config = [
   'http://fasterxml.github.io/jackson-core/javadoc/2.9/allclasses-frame.html',
   'http://fasterxml.github.io/jackson-databind/javadoc/2.9/allclasses-frame.html',
   'http://fasterxml.github.io/jackson-annotations/javadoc/2.9/allclasses-frame.html',
+  'http://hadoop.apache.org/docs/stable/api/allclasses-frame.html',
 ];
 
 async function loadPage(url) {
