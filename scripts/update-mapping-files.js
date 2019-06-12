@@ -60,6 +60,7 @@ async function getSpringDocumentationUrls() {
 }
 
 async function getClassesUrl(results, url) {
+  console.log(url);
   const document = await loadPage(url);
   const baseUrl = url.replace('allclasses-frame.html', '');
 
@@ -81,7 +82,7 @@ async function getClassesUrl(results, url) {
 (async () => {
   const fullconfig = config.concat(await getSpringDocumentationUrls());
 
-  const dir = path.join(__dirname, '../java/mapping.json');
+  const dir = path.join(__dirname, '../src/java/mapping.json');
 
   const content = {};
   for (const url of fullconfig) {
