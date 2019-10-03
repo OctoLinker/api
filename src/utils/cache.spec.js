@@ -88,19 +88,19 @@ describe('cache', () => {
           'redis-foo',
           'redis-bar',
           'EX',
-          86400 * 3,
+          3600 * 12,
         );
       });
     });
   });
 
   describe('getRedisStatus', () => {
-    it('returns current redis status', async () => {
+    it('returns ready status', async () => {
       instantiateAuth('ready', 'ready');
       expect(cache.getRedisStatus()).toBe('ready');
     });
 
-    it('returns current redis status', async () => {
+    it('returns reconneting status', async () => {
       instantiateAuth('ready', 'reconneting');
       expect(cache.getRedisStatus()).toBe('reconneting');
     });
