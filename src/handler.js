@@ -57,7 +57,7 @@ module.exports = async (req, res) => {
     } else {
       const { query } = parse(req.url, true);
       body = [].concat(
-        ...Object.entries(query).map(([type, values]) => values.split(',').map(target => ({
+        ...Object.entries(query).map(([type, values]) => values.split(',').map((target) => ({
           type,
           target,
         }))),
@@ -105,7 +105,7 @@ module.exports = async (req, res) => {
 
       const bulkData = [
         meta,
-        ...result.map(item => ({
+        ...result.map((item) => ({
           event: 'packages',
           properties: {
             Type: item.type,
