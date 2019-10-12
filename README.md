@@ -1,4 +1,4 @@
-# OctoLinker API [![Build Status][travis-image]][travis-url]
+# OctoLinker API
 
 Returns the github repository url for the requested package.
 
@@ -92,6 +92,3 @@ Our [Privacy Policy](https://octolinker.now.sh/privacy/) describes our practices
 ## License
 
 Copyright (c) 2015 Stefan Buck. Licensed under the MIT license.
-
-[travis-url]: https://travis-ci.org/OctoLinker/api
-[travis-image]: https://travis-ci.org/OctoLinker/api.svg?branch=master
