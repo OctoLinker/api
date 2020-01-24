@@ -50,6 +50,10 @@ async function resolve(type, packageName) {
   const urls = xpathHelper(json, config.xpaths);
 
   if (type === 'npm') {
+    if (json.repository && json.repository.directory) {
+      urls.unshift(`${repositoryUrl(json.repository.url)}/tree/master/${json.repository.directory}`);
+    }
+
     try {
       urls.push(
         ...json.maintainers.map(({ name }) => `${name}/${packageName}`),

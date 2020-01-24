@@ -73,6 +73,8 @@ describe('functional', () => {
   );
   testBulk('rubygems', 'nokogiri', 'https://github.com/sparklemotion/nokogiri');
   testBulk('npm', 'eslint', 'https://github.com/eslint/eslint');
+  testBulk('npm', '@jest/core', 'https://github.com/facebook/jest/tree/master/packages/jest-core');
+  testBulk('npm', '@lerna/command', 'https://github.com/lerna/lerna/tree/master/core/command');
   testBulk('npm', 'request', 'https://github.com/request/request');
   testBulk(
     'npm',
