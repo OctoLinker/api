@@ -21,11 +21,10 @@ describe('functional', () => {
   function testBulk(type, target, result) {
     it(`resolves ${target} from ${type} to ${result}`, async () => {
       const response = await got.post({
-        json: true,
         url: 'http://localhost:3000/',
-        body: [{ type, target }],
-      });
-      expect(response.body).toEqual({
+        json: [{ type, target }],
+      }).json();
+      expect(response).toEqual({
         result: [
           {
             result,
@@ -39,11 +38,10 @@ describe('functional', () => {
 
   it('supports GET', async () => {
     const response = await got.get({
-      json: true,
       url:
         'http://localhost:3000/?npm=jquery,request&go=k8s.io/kubernetes/pkg/api',
-    });
-    expect(response.body).toEqual({
+    }).json();
+    expect(response).toEqual({
       result: [
         {
           result: 'https://github.com/jquery/jquery',

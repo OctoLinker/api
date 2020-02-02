@@ -7,7 +7,7 @@ const cache = require('./utils/cache');
 const log = require('./utils/log');
 
 const getGoMeta = async (url) => {
-  const response = await got.get(url);
+  const response = await got.get(url).json();
   const meta = readMeta(response.body);
 
   if (!meta['go-source']) {

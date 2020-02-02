@@ -20,7 +20,7 @@ const config = [
 
 async function loadPage(url) {
   try {
-    const { body } = await got(url);
+    const { body } = await got(url).json();
     return new JSDOM(body).window.document;
   } catch (err) {
     return new JSDOM('<html></html>').window.document;

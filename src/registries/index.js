@@ -41,7 +41,7 @@ async function resolve(type, packageName) {
   let json;
 
   try {
-    json = JSON.parse(response.body);
+    json = response.json();
   } catch (err) {
     log('Parsing response failed');
     return;
