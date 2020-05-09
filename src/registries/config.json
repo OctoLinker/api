@@ -48,6 +48,13 @@
         "/info/package_url"
       ]
     },
+    "pub": {
+      "registry": "https://pub.dev/api/packages/%s",
+      "fallback": "https://pub.dev/packages/%s",
+      "xpaths": [
+        "/latest/pubspec/homepage"
+      ]
+    },
     "crates": {
       "registry": "https://crates.io/api/v1/crates/%s",
       "fallback": "https://crates.io/crates/%s",

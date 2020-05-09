@@ -119,4 +119,9 @@ describe('functional', () => {
     'https://nodejs.org/api/path.html',
     'https://nodejs.org/api/path.html',
   );
+  testBulk(
+    'pub',
+    'path',
+    'https://github.com/dart-lang/path',
+  );
 });
