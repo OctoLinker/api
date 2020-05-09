@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "pretest": "eslint .",
+    "dev": "nodemon devserver.js",
     "test": "jest"
   },
   "dependencies": {
@@ -20,6 +21,9 @@
     "mixpanel": "^0.11.0",
     "p-map": "^4.0.0",
     "tldjs": "^2.3.1"
+  },
+  "peerDependencies": {
+    "nodemon": "*"
   },
   "devDependencies": {
     "jsdom": "^16.2.2",
