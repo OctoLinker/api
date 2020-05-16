@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "pretest": "eslint .",
+    "dev": "nodemon devserver.js",
     "test": "jest"
   },
   "dependencies": {
@@ -21,15 +22,18 @@
     "p-map": "^4.0.0",
     "tldjs": "^2.3.1"
   },
+  "peerDependencies": {
+    "nodemon": "*"
+  },
   "devDependencies": {
     "jsdom": "^16.2.2",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-jest": "^23.8.2",
+    "eslint-plugin-jest": "^23.11.0",
     "got": "^9.5.1",
-    "jest": "^25.4.0",
-    "prettier": "^2.0.4"
+    "jest": "^26.0.1",
+    "prettier": "^2.0.5"
   },
   "engines": {
     "node": "12.x"
