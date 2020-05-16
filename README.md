@@ -75,15 +75,15 @@ Response:
 
 Install dependencies:
 
-`yarn install`
+`npm install`
 
 Run server:
 
-`yarn start`
+`npm run dev`
 
 ## Testing
 
-`yarn test`
+`npm test`
 
 ## Privacy Policy
 
