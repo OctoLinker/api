@@ -4,6 +4,7 @@ const pMap = require('p-map');
 
 const go = require('./go');
 const java = require('./java');
+const nuget = require('./nuget');
 const ping = require('./ping');
 const registries = require('./registries');
 
@@ -25,6 +26,8 @@ const mapper = async (item) => {
     result = await java(item.target);
   } else if (item.type === 'ping') {
     result = await ping(item.target);
+  } else if (item.type === 'nuget') {
+    result = await nuget(item.target);
   } else {
     return;
   }
