@@ -93,4 +93,5 @@ Our [Privacy Policy](https://octolinker.now.sh/privacy/) describes our practices
 
 ## License
 
-Copyright (c) 2015 Stefan Buck. Licensed under the MIT license.
+Copyright (c) 2015–present [Stefan Buck](https://stefanbuck.com/) and [other contributors](https://github.com/OctoLinker/api/graphs/contributors).
+Licensed under the MIT license.
