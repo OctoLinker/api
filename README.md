@@ -43,6 +43,7 @@ Type must be one of:
 - `java`
 - `go`
 - `pub`
+- `cran`
 - `ping`
 
 Response:

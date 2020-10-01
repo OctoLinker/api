@@ -124,4 +124,19 @@ describe('functional', () => {
     'path',
     'https://github.com/dart-lang/path',
   );
+  testBulk(
+    'cran',
+    'fracdiff',
+    'https://github.com/mmaechler/fracdiff',
+  );
+  testBulk(
+    'cran',
+    'usethis',
+    'https://github.com/r-lib/usethis',
+  );
+  testBulk(
+    'cran',
+    'boot',
+    'https://github.com/cran/boot',
+  );
 });
