@@ -11,7 +11,7 @@ The supported registries are:
 - [pypi.python.org](https://pypi.python.org)
 - [crates.io](https://crates.io)
 - [melpa.org](https://melpa.org)
-- [pub.dev/](https://pub.dev)
+- [pub.dev](https://pub.dev)
 
 Example:
 
