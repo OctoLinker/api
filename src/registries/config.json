@@ -22,6 +22,13 @@
         "/project_uri"
       ]
     },
+    "cran": {
+      "registry": "https://crandb.r-pkg.org/%s",
+      "fallback": "https://github.com/cran/%s",
+      "xpaths": [
+        "/URL"
+      ]
+    },
     "npm": {
       "registry": "https://registry.npmjs.org/%s",
       "fallback": "https://www.npmjs.com/package/%s",

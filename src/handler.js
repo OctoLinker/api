@@ -68,7 +68,7 @@ module.exports = async (req, res) => {
     await cache.auth();
     const timingCacheAuth = Date.now() - timingCacheAuthStart;
 
-    let result;
+    let result = [];
     let timingTotalEnd;
     let completed = false;
     const payload = preparePayload(body);

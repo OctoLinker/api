@@ -7,6 +7,7 @@ const xpathHelper = require('./xpath-helper');
 const registryConfig = require('./config.json');
 const cache = require('../utils/cache');
 const log = require('../utils/log');
+const { prioritiesHost } = require('../utils/url');
 
 async function resolve(type, packageName) {
   const cacheKey = `${type}_${packageName}`;
@@ -47,7 +48,7 @@ async function resolve(type, packageName) {
     return;
   }
 
-  const urls = xpathHelper(json, config.xpaths);
+  let urls = xpathHelper(json, config.xpaths);
 
   if (type === 'npm') {
     if (json.repository && json.repository.directory) {
@@ -61,6 +62,13 @@ async function resolve(type, packageName) {
     } catch (err) {
       //
     }
+  }
+
+  if (type === 'cran') {
+    // Some packages export multiple urls seperated by comma.
+    urls = urls.map((url) => url.split(',').map((str) => str.trim())).flat();
+
+    urls = prioritiesHost('https://github.com', urls);
   }
 
   const validUrls = urls.map((bestMatchUrl) => {
