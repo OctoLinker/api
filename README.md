@@ -12,6 +12,7 @@ The supported registries are:
 - [crates.io](https://crates.io)
 - [melpa.org](https://melpa.org)
 - [pub.dev](https://pub.dev)
+- [nuget.org](https://www.nuget.org/)
 
 Example:
 
@@ -44,6 +45,7 @@ Type must be one of:
 - `go`
 - `pub`
 - `cran`
+- `nuget`
 - `ping`
 
 Response:
