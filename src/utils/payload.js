@@ -3,7 +3,7 @@ const isEqual = require('lodash.isequal');
 
 const registries = require('../registries');
 
-const supportedTypes = ['ping', 'go', 'java', ...registries.supported];
+const supportedTypes = ['ping', 'go', 'java', 'nuget', ...registries.supported];
 
 module.exports = function (payload) {
   // Remove invalid items which does not follow format {type:'foo', target: 'bar'}

@@ -139,4 +139,14 @@ describe('functional', () => {
     'boot',
     'https://github.com/cran/boot',
   );
+  testBulk(
+    'nuget',
+    'Notify',
+    'https://www.nuget.org/packages/notify/',
+  );
+  testBulk(
+    'nuget',
+    'QRCoder',
+    'https://github.com/codebude/QRCoder',
+  );
 });

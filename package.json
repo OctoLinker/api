@@ -20,7 +20,8 @@
     "micro": "^9.3.3",
     "mixpanel": "^0.13.0",
     "p-map": "^4.0.0",
-    "tldjs": "^2.3.1"
+    "tldjs": "^2.3.1",
+    "xml-js": "^1.6.11"
   },
   "peerDependencies": {
     "nodemon": "*"
