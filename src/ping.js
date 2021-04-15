@@ -1,13 +1,19 @@
 const got = require('got');
 const cache = require('./utils/cache');
 
+const ERR_PING_NOT_FOUND = 'ERR_PING_NOT_FOUND';
+
 module.exports = async function (url) {
   const cacheKey = `ping_${url}`;
 
   const cacheValue = await cache.get(cacheKey);
 
   if (cacheValue) {
-    return cacheValue;
+    if (cacheValue !== ERR_PING_NOT_FOUND) {
+      return cacheValue;
+    }
+
+    return undefined;
   }
 
   return got
@@ -17,5 +23,9 @@ module.exports = async function (url) {
 
       return url;
     })
-    .catch(() => undefined);
+    .catch(async () => {
+      await cache.set(cacheKey, ERR_PING_NOT_FOUND, 900); // 15 minutes
+
+      return undefined;
+    });
 };
