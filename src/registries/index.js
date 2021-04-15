@@ -9,13 +9,19 @@ const cache = require('../utils/cache');
 const log = require('../utils/log');
 const { prioritiesHost } = require('../utils/url');
 
+const ERR_PACKAGE_NOT_FOUND = 'ERR_PACKAGE_NOT_FOUND';
+
 async function resolve(type, packageName) {
   const cacheKey = `${type}_${packageName}`;
 
   const cacheValue = await cache.get(cacheKey);
 
   if (cacheValue) {
-    return cacheValue;
+    if (cacheValue !== ERR_PACKAGE_NOT_FOUND) {
+      return cacheValue;
+    }
+
+    return undefined;
   }
 
   const config = registryConfig[type];
@@ -34,7 +40,9 @@ async function resolve(type, packageName) {
     response = await got.get(requestUrl);
   } catch (err) {
     if (err.statusCode === 404) {
-      return log('Package not found', packageName, type);
+      log('Package not found', packageName, type);
+      await cache.set(cacheKey, ERR_PACKAGE_NOT_FOUND, 900); // 15 minutes
+      return;
     }
 
     return log(err);
@@ -45,6 +53,7 @@ async function resolve(type, packageName) {
     json = JSON.parse(response.body);
   } catch (err) {
     log('Parsing response failed');
+    await cache.set(cacheKey, ERR_PACKAGE_NOT_FOUND, 900); // 15 minutes
     return;
   }
 
@@ -94,6 +103,7 @@ async function resolve(type, packageName) {
 
   if (!reachableUrl) {
     log('No URL for package found');
+    await cache.set(cacheKey, ERR_PACKAGE_NOT_FOUND, 900); // 15 minutes
     return;
   }
 
