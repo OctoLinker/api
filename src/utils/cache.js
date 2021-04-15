@@ -22,6 +22,7 @@ const redisUrls = {
 };
 
 const availableRegions = ['dev1', 'bru1', 'gru1', 'hnd1', 'iad1', 'sfo1'];
+const defaultExpireValue = 3600 * 12;
 
 let redis;
 const simpleCache = new Map();
@@ -101,7 +102,7 @@ function auth() {
   });
 }
 
-async function set(key, value) {
+async function set(key, value, expire = defaultExpireValue) {
   if (!redis || redis.status !== 'ready') {
     log('Cache SET simple-cache', key, value);
     simpleCache.set(key, value);
@@ -109,10 +110,9 @@ async function set(key, value) {
   }
 
   try {
-    log('Cache SET redis-cache', key, value);
-    const oneHourInSeconds = 3600;
+    log('Cache SET redis-cache', key, value, expire);
     const timingStart = Date.now();
-    await redis.set(key, value, 'EX', oneHourInSeconds * 12);
+    await redis.set(key, value, 'EX', expire);
     log('Cache SET redis-cache timing', Date.now() - timingStart);
   } catch (error) {
     log('Cache SET redis-cache error', error);
