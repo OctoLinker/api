@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "find-reachable-urls": "^1.1.1",
-    "github-url-to-object": "^4.0.4",
+    "github-url-to-object": "^4.0.6",
     "got": "^9.5.0",
     "ioredis": "^4.26.0",
     "is-url": "^1.2.4",
