@@ -16,7 +16,7 @@ describe('functional', () => {
     }),
   );
 
-  afterAll((done) => server.close(done));
+  afterAll((done) => { server.close(done); });
 
   function testBulk(type, target, result) {
     it(`resolves ${target} from ${type} to ${result}`, async () => {
