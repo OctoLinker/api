@@ -1,5 +1,5 @@
 const jpath = require('json-path');
-const xpathHelper = require('./xpath-helper.js');
+const xpathHelper = require('./xpath-helper');
 
 jest.mock('json-path');
 

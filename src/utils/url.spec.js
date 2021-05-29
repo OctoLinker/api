@@ -1,4 +1,4 @@
-const { prioritiesHost } = require('./url.js');
+const { prioritiesHost } = require('./url');
 
 const inputUrls = [
   'https://foo.com',
