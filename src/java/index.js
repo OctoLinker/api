@@ -1,5 +1,5 @@
 const findReachableUrls = require('find-reachable-urls');
-const flatMappingList = require('./mapping');
+const flatMappingList = require('./mapping.json');
 const cache = require('../utils/cache');
 
 const SUPPORTED_JAVA_VERSIONS = [9, 8, 7];

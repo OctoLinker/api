@@ -1,7 +1,7 @@
 const http = require('http');
 const got = require('got');
 
-const handler = require('./src/handler.js');
+const handler = require('./src/handler');
 
 describe('functional', () => {
   let server;
