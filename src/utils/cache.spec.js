@@ -1,8 +1,8 @@
 const redis = require('ioredis');
-const cache = require('./cache.js');
-require('./log.js');
+const cache = require('./cache');
+require('./log');
 
-jest.mock('./log.js');
+jest.mock('./log');
 jest.mock('ioredis');
 
 describe('cache', () => {
