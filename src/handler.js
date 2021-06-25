@@ -1,6 +1,7 @@
+import pMap from 'p-map';
+
 const { parse } = require('url');
 const { json } = require('micro');
-const pMap = require('p-map');
 
 const go = require('./go');
 const java = require('./java');
