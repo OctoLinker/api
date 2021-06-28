@@ -33,7 +33,7 @@
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-jest": "^24.3.6",
     "got": "^9.5.1",
-    "jest": "^27.0.4",
+    "jest": "^27.0.5",
     "prettier": "^2.3.1"
   },
   "engines": {
