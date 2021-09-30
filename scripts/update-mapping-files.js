@@ -30,7 +30,7 @@ async function loadPage(url) {
     const { body } = await got(url);
     return new JSDOM(body).window.document;
   } catch (err) {
-    console.log("Could not fetch: " + url);
+    console.log(`Could not fetch: ${url}`);
     return new JSDOM('<html></html>').window.document;
   }
 }
@@ -40,37 +40,50 @@ async function getSpringDocumentationUrls() {
 
   const document = await loadPage('https://spring.io/projects');
   const linkNodes = document.querySelector('#filters-and-proj').querySelectorAll('a');
-  var allLinks = [];
+  const allLinks = [];
   linkNodes.forEach((el) => {
     allLinks.push(el.href);
-  })
+  });
 
-  for (var link of allLinks) {
-    const currentDocument = await loadPage(link + "#learn");
+  async function getLinks(link) {
+    function next() {
+      if (allLinks.length === 0) {
+        return Promise.resolve();
+      }
+      const current = allLinks.shift();
+      return getLinks(current);
+    }
+
+    const currentDocument = await loadPage(`${link}#learn`);
     if (!currentDocument) {
-      continue;
+      return next();
     }
     const learnNode = currentDocument.querySelector('#learn');
     if (!learnNode) {
-      continue;
+      return next();
     }
     const currentNode = learnNode.querySelectorAll('a');
-    var apiLinks = [];
+    const apiLinks = [];
     currentNode.forEach((el) => {
-      const href = el.href;
+      const { href } = el;
       if (href.includes('api')) {
         apiLinks.push(href);
       }
-    })
-    if (apiLinks.length == 0) {
-      continue;
+    });
+    if (apiLinks.length === 0) {
+      return next();
     }
     apiLinks.forEach((el) => {
       // Example link: https://docs.spring.io/spring-boot/docs/current/api/allclasses-frame.html
-      urlsToFetch.push(el.replace('index.html', '') + "/allclasses-frame.html");
-      urlsToFetch.push(el.replace('index.html', '') + "/allclasses-index.html");
-    })
+      urlsToFetch.push(`${el.replace('index.html', '')}/allclasses-frame.html`);
+      urlsToFetch.push(`${el.replace('index.html', '')}/allclasses-index.html`);
+    });
+
+    return next();
   }
+
+  await getLinks(allLinks);
+
   return urlsToFetch.reverse();
 }
 
@@ -79,18 +92,18 @@ async function getClassesUrl(results, url) {
   const document = await loadPage(url);
   const baseUrl = url.replace('allclasses-frame.html', '').replace('allclasses-index.html', '');
 
-  var nodes;
+  let nodes;
   const node = document.querySelector('.allClassesContainer');
   if (node) {
     nodes = [];
-    var i = 0;
+    let index = 0;
     while (true) {
-      var current = node.querySelector('#i' + i);
+      const current = node.querySelector(`#i${index}`);
       if (!current) {
         break;
       }
       nodes.push(current.querySelector('a'));
-      i++;
+      index += 1;
     }
   } else {
     nodes = document.querySelectorAll('a');
