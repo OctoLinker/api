@@ -75,8 +75,8 @@ async function getSpringDocumentationUrls() {
     }
     apiLinks.forEach((el) => {
       // Example link: https://docs.spring.io/spring-boot/docs/current/api/allclasses-frame.html
-      urlsToFetch.push(`${el.replace('index.html', '')}/allclasses-frame.html`);
-      urlsToFetch.push(`${el.replace('index.html', '')}/allclasses-index.html`);
+      urlsToFetch.push(`${el.replace('index.html', '')}allclasses-frame.html`);
+      urlsToFetch.push(`${el.replace('index.html', '')}allclasses-index.html`);
     });
 
     return next();
