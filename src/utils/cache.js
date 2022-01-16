@@ -61,8 +61,8 @@ function auth() {
           redisUrls[redisRegion]
         } (${redisRegion}) from NOW region ${nowRegion}`,
       );
-
-      return resolve();
+      resolve();
+      return;
     }
 
     const { host, port, password } = getRedisConfig();
