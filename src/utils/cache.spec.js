@@ -88,7 +88,7 @@ describe('cache', () => {
           'redis-foo',
           'redis-bar',
           'EX',
-          3600 * 12,
+          3600 * 48,
         );
       });
     });
