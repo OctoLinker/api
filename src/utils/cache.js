@@ -22,7 +22,7 @@ const redisUrls = {
 };
 
 const availableRegions = ['dev1', 'bru1', 'gru1', 'hnd1', 'iad1', 'sfo1'];
-const defaultExpireValue = 3600 * 12;
+const defaultExpireValue = 3600 * 48;
 
 let redis;
 const simpleCache = new Map();
