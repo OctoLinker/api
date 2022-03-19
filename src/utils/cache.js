@@ -1,5 +1,6 @@
 const Redis = require('ioredis');
 const log = require('./log');
+const staticCache = require('./static-cache.json');
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ~~ Thanks to RedisGreen and ZEIT for sponsoring ~~
@@ -120,6 +121,11 @@ async function set(key, value, expire = defaultExpireValue) {
 }
 
 async function get(key) {
+  if (staticCache[key]) {
+    log('Cache GET static-cache', key);
+    return staticCache[key];
+  }
+
   if (!redis || redis.status !== 'ready') {
     log('Cache GET simple-cache', key);
     return simpleCache.get(key);
