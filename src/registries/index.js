@@ -41,7 +41,7 @@ async function resolve(type, packageName) {
   } catch (err) {
     if (err.statusCode === 404) {
       log('Package not found', packageName, type);
-      await cache.set(cacheKey, ERR_PACKAGE_NOT_FOUND, 900); // 15 minutes
+      await cache.set(cacheKey, ERR_PACKAGE_NOT_FOUND);
       return;
     }
 
@@ -53,7 +53,7 @@ async function resolve(type, packageName) {
     json = JSON.parse(response.body);
   } catch (err) {
     log('Parsing response failed');
-    await cache.set(cacheKey, ERR_PACKAGE_NOT_FOUND, 900); // 15 minutes
+    await cache.set(cacheKey, ERR_PACKAGE_NOT_FOUND);
     return;
   }
 
@@ -103,7 +103,7 @@ async function resolve(type, packageName) {
 
   if (!reachableUrl) {
     log('No URL for package found');
-    await cache.set(cacheKey, ERR_PACKAGE_NOT_FOUND, 900); // 15 minutes
+    await cache.set(cacheKey, ERR_PACKAGE_NOT_FOUND);
     return;
   }
 

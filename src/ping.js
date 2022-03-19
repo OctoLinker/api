@@ -24,7 +24,7 @@ module.exports = async function (url) {
       return url;
     })
     .catch(async () => {
-      await cache.set(cacheKey, ERR_PING_NOT_FOUND, 900); // 15 minutes
+      await cache.set(cacheKey, ERR_PING_NOT_FOUND);
 
       return undefined;
     });
