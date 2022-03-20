@@ -16,8 +16,15 @@ module.exports = async function (url) {
     return undefined;
   }
 
+  if (!url.startsWith('https://')) {
+    return undefined;
+  }
+
   return got
-    .head(url)
+    .head(url, {
+      timeout: 500,
+      retry: 0,
+    })
     .then(async () => {
       await cache.set(cacheKey, url);
 
