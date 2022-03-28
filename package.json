@@ -34,7 +34,7 @@
     "eslint-plugin-jest": "^26.1.2",
     "got": "^9.5.1",
     "jest": "^27.5.1",
-    "prettier": "^2.6.0"
+    "prettier": "^2.6.1"
   },
   "engines": {
     "node": "14.x"
