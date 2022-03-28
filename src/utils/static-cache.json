@@ -1,5 +1,5 @@
 {
-  "npm_react": "https://github.com/facebook/react/",
+  "npm_react": "https://github.com/facebook/react/tree/master/packages/react",
   "npm_lodash": "https://github.com/lodash/lodash",
   "npm_react-dom": "https://github.com/facebook/react/tree/master/packages/react-dom",
   "npm_next": "https://github.com/vercel/next.js",
