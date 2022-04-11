@@ -30,7 +30,7 @@
     "jsdom": "^19.0.0",
     "eslint": "^8.13.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jest": "^26.1.4",
     "got": "^9.5.1",
     "jest": "^27.5.1",
