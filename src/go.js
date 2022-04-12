@@ -1,65 +1,33 @@
-const findReachableUrls = require('find-reachable-urls');
-const readMeta = require('lets-get-meta');
 const got = require('got');
-const { tldExists } = require('tldjs');
 
 const cache = require('./utils/cache');
 const log = require('./utils/log');
 
-const getGoMeta = async (url) => {
-  const response = await got.get(url);
-  const meta = readMeta(response.body);
-
-  if (!meta['go-source']) {
-    throw new Error('go-source meta is missing');
-  }
-
-  const values = meta['go-source'].replace(/\s+/g, ' ').split(' ');
-
-  return {
-    projectRoot: values[0],
-    projectUrl: values[1],
-    dirTemplate: values[2].replace('{/dir}', ''),
-  };
-};
-
 const resolveUrl = async (url) => {
-  let goMetaConfig;
-
   const cacheKey = `go_${url}`;
   const cacheValue = await cache.get(cacheKey);
   if (cacheValue) {
     return cacheValue;
   }
 
-  if (!tldExists(`http://${url}`)) {
-    log(`"http://${url}" is not a valid hostname`);
-    return undefined;
+  const goDevUrl = `https://pkg.go.dev/${url}`;
+  const response = await got.get(goDevUrl);
+
+  if (response.statusCode === 404) {
+    throw new Error('Url not found');
   }
 
-  try {
-    // Preferred with https
-    goMetaConfig = await getGoMeta(`https://${url}?go-get=1`);
-  } catch (err) {
-    // Fallback insecure
-    goMetaConfig = await getGoMeta(`http://${url}?go-get=1`);
+  const isStdLib = response.body.includes('standard library');
+  if (isStdLib) {
+    await cache.set(cacheKey, goDevUrl);
+
+    return goDevUrl;
   }
 
-  const reachableUrl = await findReachableUrls(
-    [
-      url.replace(goMetaConfig.projectRoot, goMetaConfig.dirTemplate),
-      goMetaConfig.projectUrl,
-    ],
-    { firstMatch: true },
-  );
+  const [, targetUrl] = /UnitMeta-repo">[\n\s]+<a href="([^"]+)/g.exec(response.body);
+  await cache.set(cacheKey, targetUrl);
 
-  if (!reachableUrl) {
-    throw new Error('No url is reachable');
-  }
-
-  await cache.set(cacheKey, reachableUrl);
-
-  return reachableUrl;
+  return targetUrl;
 };
 
 module.exports = async function (pkg) {

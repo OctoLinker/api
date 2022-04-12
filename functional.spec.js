@@ -57,7 +57,7 @@ describe('functional', () => {
         },
         {
           result:
-            'https://github.com/kubernetes/kubernetes/tree/master/pkg/api',
+            'https://github.com/kubernetes/kubernetes',
           target: 'k8s.io/kubernetes/pkg/api',
           type: 'go',
         },
@@ -101,7 +101,17 @@ describe('functional', () => {
   testBulk(
     'go',
     'k8s.io/kubernetes/pkg/api',
-    'https://github.com/kubernetes/kubernetes/tree/master/pkg/api',
+    'https://github.com/kubernetes/kubernetes',
+  );
+  testBulk(
+    'go',
+    'context',
+    'https://pkg.go.dev/context',
+  );
+  testBulk(
+    'go',
+    'go.uber.org/multierr',
+    'https://github.com/uber-go/multierr',
   );
   // testBulk('melpa', 'zzz-to-char', 'https://github.com/mrkkrp/zzz-to-char');
   testBulk(
