@@ -18,7 +18,7 @@
     "lodash.isequal": "^4.5.0",
     "lodash.uniqwith": "^4.5.0",
     "micro": "^9.3.3",
-    "mixpanel": "^0.14.0",
+    "mixpanel": "^0.15.0",
     "p-map": "^4.0.0",
     "tldjs": "^2.3.1",
     "xml-js": "^1.6.11"
