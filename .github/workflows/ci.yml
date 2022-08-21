@@ -1,5 +1,7 @@
 name: Node CI
 on: push
+env:
+  FORCE_COLOR: 2
 jobs:
   build:
     runs-on: ubuntu-latest
