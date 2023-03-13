@@ -27,7 +27,7 @@
     "nodemon": "*"
   },
   "devDependencies": {
-    "jsdom": "^19.0.0",
+    "jsdom": "^21.1.1",
     "eslint": "^8.15.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
